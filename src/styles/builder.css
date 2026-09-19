@@ -49,30 +49,33 @@
   background: var(--bg-surface-card);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 16px;
-  margin-bottom: 20px;
+  padding: 14px 10px;
+  margin-bottom: 16px;
   position: relative;
   box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .exercise-card-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 .exercise-reorder-group {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex-shrink: 0;
 }
 
 .reorder-btn {
-  width: 32px;
-  height: 24px;
+  width: 28px;
+  height: 22px;
   padding: 0;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   background: var(--bg-surface-elevated);
   color: var(--text-secondary);
   border: 1px solid var(--border-subtle);
@@ -90,18 +93,21 @@
 .exercise-name-wrapper {
   position: relative;
   flex: 1;
+  min-width: 0;
 }
 
 .exercise-name-input {
   width: 100%;
-  font-size: 1.15rem;
+  min-width: 0;
+  font-size: 1.05rem;
   font-weight: 700;
   background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
-  padding: 8px 12px;
+  padding: 6px 8px;
   border-radius: var(--radius-md);
   outline: none;
+  box-sizing: border-box;
 }
 
 .exercise-name-input:focus {
@@ -259,14 +265,16 @@
 
 .set-row {
   display: grid;
-  grid-template-columns: 34px 44px 1fr 1fr 40px;
+  grid-template-columns: 22px 34px minmax(0, 1fr) minmax(0, 1fr) 28px;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 8px;
+  padding: 8px 4px;
   transition: border-color var(--transition-fast);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .set-row:hover {
@@ -275,7 +283,7 @@
 
 .set-number {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-secondary);
   text-align: center;
@@ -283,9 +291,9 @@
 
 /* Set Type Badge */
 .set-type-badge {
-  height: 32px;
+  height: 30px;
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -293,6 +301,7 @@
   cursor: pointer;
   border: 1px solid transparent;
   user-select: none;
+  padding: 0;
 }
 
 .set-type-badge.type-normal {
@@ -323,40 +332,48 @@
 .stepper-box {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  min-width: 0;
 }
 
 .stepper-main {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+  min-width: 0;
 }
 
 .stepper-val-input {
   width: 100%;
-  min-width: 44px;
+  min-width: 0;
   text-align: center;
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
-  padding: 4px 2px;
-  height: 36px;
+  padding: 4px 1px;
+  height: 34px;
+  box-sizing: border-box;
 }
 
 .stepper-btn {
-  min-width: 32px;
-  height: 36px;
+  width: 26px;
+  min-width: 26px;
+  height: 34px;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  padding: 0 4px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .stepper-btn:active {
@@ -367,12 +384,12 @@
 .stepper-quick-row {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .stepper-quick-btn {
-  font-size: 0.7rem;
-  padding: 2px 5px;
+  font-size: 0.65rem;
+  padding: 1px 3px;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.04);
   color: var(--text-muted);
@@ -385,9 +402,9 @@
 }
 
 .stepper-label {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
   text-align: center;
 }
@@ -398,14 +415,20 @@
   justify-content: center;
 }
 
-.btn-icon-danger {
-  width: 34px;
-  height: 34px;
+.set-actions .btn-icon-danger {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
   color: var(--text-muted);
   border-radius: var(--radius-sm);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-icon-danger:active {
+.set-actions .btn-icon-danger:active {
   color: var(--accent-danger);
   background: var(--accent-danger-bg);
 }
@@ -476,11 +499,13 @@
   background: var(--bg-surface-card);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   transition: transform var(--transition-fast), border-color var(--transition-fast);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .workout-card:active {
@@ -488,8 +513,9 @@
 }
 
 .workout-card-title {
-  font-size: 1.25rem;
+  font-size: 1.18rem;
   font-weight: 700;
+  line-height: 1.3;
 }
 
 .workout-card-meta {
@@ -508,9 +534,49 @@
 
 .workout-card-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 4px;
+  grid-template-columns: 1fr 44px;
+  gap: 8px;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.workout-card-actions .btn-cyan {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 48px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+}
+
+.workout-card-actions .btn-secondary {
+  width: 100%;
+  min-height: 40px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  min-width: 0;
+  border-radius: var(--radius-md);
+}
+
+.workout-card-actions .btn-danger {
+  width: 44px;
+  min-width: 44px;
+  height: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-md);
 }
 
 .empty-state {

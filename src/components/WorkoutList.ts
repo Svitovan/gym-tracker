@@ -161,7 +161,6 @@ export class WorkoutListView {
 
     const actions = document.createElement('div');
     actions.className = 'workout-card-actions';
-    actions.style.gridTemplateColumns = '1.4fr 1fr 44px';
 
     // Start Workout CTA
     const startBtn = document.createElement('button');

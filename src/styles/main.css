@@ -44,6 +44,14 @@ body {
   flex-direction: column;
   position: relative;
   padding: 0 16px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  #app {
+    padding: 0 10px;
+  }
 }
 
 /* ==================== TYPOGRAPHY ==================== */
