@@ -1,0 +1,25 @@
+{
+  "name": "Gym Tracker PWA",
+  "short_name": "GymTracker",
+  "description": "Автономный персональный трекер тренировок с ручным управлением и таймером отдыха",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d13",
+  "theme_color": "#090d13",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["fitness", "health", "lifestyle"]
+}

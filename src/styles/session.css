@@ -1,0 +1,454 @@
+/* ==================== ACTIVE SESSION SPECIFIC STYLES ==================== */
+
+.session-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 120px; /* Space for fixed bottom bar */
+}
+
+/* Top bar during session */
+.session-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 14px;
+}
+
+.session-elapsed-timer {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.session-elapsed-timer .timer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ==================== REST TIMER OVERLAY / WIDGET ==================== */
+
+.rest-timer-widget {
+  background: linear-gradient(135deg, rgba(18, 24, 36, 0.95) 0%, rgba(14, 20, 31, 0.98) 100%);
+  border: 1px solid var(--accent-cyan);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-cyan-glow);
+  position: relative;
+  overflow: hidden;
+  animation: timerSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes timerSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rest-timer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.rest-timer-header .tag {
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+.rest-timer-display {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.rest-timer-digits {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.rest-timer-unit {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Progress bar inside rest timer */
+.rest-progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.rest-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-primary) 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.3s linear;
+}
+
+/* Rest timer controls */
+.rest-timer-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: 8px;
+}
+
+.rest-control-btn {
+  min-height: 42px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.rest-control-btn:active {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-focus);
+}
+
+.rest-control-skip {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+}
+
+.rest-control-skip:active {
+  background: var(--accent-cyan);
+}
+
+/* ==================== EXERCISE NAVIGATION TABS ==================== */
+
+.exercise-nav-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  scrollbar-width: none;
+}
+
+.exercise-nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.exercise-tab-chip {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.exercise-tab-chip.active {
+  background: var(--bg-surface-elevated);
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.2);
+}
+
+.exercise-tab-chip.completed {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* ==================== ACTIVE SETS IN SESSION ==================== */
+
+.session-set-row {
+  display: grid;
+  grid-template-columns: 32px 42px 1fr 1fr 44px;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 8px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.session-set-row.active {
+  background: var(--bg-surface-elevated);
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.2);
+  transform: scale(1.01);
+}
+
+.session-set-row.completed {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.35);
+  opacity: 0.85;
+}
+
+.session-set-check {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: transparent;
+  transition: all var(--transition-fast);
+}
+
+.session-set-row.completed .session-set-check {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+.session-set-row.active .session-set-check {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* ==================== BOTTOM FIXED ACTION BAR ==================== */
+
+.session-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(9, 13, 19, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-card);
+  padding: 12px 16px calc(env(safe-area-inset-bottom) + 12px) 16px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.btn-finish-set {
+  min-height: 58px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+  width: 100%;
+}
+
+.btn-finish-set:active {
+  background: #059669;
+  transform: scale(0.98);
+}
+
+.btn-finish-set.all-done {
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, #0284c7 100%);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+}
+
+/* ==================== FLOATING UNDO SNACKBAR ==================== */
+
+.undo-snackbar {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 84px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  width: 90%;
+  max-width: 480px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--accent-cyan);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+  animation: undoSlideUp 0.25s ease-out;
+}
+
+@keyframes undoSlideUp {
+  from { opacity: 0; transform: translate(-50%, 15px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.undo-snackbar .undo-btn {
+  background: rgba(14, 165, 233, 0.2);
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ==================== SCREEN FLASH OVERLAY (iOS FALLBACK) ==================== */
+
+.screen-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: transparent;
+  opacity: 0;
+}
+
+.screen-flash.active {
+  animation: screenFlashAnim 0.8s ease-out;
+}
+
+@keyframes screenFlashAnim {
+  0% {
+    background: rgba(56, 189, 248, 0.45);
+    opacity: 1;
+  }
+  50% {
+    background: rgba(16, 185, 129, 0.45);
+    opacity: 0.8;
+  }
+  100% {
+    background: transparent;
+    opacity: 0;
+  }
+}
+
+/* Active session recovery banner on Home */
+.active-session-banner {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(14, 165, 233, 0.15) 100%);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-glow);
+}
+
+.active-session-banner-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active-session-banner-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.active-session-banner-actions {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+}
+
+/* Finish Summary Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.modal-dialog {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow-md);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.stat-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
