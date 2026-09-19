@@ -333,9 +333,63 @@ export async function resetToDefaultWorkouts(
   return count;
 }
 
+export async function syncDefaultWorkoutsIfMissing(): Promise<number> {
+  const templates = defaultWorkoutsData as DefaultWorkoutTemplate[];
+  const existingWorkouts = await getAllWorkouts();
+  const now = Date.now();
+  let addedCount = 0;
+
+  for (const template of templates) {
+    const exists = existingWorkouts.some(
+      (w) => w.title.trim().toLowerCase() === template.title.trim().toLowerCase()
+    );
+
+    if (!exists) {
+      const workout: Workout = {
+        id: generateUUID(),
+        title: template.title,
+        notes: template.notes || '',
+        created_at: now,
+        updated_at: now,
+        exercises: template.exercises.map((ex, exIdx) => ({
+          id: generateUUID(),
+          name: ex.name,
+          order_index: exIdx,
+          default_rest_sec: ex.default_rest_sec ?? 90,
+          notes: ex.notes || '',
+          previous_performance: null,
+          sets: (ex.sets || []).map((s, sIdx) => ({
+            id: generateUUID(),
+            set_number: sIdx + 1,
+            type: (s.type as any) || 'normal',
+            target_weight: s.target_weight ?? 0,
+            actual_weight: s.target_weight ?? 0,
+            target_reps: s.target_reps ?? 10,
+            actual_reps: s.target_reps ?? 10,
+            is_completed: false,
+            custom_rest_sec: s.custom_rest_sec ?? null,
+          })),
+        })),
+      };
+
+      for (const ex of template.exercises) {
+        await recordCustomExercise(ex.name, ex.default_rest_sec ?? 90);
+      }
+
+      await saveWorkout(workout);
+      addedCount++;
+    }
+  }
+
+  return addedCount;
+}
+
 export async function seedInitialDataIfEmpty(): Promise<void> {
   const workouts = await getAllWorkouts();
-  if (workouts.length > 0) return;
-
-  await resetToDefaultWorkouts({ overwrite: false });
+  if (workouts.length === 0) {
+    await resetToDefaultWorkouts({ overwrite: false });
+  } else {
+    // Automatically add any newly introduced templates that user doesn't have yet!
+    await syncDefaultWorkoutsIfMissing();
+  }
 }
