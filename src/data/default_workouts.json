@@ -169,5 +169,92 @@
         ]
       }
     ]
+  },
+  {
+    "title": "День 3 — Верх B + 🔥 HIIT Финишер #1",
+    "notes": "Верх B (акцент на грудь, спину, плечи, руки) + HIIT финишер",
+    "exercises": [
+      {
+        "name": "Жим гантелей на горизонтальной скамье",
+        "default_rest_sec": 120,
+        "notes": "Глубокое растяжение грудных внизу (RIR 1–2, 8–12 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 24, "target_reps": 10 },
+          { "type": "normal", "target_weight": 24, "target_reps": 10 },
+          { "type": "normal", "target_weight": 24, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Тяга верхнего блока к груди",
+        "default_rest_sec": 120,
+        "notes": "Средний/нейтральный хват (RIR 1, 8–12 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 55, "target_reps": 10 },
+          { "type": "normal", "target_weight": 55, "target_reps": 10 },
+          { "type": "normal", "target_weight": 55, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Жим гантелей сидя / Жим в хаммере",
+        "default_rest_sec": 120,
+        "notes": "Наклон спинки 75–80° для здоровья плеч (RIR 1–2, 8–12 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 20, "target_reps": 10 },
+          { "type": "normal", "target_weight": 20, "target_reps": 10 },
+          { "type": "normal", "target_weight": 20, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Горизонтальная тяга блока к поясу",
+        "default_rest_sec": 90,
+        "notes": "Сведение лопаток с фиксацией на 1 сек (RIR 1, 8–12 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 50, "target_reps": 10 },
+          { "type": "normal", "target_weight": 50, "target_reps": 10 },
+          { "type": "normal", "target_weight": 50, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Разведения в стороны (гантели или кроссовер)",
+        "default_rest_sec": 60,
+        "notes": "Суперсет 1: акцент на среднюю дельту (RIR 0–1, 12–20 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 10, "target_reps": 15 },
+          { "type": "normal", "target_weight": 10, "target_reps": 15 },
+          { "type": "normal", "target_weight": 10, "target_reps": 15 },
+          { "type": "normal", "target_weight": 10, "target_reps": 15 }
+        ]
+      },
+      {
+        "name": "Сгибание рук на наклонной скамье (бицепс)",
+        "default_rest_sec": 75,
+        "notes": "Суперсет 1: мощная растяжка длинной головки (RIR 1, 10–12 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 12, "target_reps": 10 },
+          { "type": "normal", "target_weight": 12, "target_reps": 10 },
+          { "type": "normal", "target_weight": 12, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Обратная бабочка (Rear Pec-Deck)",
+        "default_rest_sec": 60,
+        "notes": "Суперсет 2: задняя дельта (RIR 0–1, 12–20 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 35, "target_reps": 15 },
+          { "type": "normal", "target_weight": 35, "target_reps": 15 },
+          { "type": "normal", "target_weight": 35, "target_reps": 15 }
+        ]
+      },
+      {
+        "name": "Французский жим с гантелью / блоком из-за головы",
+        "default_rest_sec": 75,
+        "notes": "Суперсет 2: растяжка длинной головки трицепса (RIR 1, 10–12 повт)",
+        "sets": [
+          { "type": "normal", "target_weight": 22, "target_reps": 10 },
+          { "type": "normal", "target_weight": 22, "target_reps": 10 },
+          { "type": "normal", "target_weight": 22, "target_reps": 10 }
+        ]
+      }
+    ]
   }
 ]
