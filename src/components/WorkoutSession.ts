@@ -377,6 +377,25 @@ export class WorkoutSessionView {
       card.appendChild(ghostBox);
     }
 
+    // Exercise Notes box (prominent & editable during workout)
+    const notesBox = document.createElement('div');
+    notesBox.className = 'session-exercise-notes-box';
+    notesBox.innerHTML = `
+      <span style="font-size: 0.95rem; user-select: none;">💡</span>
+      <input
+        type="text"
+        class="session-exercise-notes-input"
+        placeholder="Заметка к упражнению (хват, сиденье тренажера)..."
+        value="${escapeHtml(exercise.notes || '')}"
+      />
+    `;
+    const notesInput = notesBox.querySelector('input') as HTMLInputElement;
+    notesInput.addEventListener('input', () => {
+      exercise.notes = notesInput.value;
+      saveActiveSession(this.session);
+    });
+    card.appendChild(notesBox);
+
     // Sets List
     const setsContainer = document.createElement('div');
     setsContainer.className = 'sets-container';
@@ -387,16 +406,6 @@ export class WorkoutSessionView {
     });
 
     card.appendChild(setsContainer);
-
-    // Exercise notes (if any)
-    if (exercise.notes) {
-      const notesEl = document.createElement('p');
-      notesEl.style.fontSize = '0.85rem';
-      notesEl.style.color = 'var(--text-muted)';
-      notesEl.style.marginTop = '8px';
-      notesEl.textContent = `💡 ${exercise.notes}`;
-      card.appendChild(notesEl);
-    }
 
     return card;
   }

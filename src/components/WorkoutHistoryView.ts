@@ -183,6 +183,15 @@ export class WorkoutHistoryView {
       if (validSets.length === 0) return;
 
       exItem.innerHTML = `<div class="snapshot-exercise-name">${escapeHtml(exercise.name)}</div>`;
+      if (exercise.notes) {
+        const noteEl = document.createElement('div');
+        noteEl.style.fontSize = '0.78rem';
+        noteEl.style.color = 'var(--text-muted)';
+        noteEl.style.marginTop = '2px';
+        noteEl.style.marginBottom = '6px';
+        noteEl.textContent = `💡 ${exercise.notes}`;
+        exItem.appendChild(noteEl);
+      }
 
       const setsGrid = document.createElement('div');
       setsGrid.className = 'snapshot-sets-grid';

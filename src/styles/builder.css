@@ -149,6 +149,45 @@
   color: var(--text-muted);
 }
 
+/* Exercise Notes Input */
+.exercise-notes-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  transition: all var(--transition-fast);
+}
+
+.exercise-notes-box:focus-within {
+  border-color: var(--accent-cyan);
+  background: var(--bg-surface-elevated);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+
+.exercise-notes-icon {
+  font-size: 0.95rem;
+  opacity: 0.75;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.exercise-notes-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.exercise-notes-input::placeholder {
+  color: var(--text-muted);
+}
+
 /* Rest duration selector */
 .exercise-meta-row {
   display: flex;

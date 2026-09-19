@@ -198,6 +198,37 @@
   color: var(--accent-primary);
 }
 
+/* Exercise Notes in Active Session */
+.session-exercise-notes-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  margin-bottom: 14px;
+  transition: all var(--transition-fast);
+}
+
+.session-exercise-notes-box:focus-within {
+  border-color: var(--accent-cyan);
+  background: var(--bg-surface-elevated);
+}
+
+.session-exercise-notes-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.session-exercise-notes-input::placeholder {
+  color: var(--text-muted);
+}
+
 /* ==================== ACTIVE SETS IN SESSION ==================== */
 
 .session-set-row {

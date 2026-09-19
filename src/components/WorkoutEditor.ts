@@ -329,6 +329,25 @@ export class WorkoutEditorView {
       card.appendChild(ghostBox);
     }
 
+    // Exercise Notes Input Field
+    const notesBox = document.createElement('div');
+    notesBox.className = 'exercise-notes-box';
+    notesBox.innerHTML = `
+      <span class="exercise-notes-icon">📝</span>
+      <input
+        type="text"
+        class="exercise-notes-input"
+        placeholder="Заметка к упражнению (хват, разминка, сиденье тренажера)..."
+        value="${escapeHtml(exercise.notes || '')}"
+      />
+    `;
+    const notesInput = notesBox.querySelector('input') as HTMLInputElement;
+    notesInput.addEventListener('input', () => {
+      exercise.notes = notesInput.value;
+      this.triggerAutoSave();
+    });
+    card.appendChild(notesBox);
+
     // Rest Duration Config Row
     const metaRow = document.createElement('div');
     metaRow.className = 'exercise-meta-row';
