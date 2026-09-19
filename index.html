@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -25,6 +25,7 @@
       rel="stylesheet"
     />
   </head>
+  <body>
     <div id="app"></div>
     <script>
       window.addEventListener('error', function (e) {
@@ -35,7 +36,7 @@
           box.style.cssText = 'position:fixed;top:10px;left:10px;right:10px;background:#ef4444;color:white;padding:12px;border-radius:8px;font-family:sans-serif;font-size:13px;z-index:999999;box-shadow:0 4px 12px rgba(0,0,0,0.5);';
           document.body.appendChild(box);
         }
-        box.textContent = 'Ошибка: ' + (e.message || e.error || 'Проверьте соединение или обновите страницу');
+        box.textContent = 'Error: ' + (e.message || e.error || 'Check connection or reload page');
       });
     </script>
     <script type="module" src="/src/main.ts"></script>

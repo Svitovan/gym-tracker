@@ -65,11 +65,11 @@ export async function importDatabaseFromJSON(file: File): Promise<{
   try {
     parsed = JSON.parse(text);
   } catch (err) {
-    throw new Error('Файл не является корректным JSON');
+    throw new Error('File is not valid JSON');
   }
 
   if (!parsed || typeof parsed !== 'object' || (parsed as BackupPayload).app !== 'GymTrackerPWA') {
-    throw new Error('Некорректный формат резервной копии Gym Tracker');
+    throw new Error('Invalid Gym Tracker backup format');
   }
 
   const payload = parsed as BackupPayload;
@@ -130,8 +130,8 @@ export interface StorageDiagnostics {
 
 export async function getStorageDiagnostics(): Promise<StorageDiagnostics> {
   let isPersisted = false;
-  let usageFormatted = 'Н/Д';
-  let quotaFormatted = 'Н/Д';
+  let usageFormatted = 'N/A';
+  let quotaFormatted = 'N/A';
 
   if (typeof navigator !== 'undefined' && navigator.storage) {
     try {

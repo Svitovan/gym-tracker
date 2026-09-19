@@ -89,9 +89,9 @@ class App {
     const badge = document.querySelector('.badge-offline');
     if (!badge) return;
     if (navigator.onLine) {
-      badge.innerHTML = `<span class="dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span><span>Офлайн готов</span>`;
+      badge.innerHTML = `<span class="dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span><span>Offline Ready</span>`;
     } else {
-      badge.innerHTML = `<span class="dot" style="background:#10b981;box-shadow:0 0 8px #10b981;"></span><span>Офлайн</span>`;
+      badge.innerHTML = `<span class="dot" style="background:#10b981;box-shadow:0 0 8px #10b981;"></span><span>Offline</span>`;
     }
   }
 
@@ -116,7 +116,7 @@ class App {
       const isEditor = this.currentView.type === 'EDITOR';
       const header = renderHeader(
         isEditor ? () => this.navigate({ type: 'LIST' }) : undefined,
-        isEditor ? 'К программам' : undefined,
+        isEditor ? 'Workouts' : undefined,
         () => openSettingsModal(() => this.render())
       );
       this.root.appendChild(header);
@@ -136,13 +136,13 @@ class App {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 6h16M4 12h16M4 18h7" stroke-linecap="round"/>
           </svg>
-          <span>Программы</span>
+          <span>Workouts</span>
         </button>
         <button class="main-nav-tab ${this.currentView.type === 'HISTORY' ? 'active' : ''}" id="tab-nav-history">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 20V10M18 20V4M6 20v-4" stroke-linecap="round"/>
           </svg>
-          <span>История</span>
+          <span>History</span>
         </button>
       `;
 

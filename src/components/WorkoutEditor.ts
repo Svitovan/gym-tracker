@@ -40,7 +40,7 @@ export class WorkoutEditorView {
       const now = Date.now();
       this.workout = {
         id: this.workoutId,
-        title: 'Новая программа',
+        title: 'New Workout',
         notes: '',
         created_at: now,
         updated_at: now,
@@ -68,7 +68,7 @@ export class WorkoutEditorView {
 
     const indicator = this.container.querySelector('.save-indicator') as HTMLElement;
     if (indicator) {
-      indicator.textContent = '● Сохранение...';
+      indicator.textContent = '● Saving...';
       indicator.classList.add('saving');
     }
 
@@ -83,13 +83,13 @@ export class WorkoutEditorView {
           }
         }
         if (indicator) {
-          indicator.textContent = '✓ Сохранено локально';
+          indicator.textContent = '✓ Saved locally';
           indicator.classList.remove('saving');
         }
       } catch (err) {
         console.error('Error auto-saving workout:', err);
         if (indicator) {
-          indicator.textContent = '⚠ Ошибка сохранения';
+          indicator.textContent = '⚠ Save error';
         }
       } finally {
         this.isSaving = false;
@@ -113,7 +113,7 @@ export class WorkoutEditorView {
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>К программам</span>
+      <span>Workouts</span>
     `;
     backBtn.addEventListener('click', () => {
       if (this.isSaving) {
@@ -125,7 +125,7 @@ export class WorkoutEditorView {
 
     const indicator = document.createElement('div');
     indicator.className = 'save-indicator';
-    indicator.textContent = '✓ Сохранено локально';
+    indicator.textContent = '✓ Saved locally';
 
     topBar.appendChild(backBtn);
     topBar.appendChild(indicator);
@@ -138,7 +138,7 @@ export class WorkoutEditorView {
     const titleInput = document.createElement('input');
     titleInput.className = 'input-title input-field';
     titleInput.value = this.workout.title;
-    titleInput.placeholder = 'Название программы (напр. День А)...';
+    titleInput.placeholder = 'Workout title (e.g. Day A)...';
     titleInput.addEventListener('input', () => {
       this.workout.title = titleInput.value;
       this.triggerAutoSave();
@@ -147,7 +147,7 @@ export class WorkoutEditorView {
     const notesInput = document.createElement('textarea');
     notesInput.className = 'workout-notes-input';
     notesInput.value = this.workout.notes || '';
-    notesInput.placeholder = 'Заметки к программе (дни недели, сплит, разминка)...';
+    notesInput.placeholder = 'Workout notes (schedule, split, warmup)...';
     notesInput.addEventListener('input', () => {
       this.workout.notes = notesInput.value;
       this.triggerAutoSave();
@@ -175,7 +175,7 @@ export class WorkoutEditorView {
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M12 5v14M5 12h14" stroke-linecap="round"/>
       </svg>
-      <span>+ Добавить упражнение</span>
+      <span>+ Add Exercise</span>
     `;
     addExBtn.addEventListener('click', () => this.addExercise());
     root.appendChild(addExBtn);
@@ -188,11 +188,11 @@ export class WorkoutEditorView {
 
     const deleteWorkoutBtn = document.createElement('button');
     deleteWorkoutBtn.className = 'btn-danger';
-    deleteWorkoutBtn.textContent = 'Удалить эту программу';
+    deleteWorkoutBtn.textContent = 'Delete this workout';
     deleteWorkoutBtn.addEventListener('click', async () => {
-      if (confirm(`Удалить программу «${this.workout.title}»?`)) {
+      if (confirm(`Delete workout "${this.workout.title}"?`)) {
         await deleteWorkout(this.workout.id);
-        showToast('Программа удалена', 'info');
+        showToast('Workout deleted', 'info');
         this.onBack();
       }
     });
@@ -218,14 +218,14 @@ export class WorkoutEditorView {
     const upBtn = document.createElement('button');
     upBtn.className = 'reorder-btn';
     upBtn.innerHTML = '▲';
-    upBtn.title = 'Переместить выше';
+    upBtn.title = 'Move up';
     upBtn.disabled = exIndex === 0;
     upBtn.addEventListener('click', () => this.moveExercise(exIndex, -1));
 
     const downBtn = document.createElement('button');
     downBtn.className = 'reorder-btn';
     downBtn.innerHTML = '▼';
-    downBtn.title = 'Переместить ниже';
+    downBtn.title = 'Move down';
     downBtn.disabled = exIndex === this.workout.exercises.length - 1;
     downBtn.addEventListener('click', () => this.moveExercise(exIndex, 1));
 
@@ -240,7 +240,7 @@ export class WorkoutEditorView {
     const nameInput = document.createElement('input');
     nameInput.className = 'exercise-name-input';
     nameInput.value = exercise.name;
-    nameInput.placeholder = 'Название упражнения...';
+    nameInput.placeholder = 'Exercise name...';
 
     const dropdown = document.createElement('div');
     dropdown.className = 'autocomplete-dropdown';
@@ -261,7 +261,7 @@ export class WorkoutEditorView {
         row.className = 'autocomplete-item';
         row.innerHTML = `
           <span>${escapeHtml(item.name)}</span>
-          <span class="rest-hint">отдых ${item.default_rest_sec}с</span>
+          <span class="rest-hint">rest ${item.default_rest_sec}s</span>
         `;
         row.addEventListener('mousedown', async (e) => {
           e.preventDefault();
@@ -307,9 +307,9 @@ export class WorkoutEditorView {
         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
       </svg>
     `;
-    deleteExBtn.title = 'Удалить упражнение';
+    deleteExBtn.title = 'Delete exercise';
     deleteExBtn.addEventListener('click', () => {
-      if (confirm(`Удалить упражнение «${exercise.name || 'Без названия'}»?`)) {
+      if (confirm(`Delete exercise "${exercise.name || 'Untitled'}"?`)) {
         this.removeExercise(exercise.id);
       }
     });
@@ -322,7 +322,7 @@ export class WorkoutEditorView {
       ghostBox.className = 'ghost-performance-box';
       ghostBox.innerHTML = `
         <span class="icon">⏱</span>
-        <span>Прошлый раз (${exercise.previous_performance.date}): <strong>${escapeHtml(
+        <span>Last time (${exercise.previous_performance.date}): <strong>${escapeHtml(
         exercise.previous_performance.summary
       )}</strong></span>
       `;
@@ -337,7 +337,7 @@ export class WorkoutEditorView {
       <input
         type="text"
         class="exercise-notes-input"
-        placeholder="Заметка к упражнению (хват, разминка, сиденье тренажера)..."
+        placeholder="Exercise notes (grip, seat height, warmup)..."
         value="${escapeHtml(exercise.notes || '')}"
       />
     `;
@@ -354,7 +354,7 @@ export class WorkoutEditorView {
 
     const restBox = document.createElement('div');
     restBox.className = 'rest-timer-config';
-    restBox.innerHTML = `<span>Отдых:</span>`;
+    restBox.innerHTML = `<span>Rest:</span>`;
 
     const chipsBox = document.createElement('div');
     chipsBox.className = 'rest-chips';
@@ -364,7 +364,7 @@ export class WorkoutEditorView {
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = `rest-chip ${exercise.default_rest_sec === sec ? 'active' : ''}`;
-      chip.textContent = `${sec}с`;
+      chip.textContent = `${sec}s`;
       chip.addEventListener('click', () => {
         exercise.default_rest_sec = sec;
         this.triggerAutoSave();
@@ -399,20 +399,20 @@ export class WorkoutEditorView {
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M12 5v14M5 12h14" stroke-linecap="round"/>
       </svg>
-      <span>+ Подход</span>
+      <span>+ Set</span>
     `;
     addSetBtn.addEventListener('click', () => this.addSet(exercise.id));
 
     const dupSetBtn = document.createElement('button');
     dupSetBtn.type = 'button';
     dupSetBtn.className = 'btn-dup-set';
-    dupSetBtn.title = 'Дублировать последний подход';
+    dupSetBtn.title = 'Duplicate last set';
     dupSetBtn.innerHTML = `
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
       </svg>
-      <span>Дублировать</span>
+      <span>Duplicate</span>
     `;
     dupSetBtn.addEventListener('click', () => this.duplicateLastSet(exercise.id));
 
@@ -437,7 +437,7 @@ export class WorkoutEditorView {
     const typeBadge = document.createElement('div');
     typeBadge.className = `set-type-badge type-${set.type}`;
     typeBadge.textContent = this.getTypeLabel(set.type);
-    typeBadge.title = 'Нажмите для переключения типа подхода (Обычный / Разминка / Дропсет / Отказ)';
+    typeBadge.title = 'Tap to switch set type (Normal / Warmup / Dropset / Failure)';
     typeBadge.addEventListener('click', () => {
       set.type = this.cycleSetType(set.type);
       typeBadge.className = `set-type-badge type-${set.type}`;
@@ -535,7 +535,7 @@ export class WorkoutEditorView {
 
     const weightLabel = document.createElement('div');
     weightLabel.className = 'stepper-label';
-    weightLabel.textContent = 'кг';
+    weightLabel.textContent = 'kg';
 
     weightBox.appendChild(weightMain);
     weightBox.appendChild(weightQuick);
@@ -589,7 +589,7 @@ export class WorkoutEditorView {
 
     const repsLabel = document.createElement('div');
     repsLabel.className = 'stepper-label';
-    repsLabel.textContent = 'повт';
+    repsLabel.textContent = 'reps';
 
     repsBox.appendChild(repsMain);
     repsBox.appendChild(repsLabel);
@@ -608,7 +608,7 @@ export class WorkoutEditorView {
         <line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     `;
-    deleteSetBtn.title = 'Удалить подход';
+    deleteSetBtn.title = 'Delete set';
     deleteSetBtn.addEventListener('click', () => {
       this.removeSet(exercise.id, set.id);
     });
@@ -666,7 +666,7 @@ export class WorkoutEditorView {
     });
     this.triggerAutoSave();
     this.render();
-    showToast('Упражнение удалено', 'info');
+    showToast('Exercise deleted', 'info');
   }
 
   private moveExercise(currentIndex: number, direction: -1 | 1): void {
@@ -730,7 +730,7 @@ export class WorkoutEditorView {
     ex.sets.push(duplicated);
     this.triggerAutoSave();
     this.render();
-    showToast(`Подход #${duplicated.set_number} скопирован`, 'success');
+    showToast(`Set #${duplicated.set_number} duplicated`, 'success');
   }
 
   private removeSet(exerciseId: string, setId: string): void {
@@ -738,7 +738,7 @@ export class WorkoutEditorView {
     if (!ex) return;
 
     if (ex.sets.length <= 1) {
-      showToast('В упражнении должен оставаться хотя бы один подход', 'error');
+      showToast('Exercise must have at least one set', 'error');
       return;
     }
 
@@ -767,7 +767,7 @@ export class WorkoutEditorView {
   private getTypeLabel(type: SetType): string {
     switch (type) {
       case 'normal':
-        return 'ОБ';
+        return 'NORM';
       case 'warmup':
         return 'W';
       case 'dropset':

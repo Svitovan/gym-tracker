@@ -1,7 +1,7 @@
 {
   "name": "Gym Tracker PWA",
   "short_name": "GymTracker",
-  "description": "Автономный персональный трекер тренировок с ручным управлением и таймером отдыха",
+  "description": "Offline personal workout tracker with manual log steppers and rest timer",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#090d13",

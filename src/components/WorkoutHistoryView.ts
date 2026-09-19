@@ -22,7 +22,7 @@ export class WorkoutHistoryView {
     // 1. Title
     const titleBar = document.createElement('div');
     titleBar.style.marginBottom = '16px';
-    titleBar.innerHTML = `<h1>История и аналитика</h1>`;
+    titleBar.innerHTML = `<h1>History & Analytics</h1>`;
     root.appendChild(titleBar);
 
     // 2. KPI Cards
@@ -31,21 +31,21 @@ export class WorkoutHistoryView {
 
     const volumeDisplay =
       stats.totalVolumeKg >= 1000
-        ? `${(stats.totalVolumeKg / 1000).toFixed(1)} т`
-        : `${stats.totalVolumeKg} кг`;
+        ? `${(stats.totalVolumeKg / 1000).toFixed(1)} t`
+        : `${stats.totalVolumeKg} kg`;
 
     kpiGrid.innerHTML = `
       <div class="kpi-card volume">
         <div class="kpi-value">${volumeDisplay}</div>
-        <div class="kpi-label">Тоннаж</div>
+        <div class="kpi-label">Volume</div>
       </div>
       <div class="kpi-card workouts">
         <div class="kpi-value">${stats.totalWorkouts}</div>
-        <div class="kpi-label">Тренировок</div>
+        <div class="kpi-label">Workouts</div>
       </div>
       <div class="kpi-card duration">
-        <div class="kpi-value">${stats.avgDurationMin} <span style="font-size:0.9rem;font-weight:600;">мин</span></div>
-        <div class="kpi-label">Сред. время</div>
+        <div class="kpi-value">${stats.avgDurationMin} <span style="font-size:0.9rem;font-weight:600;">min</span></div>
+        <div class="kpi-label">Avg. Duration</div>
       </div>
     `;
     root.appendChild(kpiGrid);
@@ -56,9 +56,9 @@ export class WorkoutHistoryView {
       emptyCard.className = 'empty-state card';
       emptyCard.innerHTML = `
         <div class="empty-state-icon">📊</div>
-        <h2>История пока пуста</h2>
+        <h2>No history yet</h2>
         <p style="margin-top: 6px; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">
-          Завершите свою первую тренировку, и здесь появятся подробные отчеты, поднятый тоннаж и аналитика.
+          Complete your first workout and your performance stats and volume will appear here.
         </p>
       `;
 
@@ -66,7 +66,7 @@ export class WorkoutHistoryView {
       startFirstBtn.className = 'btn-primary';
       startFirstBtn.style.maxWidth = '280px';
       startFirstBtn.style.margin = '0 auto';
-      startFirstBtn.textContent = 'Перейти к программам';
+      startFirstBtn.textContent = 'Go to Workouts';
       startFirstBtn.addEventListener('click', () => this.onNavigateToPrograms());
       emptyCard.appendChild(startFirstBtn);
 
@@ -92,12 +92,12 @@ export class WorkoutHistoryView {
     card.className = 'history-card';
 
     const startDate = new Date(session.started_at);
-    const dateFormatted = startDate.toLocaleDateString('ru-RU', {
+    const dateFormatted = startDate.toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'short',
       weekday: 'short',
     });
-    const timeFormatted = startDate.toLocaleTimeString('ru-RU', {
+    const timeFormatted = startDate.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
     });
@@ -122,20 +122,20 @@ export class WorkoutHistoryView {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M6 5v14M18 5v14M2 9h4M18 9h4M2 15h4M18 15h4M6 12h12" stroke-linecap="round"/>
           </svg>
-          ${session.total_volume_kg.toLocaleString('ru-RU')} кг
+          ${session.total_volume_kg.toLocaleString('en-US')} kg
         </span>
         <span class="history-chip">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"/>
             <polyline points="12 6 12 12 16 14"/>
           </svg>
-          ${durationMin} мин
+          ${durationMin} min
         </span>
         <span class="history-chip">
-          ${completedSetsCount} ${getDeclension(completedSetsCount, ['подход', 'подхода', 'подходов'])}
+          ${completedSetsCount} ${completedSetsCount === 1 ? 'set' : 'sets'}
         </span>
         <span class="history-chip">
-          ${session.total_reps} повт.
+          ${session.total_reps} reps
         </span>
       </div>
     `;
@@ -143,7 +143,7 @@ export class WorkoutHistoryView {
     // Header actions: Delete button
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'btn-icon-danger';
-    deleteBtn.title = 'Удалить эту тренировку из истории';
+    deleteBtn.title = 'Delete this workout from history';
     deleteBtn.innerHTML = `
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="3 6 5 6 21 6"/>
@@ -152,9 +152,9 @@ export class WorkoutHistoryView {
     `;
     deleteBtn.addEventListener('click', async (e) => {
       e.stopPropagation();
-      if (confirm(`Удалить тренировку «${session.title}» (${dateFormatted}) из истории?`)) {
+      if (confirm(`Delete workout "${session.title}" (${dateFormatted}) from history?`)) {
         await deleteWorkoutHistory(session.id);
-        showToast('Запись удалена из истории', 'info');
+        showToast('Entry deleted from history', 'info');
         await this.render();
       }
     });
@@ -167,7 +167,7 @@ export class WorkoutHistoryView {
     toggleBtn.type = 'button';
     toggleBtn.className = 'history-snapshot-toggle';
     toggleBtn.innerHTML = `
-      <span>Снимок тренировки (${session.snapshot.length} упражнений)</span>
+      <span>Workout snapshot (${session.snapshot.length} ${session.snapshot.length === 1 ? 'exercise' : 'exercises'})</span>
       <span class="arrow" style="transition: transform 0.2s;">▼</span>
     `;
 
@@ -202,7 +202,7 @@ export class WorkoutHistoryView {
         const typeTag = s.type !== 'normal' ? `<span class="set-tag ${s.type[0]}">${s.type[0].toUpperCase()}</span>` : '';
         badge.innerHTML = `
           ${typeTag}
-          <span>#${s.set_number}: <strong>${s.actual_weight || s.target_weight}кг</strong> × ${s.actual_reps || s.target_reps}</span>
+          <span>#${s.set_number}: <strong>${s.actual_weight || s.target_weight}kg</strong> × ${s.actual_reps || s.target_reps}</span>
         `;
         setsGrid.appendChild(badge);
       });
@@ -231,13 +231,4 @@ function escapeHtml(str: string): string {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
-}
-
-function getDeclension(num: number, forms: [string, string, string]): string {
-  const n = Math.abs(num) % 100;
-  const n1 = n % 10;
-  if (n > 10 && n < 20) return forms[2];
-  if (n1 > 1 && n1 < 5) return forms[1];
-  if (n1 === 1) return forms[0];
-  return forms[2];
 }

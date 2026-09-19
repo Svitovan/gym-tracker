@@ -48,7 +48,7 @@ export class WorkoutSessionView {
     } else {
       // Create new session from template
       const now = Date.now();
-      let title = 'Свободная тренировка';
+      let title = 'Free Workout';
       let exercises: Exercise[] = [];
 
       if (workoutId) {
@@ -65,7 +65,7 @@ export class WorkoutSessionView {
         exercises = [
           {
             id: generateUUID(),
-            name: 'Жим штанги лежа',
+            name: 'Barbell Bench Press',
             order_index: 0,
             default_rest_sec: 90,
             notes: '',
@@ -155,7 +155,7 @@ export class WorkoutSessionView {
 
       // Trigger multi-sensory notification
       triggerTimerDoneFeedback();
-      showToast('Отдых окончен! Время следующего подхода', 'info');
+      showToast('Rest finished! Time for next set', 'info');
 
       // Re-render rest timer widget
       this.renderRestTimerWidget();
@@ -218,7 +218,7 @@ export class WorkoutSessionView {
     finishTopBtn.className = 'btn-danger';
     finishTopBtn.style.minHeight = '38px';
     finishTopBtn.style.padding = '0 14px';
-    finishTopBtn.textContent = 'Закончить';
+    finishTopBtn.textContent = 'Finish';
     finishTopBtn.addEventListener('click', () => this.showFinishModal());
 
     topBar.appendChild(leftBox);
@@ -240,7 +240,7 @@ export class WorkoutSessionView {
       chip.className = `exercise-tab-chip ${idx === this.session.active_exercise_index ? 'active' : ''} ${
         allDone ? 'completed' : ''
       }`;
-      chip.innerHTML = `${allDone ? '✓ ' : ''}${idx + 1}. ${escapeHtml(ex.name || 'Упражнение')}`;
+      chip.innerHTML = `${allDone ? '✓ ' : ''}${idx + 1}. ${escapeHtml(ex.name || 'Exercise')}`;
       chip.addEventListener('click', () => {
         this.session.active_exercise_index = idx;
         // Select first incomplete set in this exercise
@@ -284,14 +284,14 @@ export class WorkoutSessionView {
 
     widget.innerHTML = `
       <div class="rest-timer-header">
-        <span class="tag">Отдых между подходами</span>
+        <span class="tag">Rest between sets</span>
         <button class="btn-ghost" id="btn-skip-rest" style="padding:0 4px;font-size:0.8rem;color:var(--accent-cyan);">
-          Пропустить ✕
+          Skip ✕
         </button>
       </div>
       <div class="rest-timer-display">
         <span class="rest-timer-digits" id="rest-timer-digits">${this.formatRestTime(remainingSec)}</span>
-        <span class="rest-timer-unit">сек</span>
+        <span class="rest-timer-unit">sec</span>
       </div>
       <div class="rest-progress-bar-bg">
         <div class="rest-progress-bar-fill" id="rest-progress-fill" style="width: 0%;"></div>
@@ -303,17 +303,17 @@ export class WorkoutSessionView {
 
     const btnMinus15 = document.createElement('button');
     btnMinus15.className = 'rest-control-btn';
-    btnMinus15.textContent = '-15 сек';
+    btnMinus15.textContent = '-15 sec';
     btnMinus15.addEventListener('click', () => this.adjustRestTimer(-15));
 
     const btnPlus30 = document.createElement('button');
     btnPlus30.className = 'rest-control-btn';
-    btnPlus30.textContent = '+30 сек';
+    btnPlus30.textContent = '+30 sec';
     btnPlus30.addEventListener('click', () => this.adjustRestTimer(30));
 
     const btnSkip = document.createElement('button');
     btnSkip.className = 'rest-control-btn rest-control-skip';
-    btnSkip.textContent = 'К подходу ➔';
+    btnSkip.textContent = 'Next Set ➔';
     btnSkip.addEventListener('click', () => this.skipRestTimer());
 
     controls.appendChild(btnMinus15);
@@ -347,9 +347,9 @@ export class WorkoutSessionView {
     header.innerHTML = `
       <div>
         <div style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase;">
-          Упражнение ${this.session.active_exercise_index + 1} из ${this.session.exercises.length}
+          EXERCISE ${this.session.active_exercise_index + 1} OF ${this.session.exercises.length}
         </div>
-        <h2 style="margin-top: 2px;">${escapeHtml(exercise.name || 'Упражнение')}</h2>
+        <h2 style="margin-top: 2px;">${escapeHtml(exercise.name || 'Exercise')}</h2>
       </div>
     `;
 
@@ -358,7 +358,7 @@ export class WorkoutSessionView {
     addSetQuick.className = 'btn-secondary';
     addSetQuick.style.fontSize = '0.8rem';
     addSetQuick.style.minHeight = '36px';
-    addSetQuick.innerHTML = `+ Подход`;
+    addSetQuick.innerHTML = `+ Set`;
     addSetQuick.addEventListener('click', () => this.addSetToCurrentExercise());
     header.appendChild(addSetQuick);
 
@@ -370,7 +370,7 @@ export class WorkoutSessionView {
       ghostBox.className = 'ghost-performance-box';
       ghostBox.innerHTML = `
         <span class="icon">⏱</span>
-        <span>В прошлый раз (${exercise.previous_performance.date}): <strong>${escapeHtml(
+        <span>Last time (${exercise.previous_performance.date}): <strong>${escapeHtml(
         exercise.previous_performance.summary
       )}</strong></span>
       `;
@@ -385,7 +385,7 @@ export class WorkoutSessionView {
       <input
         type="text"
         class="session-exercise-notes-input"
-        placeholder="Заметка к упражнению (хват, сиденье тренажера)..."
+        placeholder="Exercise notes (grip, seat height)..."
         value="${escapeHtml(exercise.notes || '')}"
       />
     `;
@@ -431,7 +431,7 @@ export class WorkoutSessionView {
     checkBtn.type = 'button';
     checkBtn.className = 'session-set-check';
     checkBtn.innerHTML = set.is_completed ? '✓' : `${setIndex + 1}`;
-    checkBtn.title = set.is_completed ? 'Снять отметку' : 'Отметить выполненным';
+    checkBtn.title = set.is_completed ? 'Uncheck set' : 'Mark as completed';
     checkBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.toggleSetCompletion(exercise, set, setIndex);
@@ -539,7 +539,7 @@ export class WorkoutSessionView {
 
     const wLabel = document.createElement('div');
     wLabel.className = 'stepper-label';
-    wLabel.textContent = 'кг';
+    wLabel.textContent = 'kg';
 
     weightBox.appendChild(weightMain);
     weightBox.appendChild(wQuick);
@@ -593,7 +593,7 @@ export class WorkoutSessionView {
 
     const rLabel = document.createElement('div');
     rLabel.className = 'stepper-label';
-    rLabel.textContent = 'повт';
+    rLabel.textContent = 'reps';
 
     repsBox.appendChild(rMain);
     repsBox.appendChild(rLabel);
@@ -604,7 +604,7 @@ export class WorkoutSessionView {
     delBtn.type = 'button';
     delBtn.className = 'btn-icon-danger';
     delBtn.innerHTML = '✕';
-    delBtn.title = 'Удалить подход';
+    delBtn.title = 'Delete set';
     delBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.deleteSet(exercise, set.id);
@@ -635,7 +635,7 @@ export class WorkoutSessionView {
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="20 6 9 17 4 12"/>
         </svg>
-        <span>ЗАВЕРШИТЬ ТРЕНИРОВКУ</span>
+        <span>FINISH WORKOUT</span>
       `;
       finishSetBtn.addEventListener('click', () => this.showFinishModal());
     } else {
@@ -644,7 +644,7 @@ export class WorkoutSessionView {
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="20 6 9 17 4 12"/>
         </svg>
-        <span>ЗАВЕРШИТЬ ПОДХОД #${setNum}</span>
+        <span>COMPLETE SET #${setNum}</span>
       `;
       finishSetBtn.addEventListener('click', () => {
         if (currentEx && currentSet) {
@@ -739,8 +739,8 @@ export class WorkoutSessionView {
     snackbar.id = 'session-undo-bar';
     snackbar.className = 'undo-snackbar';
     snackbar.innerHTML = `
-      <span>${escapeHtml(exerciseName)}: сет #${setNumber} выполнен</span>
-      <button class="undo-btn" id="btn-undo-action">Отменить</button>
+      <span>${escapeHtml(exerciseName)}: set #${setNumber} completed</span>
+      <button class="undo-btn" id="btn-undo-action">Undo</button>
     `;
 
     document.body.appendChild(snackbar);
@@ -776,7 +776,7 @@ export class WorkoutSessionView {
 
       saveActiveSession(this.session);
       this.render();
-      showToast('Отметка подхода отменена', 'info');
+      showToast('Set completion undone', 'info');
     }
 
     this.lastCompletedSetRef = null;
@@ -805,12 +805,12 @@ export class WorkoutSessionView {
     this.session.active_set_index = ex.sets.length - 1;
     saveActiveSession(this.session);
     this.render();
-    showToast(`Добавлен подход #${newSet.set_number}`, 'success');
+    showToast(`Added set #${newSet.set_number}`, 'success');
   }
 
   private deleteSet(exercise: Exercise, setId: string): void {
     if (exercise.sets.length <= 1) {
-      showToast('Нельзя удалить единственный подход', 'error');
+      showToast('Cannot delete the only set', 'error');
       return;
     }
 
@@ -863,28 +863,28 @@ export class WorkoutSessionView {
       <div class="modal-dialog">
         <h2 style="font-size: 1.4rem; display: flex; align-items: center; gap: 8px;">
           <span>🎉</span>
-          <span>Завершение тренировки</span>
+          <span>Workout Complete</span>
         </h2>
         <p style="color: var(--text-secondary); margin-top: 4px; font-size: 0.95rem;">
-          Отличная работа! Тренировка «${escapeHtml(this.session.title)}» подошла к концу.
+          Great job! "${escapeHtml(this.session.title)}" is complete.
         </p>
 
         <div class="stats-grid">
           <div class="stat-box">
-            <div class="stat-value">${totalVolumeKg.toLocaleString('ru-RU')}</div>
-            <div class="stat-label">Тоннаж (кг)</div>
+            <div class="stat-value">${totalVolumeKg.toLocaleString('en-US')}</div>
+            <div class="stat-label">Volume (kg)</div>
           </div>
           <div class="stat-box">
             <div class="stat-value">${durationMin}</div>
-            <div class="stat-label">Время (мин)</div>
+            <div class="stat-label">Duration (min)</div>
           </div>
           <div class="stat-box">
             <div class="stat-value">${completedSetsCount}</div>
-            <div class="stat-label">Подходов</div>
+            <div class="stat-label">Sets</div>
           </div>
           <div class="stat-box">
             <div class="stat-value">${totalReps}</div>
-            <div class="stat-label">Повторений</div>
+            <div class="stat-label">Reps</div>
           </div>
         </div>
 
@@ -893,7 +893,7 @@ export class WorkoutSessionView {
             ? `
           <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; margin: 16px 0; font-size: 0.9rem; color: var(--text-primary); user-select: none;">
             <input type="checkbox" id="chk-update-template" checked style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent-primary);" />
-            <span>Обновить базовый шаблон программы новыми весами для следующей тренировки</span>
+            <span>Update base workout template with new weights for next time</span>
           </label>
         `
             : ''
@@ -901,10 +901,10 @@ export class WorkoutSessionView {
 
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
           <button class="btn-primary" id="btn-confirm-finish">
-            ✓ Сохранить и завершить
+            ✓ Save and Finish
           </button>
           <button class="btn-ghost" id="btn-cancel-finish" style="color: var(--text-secondary);">
-            Продолжить тренировку
+            Continue Workout
           </button>
         </div>
       </div>
@@ -970,7 +970,7 @@ export class WorkoutSessionView {
     // 4. Release resources
     this.dispose();
 
-    showToast('Тренировка успешно сохранена в историю!', 'success');
+    showToast('Workout successfully saved to history!', 'success');
     this.onFinishCallback();
   }
 
@@ -1033,7 +1033,7 @@ export class WorkoutSessionView {
   private getTypeLabel(type: SetType): string {
     switch (type) {
       case 'normal':
-        return 'ОБ';
+        return 'NORM';
       case 'warmup':
         return 'W';
       case 'dropset':

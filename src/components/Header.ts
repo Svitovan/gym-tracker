@@ -19,7 +19,7 @@ export function renderHeader(
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>${backTitle || 'Назад'}</span>
+      <span>${backTitle || 'Back'}</span>
     `;
     backBtn.addEventListener('click', onBack);
     leftBox.appendChild(backBtn);
@@ -42,10 +42,10 @@ export function renderHeader(
 
   const badge = document.createElement('div');
   badge.className = 'badge-offline';
-  badge.title = 'Все данные хранятся локально на устройстве (IndexedDB)';
+  badge.title = 'All data stored locally on your device (IndexedDB)';
   badge.innerHTML = `
     <span class="dot"></span>
-    <span>Офлайн</span>
+    <span>Offline</span>
   `;
   rightBox.appendChild(badge);
 
@@ -55,7 +55,7 @@ export function renderHeader(
     settingsBtn.style.padding = '0 6px';
     settingsBtn.style.minHeight = '36px';
     settingsBtn.style.width = '36px';
-    settingsBtn.title = 'Настройки и резервное копирование';
+    settingsBtn.title = 'Settings & Backup';
     settingsBtn.innerHTML = `
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="3"/>

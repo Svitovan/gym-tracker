@@ -35,16 +35,16 @@ export class WorkoutListView {
         <div class="active-session-banner-top">
           <div class="active-session-banner-title">
             <span>⚡</span>
-            <span>Идет тренировка: ${escapeHtml(active.title)}</span>
+            <span>Workout in progress: ${escapeHtml(active.title)}</span>
           </div>
-          <span style="font-size: 0.85rem; color: var(--accent-cyan); font-weight: 700;">${elapsedMins} мин</span>
+          <span style="font-size: 0.85rem; color: var(--accent-cyan); font-weight: 700;">${elapsedMins} min</span>
         </div>
         <div class="active-session-banner-actions">
           <button class="btn-primary" id="btn-resume-session" style="min-height: 46px;">
-            ▶ Продолжить тренировку
+            ▶ Resume Workout
           </button>
           <button class="btn-danger" id="btn-discard-session" style="min-height: 46px;">
-            Сбросить
+            Discard
           </button>
         </div>
       `;
@@ -54,9 +54,9 @@ export class WorkoutListView {
       });
 
       banner.querySelector('#btn-discard-session')?.addEventListener('click', async () => {
-        if (confirm('Сбросить несохраненную активную тренировку?')) {
+        if (confirm('Discard unsaved active workout?')) {
           await clearActiveSession();
-          showToast('Активная тренировка сброшена', 'info');
+          showToast('Active workout discarded', 'info');
           await this.render();
         }
       });
@@ -74,7 +74,7 @@ export class WorkoutListView {
     topBar.style.marginBottom = '20px';
 
     const title = document.createElement('h1');
-    title.textContent = 'Мои программы';
+    title.textContent = 'My Workouts';
     topBar.appendChild(title);
 
     this.container.appendChild(topBar);
@@ -87,7 +87,7 @@ export class WorkoutListView {
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M12 5v14M5 12h14" stroke-linecap="round"/>
       </svg>
-      <span>+ Новая программа тренировки</span>
+      <span>+ New Workout</span>
     `;
     newBtn.addEventListener('click', () => this.onCreateWorkout());
     this.container.appendChild(newBtn);
@@ -98,9 +98,9 @@ export class WorkoutListView {
       emptyBox.className = 'empty-state card';
       emptyBox.innerHTML = `
         <div class="empty-state-icon">🏋️‍♂️</div>
-        <h2>Нет сохраненных программ</h2>
+        <h2>No workouts saved</h2>
         <p style="margin-top: 6px; font-size: 0.95rem; color: var(--text-muted);">
-          Создайте свою первую тренировочную программу с произвольными упражнениями и подходами.
+          Create your first workout routine with custom exercises and sets.
         </p>
       `;
       this.container.appendChild(emptyBox);
@@ -125,14 +125,14 @@ export class WorkoutListView {
     const totalExercises = workout.exercises.length;
     const totalSets = workout.exercises.reduce((acc, ex) => acc + ex.sets.length, 0);
 
-    const updatedDate = new Date(workout.updated_at).toLocaleDateString('ru-RU', {
+    const updatedDate = new Date(workout.updated_at).toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'short',
     });
 
     card.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-        <div class="workout-card-title">${escapeHtml(workout.title || 'Без названия')}</div>
+        <div class="workout-card-title">${escapeHtml(workout.title || 'Untitled Workout')}</div>
         <span style="font-size: 0.75rem; color: var(--text-muted);">${updatedDate}</span>
       </div>
       ${
@@ -147,14 +147,14 @@ export class WorkoutListView {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 6h16M4 12h16M4 18h7" stroke-linecap="round"/>
           </svg>
-          ${totalExercises} ${getDeclension(totalExercises, ['упражнение', 'упражнения', 'упражнений'])}
+          ${totalExercises} ${totalExercises === 1 ? 'exercise' : 'exercises'}
         </span>
         <span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="4" width="18" height="16" rx="2"/>
             <path d="M7 8h10M7 12h10M7 16h6"/>
           </svg>
-          ${totalSets} ${getDeclension(totalSets, ['подход', 'подхода', 'подходов'])}
+          ${totalSets} ${totalSets === 1 ? 'set' : 'sets'}
         </span>
       </div>
     `;
@@ -169,7 +169,7 @@ export class WorkoutListView {
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <polygon points="5 3 19 12 5 21 5 3"/>
       </svg>
-      <span>Начать</span>
+      <span>Start</span>
     `;
     startBtn.addEventListener('click', () => this.onStartSession(workout.id));
 
@@ -180,7 +180,7 @@ export class WorkoutListView {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
       </svg>
-      <span>Настроить</span>
+      <span>Edit</span>
     `;
     editBtn.addEventListener('click', () => this.onSelectWorkout(workout.id));
 
@@ -194,12 +194,12 @@ export class WorkoutListView {
         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
       </svg>
     `;
-    deleteBtn.title = 'Удалить программу';
+    deleteBtn.title = 'Delete workout';
     deleteBtn.addEventListener('click', async (e) => {
       e.stopPropagation();
-      if (confirm(`Удалить программу «${workout.title}»?`)) {
+      if (confirm(`Delete workout "${workout.title}"?`)) {
         await deleteWorkout(workout.id);
-        showToast('Программа удалена', 'info');
+        showToast('Workout deleted', 'info');
         await this.render();
       }
     });
@@ -217,13 +217,4 @@ function escapeHtml(str: string): string {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
-}
-
-function getDeclension(num: number, forms: [string, string, string]): string {
-  const n = Math.abs(num) % 100;
-  const n1 = n % 10;
-  if (n > 10 && n < 20) return forms[2];
-  if (n1 > 1 && n1 < 5) return forms[1];
-  if (n1 === 1) return forms[0];
-  return forms[2];
 }

@@ -1,12 +1,12 @@
 [
   {
-    "title": "День 1 (Грудь / Трицепс)",
-    "notes": "Понедельник. Разминка перед жимом 10 мин",
+    "title": "Day 1 (Chest / Triceps)",
+    "notes": "Monday. 10 min warm-up before bench press",
     "exercises": [
       {
-        "name": "Жим штанги лежа",
+        "name": "Barbell Bench Press",
         "default_rest_sec": 120,
-        "notes": "Лопатки сведены, упор ногами в пол",
+        "notes": "Scapulae retracted, feet planted on floor",
         "sets": [
           { "type": "warmup", "target_weight": 40, "target_reps": 12 },
           { "type": "normal", "target_weight": 70, "target_reps": 8 },
@@ -15,9 +15,9 @@
         ]
       },
       {
-        "name": "Жим гантелей на наклонной скамье",
+        "name": "Incline Dumbbell Press",
         "default_rest_sec": 90,
-        "notes": "Угол скамьи 30 градусов",
+        "notes": "30-degree bench angle",
         "sets": [
           { "type": "normal", "target_weight": 24, "target_reps": 10 },
           { "type": "normal", "target_weight": 24, "target_reps": 10 },
@@ -25,9 +25,9 @@
         ]
       },
       {
-        "name": "Разведение гантелей лежа",
+        "name": "Flat Dumbbell Flyes",
         "default_rest_sec": 75,
-        "notes": "Плавная растяжка в нижней точке",
+        "notes": "Smooth stretch at the bottom",
         "sets": [
           { "type": "normal", "target_weight": 14, "target_reps": 12 },
           { "type": "normal", "target_weight": 14, "target_reps": 12 },
@@ -35,9 +35,9 @@
         ]
       },
       {
-        "name": "Французский жим со штангой",
+        "name": "Lying Barbell Triceps Extension",
         "default_rest_sec": 75,
-        "notes": "Локти зафиксированы",
+        "notes": "Elbows locked in place",
         "sets": [
           { "type": "normal", "target_weight": 30, "target_reps": 10 },
           { "type": "normal", "target_weight": 30, "target_reps": 10 },
@@ -45,9 +45,9 @@
         ]
       },
       {
-        "name": "Разгибание рук на блоке (канат)",
+        "name": "Rope Cable Triceps Pushdown",
         "default_rest_sec": 60,
-        "notes": "Разведение кистей в нижней точке",
+        "notes": "Spread ropes at the bottom",
         "sets": [
           { "type": "normal", "target_weight": 25, "target_reps": 12 },
           { "type": "normal", "target_weight": 25, "target_reps": 12 },
@@ -57,13 +57,13 @@
     ]
   },
   {
-    "title": "День 2 (Спина / Бицепс)",
-    "notes": "Среда. Фокус на сведении лопаток",
+    "title": "Day 2 (Back / Biceps)",
+    "notes": "Wednesday. Focus on scapular retraction",
     "exercises": [
       {
-        "name": "Подтягивания широким хватом",
+        "name": "Wide-Grip Pull-Ups",
         "default_rest_sec": 90,
-        "notes": "Собственный вес или гравитрон",
+        "notes": "Bodyweight or assisted machine",
         "sets": [
           { "type": "normal", "target_weight": 0, "target_reps": 10 },
           { "type": "normal", "target_weight": 0, "target_reps": 10 },
@@ -71,9 +71,9 @@
         ]
       },
       {
-        "name": "Тяга верхнего блока к груди",
+        "name": "Lat Pulldown to Chest",
         "default_rest_sec": 90,
-        "notes": "Тянуть локтями вниз",
+        "notes": "Drive down with elbows",
         "sets": [
           { "type": "normal", "target_weight": 55, "target_reps": 10 },
           { "type": "normal", "target_weight": 55, "target_reps": 10 },
@@ -81,9 +81,9 @@
         ]
       },
       {
-        "name": "Тяга штанги в наклоне",
+        "name": "Bent-Over Barbell Row",
         "default_rest_sec": 90,
-        "notes": "Спина прямая, поясница прогнута",
+        "notes": "Flat back, neutral lumbar spine",
         "sets": [
           { "type": "normal", "target_weight": 60, "target_reps": 8 },
           { "type": "normal", "target_weight": 60, "target_reps": 8 },
@@ -91,9 +91,9 @@
         ]
       },
       {
-        "name": "Подъем штанги на бицепс стоя",
+        "name": "Standing Barbell Bicep Curl",
         "default_rest_sec": 75,
-        "notes": "Без раскачки корпуса",
+        "notes": "No torso swinging",
         "sets": [
           { "type": "normal", "target_weight": 30, "target_reps": 10 },
           { "type": "normal", "target_weight": 30, "target_reps": 10 },
@@ -101,9 +101,9 @@
         ]
       },
       {
-        "name": "Молотковые сгибания с гантелями",
+        "name": "Dumbbell Hammer Curls",
         "default_rest_sec": 60,
-        "notes": "Хват нейтральный",
+        "notes": "Neutral grip",
         "sets": [
           { "type": "normal", "target_weight": 14, "target_reps": 12 },
           { "type": "normal", "target_weight": 14, "target_reps": 12 },
@@ -113,13 +113,13 @@
     ]
   },
   {
-    "title": "День 3 (Ноги / Плечи)",
-    "notes": "Пятница. Базовый тяжелый день",
+    "title": "Day 3 (Legs / Shoulders)",
+    "notes": "Friday. Heavy compound day",
     "exercises": [
       {
-        "name": "Приседания со штангой",
+        "name": "Barbell Back Squat",
         "default_rest_sec": 150,
-        "notes": "Глубина до параллели или чуть ниже",
+        "notes": "Depth to parallel or slightly below",
         "sets": [
           { "type": "warmup", "target_weight": 40, "target_reps": 12 },
           { "type": "warmup", "target_weight": 60, "target_reps": 8 },
@@ -129,9 +129,9 @@
         ]
       },
       {
-        "name": "Жим ногами в тренажере",
+        "name": "Leg Press Machine",
         "default_rest_sec": 90,
-        "notes": "Колени не блокировать в верхней точке",
+        "notes": "Do not lock knees at the top",
         "sets": [
           { "type": "normal", "target_weight": 140, "target_reps": 10 },
           { "type": "normal", "target_weight": 140, "target_reps": 10 },
@@ -139,9 +139,9 @@
         ]
       },
       {
-        "name": "Сгибание ног лежа в тренажере",
+        "name": "Lying Leg Curls",
         "default_rest_sec": 75,
-        "notes": "Изоляция бицепса бедра",
+        "notes": "Hamstring isolation",
         "sets": [
           { "type": "normal", "target_weight": 45, "target_reps": 12 },
           { "type": "normal", "target_weight": 45, "target_reps": 12 },
@@ -149,9 +149,9 @@
         ]
       },
       {
-        "name": "Армейский жим штанги стоя",
+        "name": "Standing Overhead Barbell Press",
         "default_rest_sec": 100,
-        "notes": "Пресс напряжен, упор ногами",
+        "notes": "Core braced, stable footing",
         "sets": [
           { "type": "normal", "target_weight": 45, "target_reps": 8 },
           { "type": "normal", "target_weight": 45, "target_reps": 8 },
@@ -159,9 +159,9 @@
         ]
       },
       {
-        "name": "Махи гантелями в стороны",
+        "name": "Dumbbell Lateral Raises",
         "default_rest_sec": 60,
-        "notes": "Подъем локтями, не кистями",
+        "notes": "Lead with elbows, not wrists",
         "sets": [
           { "type": "normal", "target_weight": 10, "target_reps": 12 },
           { "type": "normal", "target_weight": 10, "target_reps": 12 },
@@ -171,13 +171,13 @@
     ]
   },
   {
-    "title": "День 3 — Верх B + 🔥 HIIT Финишер #1",
-    "notes": "Верх B (акцент на грудь, спину, плечи, руки) + HIIT финишер",
+    "title": "Day 3 — Upper Body B + 🔥 HIIT Finisher #1",
+    "notes": "Upper Body B (Chest, Back, Shoulders, Arms) + HIIT Finisher",
     "exercises": [
       {
-        "name": "Жим гантелей на горизонтальной скамье",
+        "name": "Flat Dumbbell Bench Press",
         "default_rest_sec": 120,
-        "notes": "Глубокое растяжение грудных внизу (RIR 1–2, 8–12 повт)",
+        "notes": "Deep pectoral stretch at the bottom (RIR 1–2, 8–12 reps)",
         "sets": [
           { "type": "normal", "target_weight": 24, "target_reps": 10 },
           { "type": "normal", "target_weight": 24, "target_reps": 10 },
@@ -185,9 +185,9 @@
         ]
       },
       {
-        "name": "Тяга верхнего блока к груди",
+        "name": "Lat Pulldown to Chest",
         "default_rest_sec": 120,
-        "notes": "Средний/нейтральный хват (RIR 1, 8–12 повт)",
+        "notes": "Medium/neutral grip (RIR 1, 8–12 reps)",
         "sets": [
           { "type": "normal", "target_weight": 55, "target_reps": 10 },
           { "type": "normal", "target_weight": 55, "target_reps": 10 },
@@ -195,9 +195,9 @@
         ]
       },
       {
-        "name": "Жим гантелей сидя / Жим в хаммере",
+        "name": "Seated Dumbbell / Hammer Shoulder Press",
         "default_rest_sec": 120,
-        "notes": "Наклон спинки 75–80° для здоровья плеч (RIR 1–2, 8–12 повт)",
+        "notes": "Bench angle 75–80° for shoulder health (RIR 1–2, 8–12 reps)",
         "sets": [
           { "type": "normal", "target_weight": 20, "target_reps": 10 },
           { "type": "normal", "target_weight": 20, "target_reps": 10 },
@@ -205,9 +205,9 @@
         ]
       },
       {
-        "name": "Горизонтальная тяга блока к поясу",
+        "name": "Seated Cable Row to Waist",
         "default_rest_sec": 90,
-        "notes": "Сведение лопаток с фиксацией на 1 сек (RIR 1, 8–12 повт)",
+        "notes": "Scapulae squeeze with 1s hold (RIR 1, 8–12 reps)",
         "sets": [
           { "type": "normal", "target_weight": 50, "target_reps": 10 },
           { "type": "normal", "target_weight": 50, "target_reps": 10 },
@@ -215,9 +215,9 @@
         ]
       },
       {
-        "name": "Разведения в стороны (гантели или кроссовер)",
+        "name": "Lateral Raises (Dumbbells or Cable)",
         "default_rest_sec": 60,
-        "notes": "Суперсет 1: акцент на среднюю дельту (RIR 0–1, 12–20 повт)",
+        "notes": "Superset 1: Lateral delt focus (RIR 0–1, 12–20 reps)",
         "sets": [
           { "type": "normal", "target_weight": 10, "target_reps": 15 },
           { "type": "normal", "target_weight": 10, "target_reps": 15 },
@@ -226,9 +226,9 @@
         ]
       },
       {
-        "name": "Сгибание рук на наклонной скамье (бицепс)",
+        "name": "Incline Dumbbell Bicep Curl",
         "default_rest_sec": 75,
-        "notes": "Суперсет 1: мощная растяжка длинной головки (RIR 1, 10–12 повт)",
+        "notes": "Superset 1: Strong stretch on long head (RIR 1, 10–12 reps)",
         "sets": [
           { "type": "normal", "target_weight": 12, "target_reps": 10 },
           { "type": "normal", "target_weight": 12, "target_reps": 10 },
@@ -236,9 +236,9 @@
         ]
       },
       {
-        "name": "Обратная бабочка (Rear Pec-Deck)",
+        "name": "Rear Delt Pec-Deck Flyes",
         "default_rest_sec": 60,
-        "notes": "Суперсет 2: задняя дельта (RIR 0–1, 12–20 повт)",
+        "notes": "Superset 2: Rear delts (RIR 0–1, 12–20 reps)",
         "sets": [
           { "type": "normal", "target_weight": 35, "target_reps": 15 },
           { "type": "normal", "target_weight": 35, "target_reps": 15 },
@@ -246,9 +246,9 @@
         ]
       },
       {
-        "name": "Французский жим с гантелью / блоком из-за головы",
+        "name": "Overhead Triceps Extension (Dumbbell or Cable)",
         "default_rest_sec": 75,
-        "notes": "Суперсет 2: растяжка длинной головки трицепса (RIR 1, 10–12 повт)",
+        "notes": "Superset 2: Long head triceps stretch (RIR 1, 10–12 reps)",
         "sets": [
           { "type": "normal", "target_weight": 22, "target_reps": 10 },
           { "type": "normal", "target_weight": 22, "target_reps": 10 },

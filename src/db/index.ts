@@ -237,10 +237,10 @@ export async function getLastPerformanceForExercise(
       if (completedSets.length === 0) continue;
 
       const setSummaries = completedSets.map(
-        (s) => `${s.actual_weight || s.target_weight}кг × ${s.actual_reps || s.target_reps}`
+        (s) => `${s.actual_weight || s.target_weight}kg × ${s.actual_reps || s.target_reps}`
       );
 
-      const dateStr = new Date(session.finished_at).toLocaleDateString('ru-RU', {
+      const dateStr = new Date(session.finished_at).toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
       });
