@@ -1,0 +1,173 @@
+[
+  {
+    "title": "День 1 (Грудь / Трицепс)",
+    "notes": "Понедельник. Разминка перед жимом 10 мин",
+    "exercises": [
+      {
+        "name": "Жим штанги лежа",
+        "default_rest_sec": 120,
+        "notes": "Лопатки сведены, упор ногами в пол",
+        "sets": [
+          { "type": "warmup", "target_weight": 40, "target_reps": 12 },
+          { "type": "normal", "target_weight": 70, "target_reps": 8 },
+          { "type": "normal", "target_weight": 70, "target_reps": 8 },
+          { "type": "normal", "target_weight": 70, "target_reps": 8 }
+        ]
+      },
+      {
+        "name": "Жим гантелей на наклонной скамье",
+        "default_rest_sec": 90,
+        "notes": "Угол скамьи 30 градусов",
+        "sets": [
+          { "type": "normal", "target_weight": 24, "target_reps": 10 },
+          { "type": "normal", "target_weight": 24, "target_reps": 10 },
+          { "type": "normal", "target_weight": 24, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Разведение гантелей лежа",
+        "default_rest_sec": 75,
+        "notes": "Плавная растяжка в нижней точке",
+        "sets": [
+          { "type": "normal", "target_weight": 14, "target_reps": 12 },
+          { "type": "normal", "target_weight": 14, "target_reps": 12 },
+          { "type": "normal", "target_weight": 14, "target_reps": 12 }
+        ]
+      },
+      {
+        "name": "Французский жим со штангой",
+        "default_rest_sec": 75,
+        "notes": "Локти зафиксированы",
+        "sets": [
+          { "type": "normal", "target_weight": 30, "target_reps": 10 },
+          { "type": "normal", "target_weight": 30, "target_reps": 10 },
+          { "type": "normal", "target_weight": 30, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Разгибание рук на блоке (канат)",
+        "default_rest_sec": 60,
+        "notes": "Разведение кистей в нижней точке",
+        "sets": [
+          { "type": "normal", "target_weight": 25, "target_reps": 12 },
+          { "type": "normal", "target_weight": 25, "target_reps": 12 },
+          { "type": "dropset", "target_weight": 20, "target_reps": 15 }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "День 2 (Спина / Бицепс)",
+    "notes": "Среда. Фокус на сведении лопаток",
+    "exercises": [
+      {
+        "name": "Подтягивания широким хватом",
+        "default_rest_sec": 90,
+        "notes": "Собственный вес или гравитрон",
+        "sets": [
+          { "type": "normal", "target_weight": 0, "target_reps": 10 },
+          { "type": "normal", "target_weight": 0, "target_reps": 10 },
+          { "type": "normal", "target_weight": 0, "target_reps": 8 }
+        ]
+      },
+      {
+        "name": "Тяга верхнего блока к груди",
+        "default_rest_sec": 90,
+        "notes": "Тянуть локтями вниз",
+        "sets": [
+          { "type": "normal", "target_weight": 55, "target_reps": 10 },
+          { "type": "normal", "target_weight": 55, "target_reps": 10 },
+          { "type": "normal", "target_weight": 55, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Тяга штанги в наклоне",
+        "default_rest_sec": 90,
+        "notes": "Спина прямая, поясница прогнута",
+        "sets": [
+          { "type": "normal", "target_weight": 60, "target_reps": 8 },
+          { "type": "normal", "target_weight": 60, "target_reps": 8 },
+          { "type": "normal", "target_weight": 60, "target_reps": 8 }
+        ]
+      },
+      {
+        "name": "Подъем штанги на бицепс стоя",
+        "default_rest_sec": 75,
+        "notes": "Без раскачки корпуса",
+        "sets": [
+          { "type": "normal", "target_weight": 30, "target_reps": 10 },
+          { "type": "normal", "target_weight": 30, "target_reps": 10 },
+          { "type": "normal", "target_weight": 30, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Молотковые сгибания с гантелями",
+        "default_rest_sec": 60,
+        "notes": "Хват нейтральный",
+        "sets": [
+          { "type": "normal", "target_weight": 14, "target_reps": 12 },
+          { "type": "normal", "target_weight": 14, "target_reps": 12 },
+          { "type": "normal", "target_weight": 14, "target_reps": 12 }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "День 3 (Ноги / Плечи)",
+    "notes": "Пятница. Базовый тяжелый день",
+    "exercises": [
+      {
+        "name": "Приседания со штангой",
+        "default_rest_sec": 150,
+        "notes": "Глубина до параллели или чуть ниже",
+        "sets": [
+          { "type": "warmup", "target_weight": 40, "target_reps": 12 },
+          { "type": "warmup", "target_weight": 60, "target_reps": 8 },
+          { "type": "normal", "target_weight": 85, "target_reps": 8 },
+          { "type": "normal", "target_weight": 85, "target_reps": 8 },
+          { "type": "normal", "target_weight": 85, "target_reps": 8 }
+        ]
+      },
+      {
+        "name": "Жим ногами в тренажере",
+        "default_rest_sec": 90,
+        "notes": "Колени не блокировать в верхней точке",
+        "sets": [
+          { "type": "normal", "target_weight": 140, "target_reps": 10 },
+          { "type": "normal", "target_weight": 140, "target_reps": 10 },
+          { "type": "normal", "target_weight": 140, "target_reps": 10 }
+        ]
+      },
+      {
+        "name": "Сгибание ног лежа в тренажере",
+        "default_rest_sec": 75,
+        "notes": "Изоляция бицепса бедра",
+        "sets": [
+          { "type": "normal", "target_weight": 45, "target_reps": 12 },
+          { "type": "normal", "target_weight": 45, "target_reps": 12 },
+          { "type": "normal", "target_weight": 45, "target_reps": 12 }
+        ]
+      },
+      {
+        "name": "Армейский жим штанги стоя",
+        "default_rest_sec": 100,
+        "notes": "Пресс напряжен, упор ногами",
+        "sets": [
+          { "type": "normal", "target_weight": 45, "target_reps": 8 },
+          { "type": "normal", "target_weight": 45, "target_reps": 8 },
+          { "type": "normal", "target_weight": 45, "target_reps": 8 }
+        ]
+      },
+      {
+        "name": "Махи гантелями в стороны",
+        "default_rest_sec": 60,
+        "notes": "Подъем локтями, не кистями",
+        "sets": [
+          { "type": "normal", "target_weight": 10, "target_reps": 12 },
+          { "type": "normal", "target_weight": 10, "target_reps": 12 },
+          { "type": "dropset", "target_weight": 8, "target_reps": 15 }
+        ]
+      }
+    ]
+  }
+]

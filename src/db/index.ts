@@ -7,6 +7,7 @@ import type {
   PreviousPerformance,
 } from '../types/workout.ts';
 import { generateUUID } from '../utils/uuid.ts';
+import defaultWorkoutsData from '../data/default_workouts.json';
 
 interface GymTrackerDB extends DBSchema {
   workouts: {
@@ -254,109 +255,87 @@ export async function getLastPerformanceForExercise(
   return null;
 }
 
-/* ==================== SEED DATA ==================== */
+export interface DefaultWorkoutTemplate {
+  title: string;
+  notes?: string;
+  exercises: {
+    name: string;
+    default_rest_sec?: number;
+    notes?: string;
+    sets: {
+      type?: 'normal' | 'warmup' | 'dropset' | 'failure';
+      target_weight?: number;
+      target_reps?: number;
+      custom_rest_sec?: number | null;
+    }[];
+  }[];
+}
+
+/**
+ * Loads or resets workouts from default_workouts.json.
+ * If a workout with the same title exists and overwrite is true, its exercises and notes are updated.
+ * If it doesn't exist, it is created.
+ */
+export async function resetToDefaultWorkouts(
+  options: { overwrite?: boolean } = { overwrite: true }
+): Promise<number> {
+  const templates = defaultWorkoutsData as DefaultWorkoutTemplate[];
+  const existingWorkouts = await getAllWorkouts();
+  const now = Date.now();
+  let count = 0;
+
+  for (const template of templates) {
+    const existing = existingWorkouts.find(
+      (w) => w.title.trim().toLowerCase() === template.title.trim().toLowerCase()
+    );
+
+    if (existing && !options.overwrite) {
+      continue;
+    }
+
+    const workoutId = existing ? existing.id : generateUUID();
+    const workout: Workout = {
+      id: workoutId,
+      title: template.title,
+      notes: template.notes || '',
+      created_at: existing ? existing.created_at : now,
+      updated_at: now,
+      exercises: template.exercises.map((ex, exIdx) => ({
+        id: generateUUID(),
+        name: ex.name,
+        order_index: exIdx,
+        default_rest_sec: ex.default_rest_sec ?? 90,
+        notes: ex.notes || '',
+        previous_performance: null,
+        sets: (ex.sets || []).map((s, sIdx) => ({
+          id: generateUUID(),
+          set_number: sIdx + 1,
+          type: (s.type as any) || 'normal',
+          target_weight: s.target_weight ?? 0,
+          actual_weight: s.target_weight ?? 0,
+          target_reps: s.target_reps ?? 10,
+          actual_reps: s.target_reps ?? 10,
+          is_completed: false,
+          custom_rest_sec: s.custom_rest_sec ?? null,
+        })),
+      })),
+    };
+
+    // Register each exercise in user_custom_exercises for search/autocomplete
+    for (const ex of template.exercises) {
+      await recordCustomExercise(ex.name, ex.default_rest_sec ?? 90);
+    }
+
+    await saveWorkout(workout);
+    count++;
+  }
+
+  return count;
+}
 
 export async function seedInitialDataIfEmpty(): Promise<void> {
   const workouts = await getAllWorkouts();
   if (workouts.length > 0) return;
 
-  const now = Date.now();
-  const defaultExercises = [
-    { name: 'Жим штанги лежа', rest: 120 },
-    { name: 'Приседания со штангой', rest: 120 },
-    { name: 'Тяга верхнего блока', rest: 90 },
-    { name: 'Жим гантелей сидя', rest: 90 },
-    { name: 'Подъем штанги на бицепс', rest: 60 },
-  ];
-
-  for (const ex of defaultExercises) {
-    await recordCustomExercise(ex.name, ex.rest);
-  }
-
-  const sampleWorkout: Workout = {
-    id: generateUUID(),
-    title: 'День А (Грудь / Спина / Ноги)',
-    notes: 'Базовая программа для старта. Веса регулируются степперами.',
-    created_at: now,
-    updated_at: now,
-    exercises: [
-      {
-        id: generateUUID(),
-        name: 'Жим штанги лежа',
-        order_index: 0,
-        default_rest_sec: 120,
-        notes: 'Лопатки сведены, упор ногами в пол',
-        previous_performance: null,
-        sets: [
-          {
-            id: generateUUID(),
-            set_number: 1,
-            type: 'warmup',
-            target_weight: 40,
-            actual_weight: 40,
-            target_reps: 12,
-            actual_reps: 12,
-            is_completed: false,
-            custom_rest_sec: null,
-          },
-          {
-            id: generateUUID(),
-            set_number: 2,
-            type: 'normal',
-            target_weight: 70,
-            actual_weight: 70,
-            target_reps: 8,
-            actual_reps: 8,
-            is_completed: false,
-            custom_rest_sec: null,
-          },
-          {
-            id: generateUUID(),
-            set_number: 3,
-            type: 'normal',
-            target_weight: 70,
-            actual_weight: 70,
-            target_reps: 8,
-            actual_reps: 8,
-            is_completed: false,
-            custom_rest_sec: null,
-          },
-        ],
-      },
-      {
-        id: generateUUID(),
-        name: 'Тяга верхнего блока',
-        order_index: 1,
-        default_rest_sec: 90,
-        notes: 'Тянуть к верху груди за счет сведения лопаток',
-        previous_performance: null,
-        sets: [
-          {
-            id: generateUUID(),
-            set_number: 1,
-            type: 'normal',
-            target_weight: 55,
-            actual_weight: 55,
-            target_reps: 10,
-            actual_reps: 10,
-            is_completed: false,
-            custom_rest_sec: null,
-          },
-          {
-            id: generateUUID(),
-            set_number: 2,
-            type: 'normal',
-            target_weight: 55,
-            actual_weight: 55,
-            target_reps: 10,
-            actual_reps: 10,
-            is_completed: false,
-            custom_rest_sec: null,
-          },
-        ],
-      },
-    ],
-  };
-
-  await saveWorkout(sampleWorkout);
+  await resetToDefaultWorkouts({ overwrite: false });
 }

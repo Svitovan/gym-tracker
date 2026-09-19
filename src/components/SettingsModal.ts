@@ -3,6 +3,7 @@ import {
   importDatabaseFromJSON,
   getStorageDiagnostics,
 } from '../services/backup.ts';
+import { resetToDefaultWorkouts } from '../db/index.ts';
 import { showToast } from './Toast.ts';
 
 // Global deferred prompt for PWA installation
@@ -58,6 +59,22 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
             <span>Импортировать из JSON</span>
             <input type="file" id="input-import-json" accept=".json" style="display: none;" />
           </label>
+        </div>
+      </div>
+
+      <!-- 2. Default Workouts Templates Section -->
+      <div style="margin-bottom: 20px;">
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 8px;">
+          Встроенные программы (PC JSON)
+        </div>
+        <button class="btn-secondary" id="btn-load-defaults" style="width: 100%; justify-content: flex-start; padding: 0 14px; border-color: rgba(56, 189, 248, 0.4);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+          </svg>
+          <span>Загрузить шаблоны из default_workouts.json</span>
+        </button>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; line-height: 1.3;">
+          Обновляет или загружает программы (День 1, День 2, День 3), прописанные в коде на ПК.
         </div>
       </div>
 
@@ -153,6 +170,19 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
       showToast(err.message || 'Ошибка импорта файла', 'error');
     } finally {
       fileInput.value = '';
+    }
+  });
+
+  // Load Default Workouts from default_workouts.json
+  overlay.querySelector('#btn-load-defaults')?.addEventListener('click', async () => {
+    try {
+      const count = await resetToDefaultWorkouts();
+      showToast(`Загружено: ${count} программ из default_workouts.json`, 'success');
+      close();
+      if (onDataUpdated) onDataUpdated();
+    } catch (err: any) {
+      console.error(err);
+      showToast(err?.message || 'Ошибка загрузки шаблонов', 'error');
     }
   });
 
