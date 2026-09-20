@@ -74,7 +74,7 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
           <span>Reload templates from default_workouts.json</span>
         </button>
         <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; line-height: 1.3;">
-          Updates or reloads workout templates (Day 1, Day 2, Day 3, etc.) configured in default_workouts.json.
+          Updates or reloads workout templates configured in default_workouts.json.
         </div>
       </div>
 

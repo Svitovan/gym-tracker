@@ -33,10 +33,7 @@ A sleek, offline-first Progressive Web App (PWA) designed for frictionless stren
 - Reorder exercises easily with `▲ / ▼` buttons.
 - Exercise search & autocomplete that remembers your frequently used movements.
 - **Preloaded Workouts** (`src/data/default_workouts.json`):
-  1. **Day 1 (Chest / Triceps)**
-  2. **Day 2 (Back / Biceps)**
-  3. **Day 3 (Legs / Shoulders)**
-  4. **Day 3 — Upper Body B + 🔥 HIIT Finisher #1**
+  1. **Day 3 — Upper Body B + 🔥 HIIT Finisher #1**
 
 ### 📊 History & Analytics
 - Overview cards: **Total Volume (kg / tonnes)**, **Total Workouts Completed**, and **Average Duration**.

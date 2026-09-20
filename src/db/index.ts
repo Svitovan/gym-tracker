@@ -271,6 +271,25 @@ export interface DefaultWorkoutTemplate {
   }[];
 }
 
+export const OBSOLETE_DEFAULT_WORKOUT_TITLES = [
+  'day 1 (chest / triceps)',
+  'day 2 (back / biceps)',
+  'day 3 (legs / shoulders)',
+];
+
+export async function removeObsoleteDefaultWorkouts(): Promise<number> {
+  const db = await getDB();
+  const all = await db.getAll('workouts');
+  let removedCount = 0;
+  for (const w of all) {
+    if (OBSOLETE_DEFAULT_WORKOUT_TITLES.includes(w.title.trim().toLowerCase())) {
+      await db.delete('workouts', w.id);
+      removedCount++;
+    }
+  }
+  return removedCount;
+}
+
 /**
  * Loads or resets workouts from default_workouts.json.
  * If a workout with the same title exists and overwrite is true, its exercises and notes are updated.
@@ -279,6 +298,7 @@ export interface DefaultWorkoutTemplate {
 export async function resetToDefaultWorkouts(
   options: { overwrite?: boolean } = { overwrite: true }
 ): Promise<number> {
+  await removeObsoleteDefaultWorkouts();
   const templates = defaultWorkoutsData as DefaultWorkoutTemplate[];
   const existingWorkouts = await getAllWorkouts();
   const now = Date.now();
@@ -385,6 +405,7 @@ export async function syncDefaultWorkoutsIfMissing(): Promise<number> {
 }
 
 export async function seedInitialDataIfEmpty(): Promise<void> {
+  await removeObsoleteDefaultWorkouts();
   const workouts = await getAllWorkouts();
   if (workouts.length === 0) {
     await resetToDefaultWorkouts({ overwrite: false });
