@@ -20,6 +20,7 @@ import { triggerTimerDoneFeedback } from '../services/feedback.ts';
 import { requestWakeLock, releaseWakeLock } from '../services/wakeLock.ts';
 import { generateUUID } from '../utils/uuid.ts';
 import { showToast } from './Toast.ts';
+import { exportWorkoutHistoryToMarkdown } from '../services/markdownExport.ts';
 
 export class WorkoutSessionView {
   private container: HTMLElement;
@@ -215,14 +216,40 @@ export class WorkoutSessionView {
     leftBox.appendChild(timerBadge);
 
     const finishTopBtn = document.createElement('button');
-    finishTopBtn.className = 'btn-danger';
+    finishTopBtn.className = 'btn-secondary';
     finishTopBtn.style.minHeight = '38px';
     finishTopBtn.style.padding = '0 14px';
     finishTopBtn.textContent = 'Finish';
     finishTopBtn.addEventListener('click', () => this.showFinishModal());
 
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'btn-icon-danger';
+    closeBtn.title = 'Close & delete workout session';
+    closeBtn.style.width = '38px';
+    closeBtn.style.height = '38px';
+    closeBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    `;
+    closeBtn.addEventListener('click', async () => {
+      if (confirm('Close and delete this active workout session?')) {
+        await clearActiveSession();
+        this.dispose();
+        this.onFinishCallback();
+      }
+    });
+
+    const rightBox = document.createElement('div');
+    rightBox.style.display = 'flex';
+    rightBox.style.alignItems = 'center';
+    rightBox.style.gap = '8px';
+    rightBox.appendChild(finishTopBtn);
+    rightBox.appendChild(closeBtn);
+
     topBar.appendChild(leftBox);
-    topBar.appendChild(finishTopBtn);
+    topBar.appendChild(rightBox);
     root.appendChild(topBar);
 
     // 2. Rest Timer Widget Container
@@ -903,8 +930,17 @@ export class WorkoutSessionView {
           <button class="btn-primary" id="btn-confirm-finish">
             ✓ Save and Finish
           </button>
+          <button class="btn-secondary" id="btn-export-finish-md" style="width: 100%; justify-content: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            <span>Export to Markdown (.md)</span>
+          </button>
           <button class="btn-ghost" id="btn-cancel-finish" style="color: var(--text-secondary);">
             Continue Workout
+          </button>
+          <button class="btn-ghost" id="btn-discard-finish" style="color: var(--accent-danger-text, var(--accent-danger)); font-size: 0.9rem; margin-top: 4px;">
+            ✕ Discard & Delete Workout
           </button>
         </div>
       </div>
@@ -912,8 +948,33 @@ export class WorkoutSessionView {
 
     document.body.appendChild(overlay);
 
+    const exportBtn = overlay.querySelector('#btn-export-finish-md');
+    exportBtn?.addEventListener('click', async () => {
+      const historyRecord: WorkoutHistory = {
+        id: generateUUID(),
+        workout_id: this.session.workout_id,
+        title: this.session.title,
+        started_at: this.session.started_at,
+        finished_at: Date.now(),
+        total_volume_kg: totalVolumeKg,
+        total_reps: totalReps,
+        snapshot: this.session.exercises,
+      };
+      await exportWorkoutHistoryToMarkdown(historyRecord);
+    });
+
     const cancelBtn = overlay.querySelector('#btn-cancel-finish');
     cancelBtn?.addEventListener('click', () => overlay.remove());
+
+    const discardBtn = overlay.querySelector('#btn-discard-finish');
+    discardBtn?.addEventListener('click', async () => {
+      if (confirm('Discard and delete this active workout session?')) {
+        overlay.remove();
+        await clearActiveSession();
+        this.dispose();
+        this.onFinishCallback();
+      }
+    });
 
     const confirmBtn = overlay.querySelector('#btn-confirm-finish');
     confirmBtn?.addEventListener('click', async () => {

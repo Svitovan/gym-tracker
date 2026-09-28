@@ -34,8 +34,11 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
           <span>⚙</span>
           <span>Settings & Data</span>
         </h2>
-        <button class="btn-icon-danger" id="btn-close-settings" style="width: 32px; height: 32px; font-size: 1.2rem;">
-          ✕
+        <button class="btn-icon-danger" id="btn-close-settings" title="Close" aria-label="Close" style="width: 32px; height: 32px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
         </button>
       </div>
 

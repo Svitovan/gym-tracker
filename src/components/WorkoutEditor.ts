@@ -14,6 +14,7 @@ import {
 } from '../db/index.ts';
 import { showToast } from './Toast.ts';
 import { generateUUID } from '../utils/uuid.ts';
+import { exportWorkoutTemplateToMarkdown } from '../services/markdownExport.ts';
 
 export class WorkoutEditorView {
   private container: HTMLElement;
@@ -123,12 +124,36 @@ export class WorkoutEditorView {
       }
     });
 
+    const rightBox = document.createElement('div');
+    rightBox.style.display = 'flex';
+    rightBox.style.alignItems = 'center';
+    rightBox.style.gap = '8px';
+
+    const exportBtn = document.createElement('button');
+    exportBtn.className = 'btn-ghost';
+    exportBtn.style.padding = '0 10px';
+    exportBtn.style.minHeight = '36px';
+    exportBtn.style.fontSize = '0.85rem';
+    exportBtn.title = 'Export workout to Markdown (.md)';
+    exportBtn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+      </svg>
+      <span>Export MD</span>
+    `;
+    exportBtn.addEventListener('click', async () => {
+      await exportWorkoutTemplateToMarkdown(this.workout);
+    });
+
     const indicator = document.createElement('div');
     indicator.className = 'save-indicator';
     indicator.textContent = '✓ Saved locally';
 
+    rightBox.appendChild(indicator);
+    rightBox.appendChild(exportBtn);
+
     topBar.appendChild(backBtn);
-    topBar.appendChild(indicator);
+    topBar.appendChild(rightBox);
     root.appendChild(topBar);
 
     // Workout title & notes
@@ -188,7 +213,13 @@ export class WorkoutEditorView {
 
     const deleteWorkoutBtn = document.createElement('button');
     deleteWorkoutBtn.className = 'btn-danger';
-    deleteWorkoutBtn.textContent = 'Delete this workout';
+    deleteWorkoutBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="3 6 5 6 21 6"/>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+      </svg>
+      <span>Delete this workout</span>
+    `;
     deleteWorkoutBtn.addEventListener('click', async () => {
       if (confirm(`Delete workout "${this.workout.title}"?`)) {
         await deleteWorkout(this.workout.id);

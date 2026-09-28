@@ -25,8 +25,11 @@
   --accent-dropset: #8b5cf6; /* Purple for Dropset */
   --accent-failure: #ef4444; /* Red for Failure */
 
-  --accent-danger: #f43f5e;
-  --accent-danger-bg: rgba(244, 63, 94, 0.15);
+  --accent-danger: #b91c1c; /* Dark Red */
+  --accent-danger-hover: #991b1b;
+  --accent-danger-text: #ef4444;
+  --accent-danger-bg: rgba(185, 28, 28, 0.2);
+  --accent-danger-border: rgba(185, 28, 28, 0.5);
 
   /* Typography */
   --text-primary: #f8fafc;

@@ -133,11 +133,49 @@ button:active {
 .btn-danger {
   min-height: var(--touch-target-min);
   background: var(--accent-danger-bg);
-  color: var(--accent-danger);
-  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: var(--accent-danger-text, var(--accent-danger));
+  border: 1px solid var(--accent-danger-border);
   border-radius: var(--radius-md);
   padding: 0 16px;
   font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+}
+
+.btn-danger:hover,
+.btn-danger:active {
+  background: var(--accent-danger);
+  border-color: var(--accent-danger-hover);
+  color: #ffffff;
+}
+
+.btn-icon-danger {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--accent-danger-text, var(--accent-danger));
+  background: var(--accent-danger-bg);
+  border: 1px solid var(--accent-danger-border);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.btn-icon-danger:hover,
+.btn-icon-danger:active {
+  background: var(--accent-danger);
+  border-color: var(--accent-danger-hover);
+  color: #ffffff;
+  transform: scale(0.96);
 }
 
 .btn-ghost {
@@ -199,6 +237,7 @@ button:active {
   letter-spacing: -0.01em;
   background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

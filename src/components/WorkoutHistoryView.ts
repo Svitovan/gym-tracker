@@ -1,6 +1,7 @@
 import type { WorkoutHistory } from '../types/workout.ts';
 import { getWorkoutHistory, deleteWorkoutHistory, getHistoryStats } from '../db/index.ts';
 import { showToast } from './Toast.ts';
+import { exportWorkoutHistoryToMarkdown } from '../services/markdownExport.ts';
 
 export class WorkoutHistoryView {
   private container: HTMLElement;
@@ -140,7 +141,29 @@ export class WorkoutHistoryView {
       </div>
     `;
 
-    // Header actions: Delete button
+    // Header actions: Export to MD + Delete button
+    const actionsBox = document.createElement('div');
+    actionsBox.style.display = 'flex';
+    actionsBox.style.alignItems = 'center';
+    actionsBox.style.gap = '6px';
+
+    const exportBtn = document.createElement('button');
+    exportBtn.className = 'icon-btn';
+    exportBtn.style.width = '36px';
+    exportBtn.style.height = '36px';
+    exportBtn.style.minWidth = '36px';
+    exportBtn.style.minHeight = '36px';
+    exportBtn.title = 'Export workout to Markdown (.md)';
+    exportBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+      </svg>
+    `;
+    exportBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      await exportWorkoutHistoryToMarkdown(session);
+    });
+
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'btn-icon-danger';
     deleteBtn.title = 'Delete this workout from history';
@@ -159,8 +182,11 @@ export class WorkoutHistoryView {
       }
     });
 
+    actionsBox.appendChild(exportBtn);
+    actionsBox.appendChild(deleteBtn);
+
     const header = card.querySelector('.history-card-header');
-    if (header) header.appendChild(deleteBtn);
+    if (header) header.appendChild(actionsBox);
 
     // Collapsible Accordion Toggle for Session Snapshot
     const toggleBtn = document.createElement('button');

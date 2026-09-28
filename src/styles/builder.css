@@ -416,12 +416,14 @@
 }
 
 .set-actions .btn-icon-danger {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
-  color: var(--text-muted);
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  min-height: 26px;
   border-radius: var(--radius-sm);
+  color: var(--accent-danger-text, var(--accent-danger));
+  background: var(--accent-danger-bg);
+  border: 1px solid var(--accent-danger-border);
   padding: 0;
   display: flex;
   align-items: center;
@@ -429,8 +431,8 @@
 }
 
 .set-actions .btn-icon-danger:active {
-  color: var(--accent-danger);
-  background: var(--accent-danger-bg);
+  background: var(--accent-danger);
+  color: #ffffff;
 }
 
 /* Add / Duplicate Set Actions */
@@ -534,7 +536,7 @@
 
 .workout-card-actions {
   display: grid;
-  grid-template-columns: 1fr 44px;
+  grid-template-columns: 1fr 44px 44px;
   gap: 8px;
   margin-top: 6px;
   width: 100%;
@@ -565,6 +567,29 @@
   padding: 0 12px;
   min-width: 0;
   border-radius: var(--radius-md);
+}
+
+.workout-card-actions .btn-export {
+  width: 44px;
+  min-width: 44px;
+  height: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.workout-card-actions .btn-export:hover,
+.workout-card-actions .btn-export:active {
+  background: var(--bg-surface-hover);
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
 }
 
 .workout-card-actions .btn-danger {
