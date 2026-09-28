@@ -1,87 +1,716 @@
 [
   {
-    "title": "Day 3 — Upper Body B + 🔥 HIIT Finisher #1",
-    "notes": "Upper Body B (Chest, Back, Shoulders, Arms) + HIIT Finisher",
+    "title": "💥 День 1 — Верх A (Силовой уклон)",
+    "notes": "Цель: Максимальное механическое напряжение, сила и база. Время: ~65 мин. Ноги свежие к завтра.",
     "exercises": [
       {
-        "name": "Flat Dumbbell Bench Press",
-        "default_rest_sec": 120,
-        "notes": "Deep pectoral stretch at the bottom (RIR 1–2, 8–12 reps)",
+        "name": "Жим штанги лёжа",
+        "default_rest_sec": 180,
+        "notes": "RIR 2 (5–8 повт). Лопатки сведены, стабильный упор ногами",
         "sets": [
-          { "type": "normal", "target_weight": 24, "target_reps": 10 },
-          { "type": "normal", "target_weight": 24, "target_reps": 10 },
-          { "type": "normal", "target_weight": 24, "target_reps": 10 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          }
         ]
       },
       {
-        "name": "Lat Pulldown to Chest",
-        "default_rest_sec": 120,
-        "notes": "Medium/neutral grip (RIR 1, 8–12 reps)",
+        "name": "Подтягивания с весом / без",
+        "default_rest_sec": 150,
+        "notes": "RIR 1–2 (6–8 повт). Полная амплитуда с паузой внизу",
         "sets": [
-          { "type": "normal", "target_weight": 55, "target_reps": 10 },
-          { "type": "normal", "target_weight": 55, "target_reps": 10 },
-          { "type": "normal", "target_weight": 55, "target_reps": 10 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          }
         ]
       },
       {
-        "name": "Seated Dumbbell / Hammer Shoulder Press",
+        "name": "Жим гантелей на наклонной скамье (30°)",
         "default_rest_sec": 120,
-        "notes": "Bench angle 75–80° for shoulder health (RIR 1–2, 8–12 reps)",
+        "notes": "RIR 1–2 (8–10 повт). Акцент на верхний пучок грудных",
         "sets": [
-          { "type": "normal", "target_weight": 20, "target_reps": 10 },
-          { "type": "normal", "target_weight": 20, "target_reps": 10 },
-          { "type": "normal", "target_weight": 20, "target_reps": 10 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
         ]
       },
       {
-        "name": "Seated Cable Row to Waist",
+        "name": "Тяга гантели/штанги с опорой грудью",
+        "default_rest_sec": 120,
+        "notes": "RIR 1–2 (8–10 повт). Исключает нагрузку на поясницу",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Разведения гантелей в стороны",
+        "default_rest_sec": 60,
+        "notes": "Суперсет 1. RIR 1–0 (12–15 повт). Плавно, без рывков корпусом",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
+        ]
+      },
+      {
+        "name": "Сгибание рук с гантелями стоя (бицепс)",
+        "default_rest_sec": 75,
+        "notes": "Суперсет 1. RIR 1 (8–12 повт). Супинация кисти в верхней точке",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Разведения на заднюю дельту (наклон/блок)",
+        "default_rest_sec": 60,
+        "notes": "Суперсет 2. RIR 1–0 (12–15 повт). Движение строго через локти",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
+        ]
+      },
+      {
+        "name": "Разгибание рук на блоке (трицепс)",
+        "default_rest_sec": 75,
+        "notes": "Суперсет 2. RIR 1–0 (10–12 повт). Локти прижаты к корпусу",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "🦵 День 2 — Ноги (Оптимизированный порядок + Заминка)",
+    "notes": "Цель: Квадрицепсы, бицепсы бедра, ягодицы с защитой поясницы. Время: ~60 мин + 8–10 мин заминка на велотренажере (Zone 1–2, пульс 100–120 уд/мин).",
+    "exercises": [
+      {
+        "name": "Присед со штангой на спине",
+        "default_rest_sec": 180,
+        "notes": "RIR 2 (5–8 повт). Контролируемый спуск, без отбива",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 8
+          }
+        ]
+      },
+      {
+        "name": "Сгибание ног в тренажёре лёжа/сидя",
         "default_rest_sec": 90,
-        "notes": "Scapulae squeeze with 1s hold (RIR 1, 8–12 reps)",
+        "notes": "RIR 1 (10–12 повт). Разгрузка спины, памп задней поверхности",
         "sets": [
-          { "type": "normal", "target_weight": 50, "target_reps": 10 },
-          { "type": "normal", "target_weight": 50, "target_reps": 10 },
-          { "type": "normal", "target_weight": 50, "target_reps": 10 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          }
         ]
       },
       {
-        "name": "Lateral Raises (Dumbbells or Cable)",
-        "default_rest_sec": 60,
-        "notes": "Superset 1: Lateral delt focus (RIR 0–1, 12–20 reps)",
+        "name": "Румынская тяга с гантелями / штангой",
+        "default_rest_sec": 150,
+        "notes": "RIR 1–2 (8–10 повт). Отвод таза назад, нейтральная спина",
         "sets": [
-          { "type": "normal", "target_weight": 10, "target_reps": 15 },
-          { "type": "normal", "target_weight": 10, "target_reps": 15 },
-          { "type": "normal", "target_weight": 10, "target_reps": 15 },
-          { "type": "normal", "target_weight": 10, "target_reps": 15 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
         ]
       },
       {
-        "name": "Incline Dumbbell Bicep Curl",
+        "name": "Болгарский сплит-присед",
+        "default_rest_sec": 90,
+        "notes": "RIR 1 (8–12 повт на ногу). Можно держаться за стойку для баланса",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Разгибание ног в тренажёре",
         "default_rest_sec": 75,
-        "notes": "Superset 1: Strong stretch on long head (RIR 1, 10–12 reps)",
+        "notes": "RIR 0–1 (12–15 повт). Пауза 1 сек в верхней точке",
         "sets": [
-          { "type": "normal", "target_weight": 12, "target_reps": 10 },
-          { "type": "normal", "target_weight": 12, "target_reps": 10 },
-          { "type": "normal", "target_weight": 12, "target_reps": 10 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
         ]
       },
       {
-        "name": "Rear Delt Pec-Deck Flyes",
+        "name": "Подъём на носки стоя (икры)",
+        "default_rest_sec": 45,
+        "notes": "Суперсет. RIR 0–1 (10–15 повт). 2 сек пауза в растяжке внизу",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
+        ]
+      },
+      {
+        "name": "Пресс (скручивания на блоке или подъем ног)",
         "default_rest_sec": 60,
-        "notes": "Superset 2: Rear delts (RIR 0–1, 12–20 reps)",
+        "notes": "Суперсет. RIR 1 (10–15 повт). Подконтрольное сокращение",
         "sets": [
-          { "type": "normal", "target_weight": 35, "target_reps": 15 },
-          { "type": "normal", "target_weight": 35, "target_reps": 15 },
-          { "type": "normal", "target_weight": 35, "target_reps": 15 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "⚡ День 3 — Верх B + 🔥 HIIT Финишер #1",
+    "notes": "Цель: Изоляция, метаболический стресс, проработка в удлинённых позициях. Время: ~60 мин + 8 мин финишер (AirBike 15/45 или Табата Concept2).",
+    "exercises": [
+      {
+        "name": "Жим гантелей на горизонтальной скамье",
+        "default_rest_sec": 120,
+        "notes": "RIR 1–2 (8–12 повт). Глубокое растяжение грудных внизу",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
         ]
       },
       {
-        "name": "Overhead Triceps Extension (Dumbbell or Cable)",
-        "default_rest_sec": 75,
-        "notes": "Superset 2: Long head triceps stretch (RIR 1, 10–12 reps)",
+        "name": "Тяга верхнего блока к груди",
+        "default_rest_sec": 120,
+        "notes": "RIR 1 (8–12 повт). Средний/нейтральный хват",
         "sets": [
-          { "type": "normal", "target_weight": 22, "target_reps": 10 },
-          { "type": "normal", "target_weight": 22, "target_reps": 10 },
-          { "type": "normal", "target_weight": 22, "target_reps": 10 }
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Жим гантелей сидя / Жим в хаммере",
+        "default_rest_sec": 120,
+        "notes": "RIR 1–2 (8–12 повт). Наклон спинки 75–80° для здоровья плеч",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Горизонтальная тяга блока к поясу",
+        "default_rest_sec": 90,
+        "notes": "RIR 1 (8–12 повт). Сведение лопаток с фиксацией на 1 сек",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Разведения в стороны (гантели или кроссовер)",
+        "default_rest_sec": 60,
+        "notes": "Суперсет 1. RIR 0–1 (12–20 повт). Акцент на среднюю дельту",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
+        ]
+      },
+      {
+        "name": "Сгибание рук на наклонной скамье (бицепс)",
+        "default_rest_sec": 75,
+        "notes": "Суперсет 1. RIR 1 (10–12 повт). Мощная растяжка длинной головки",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          }
+        ]
+      },
+      {
+        "name": "Обратная бабочка (Rear Pec-Deck)",
+        "default_rest_sec": 60,
+        "notes": "Суперсет 2. RIR 0–1 (12–20 повт). Задняя дельта",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
+        ]
+      },
+      {
+        "name": "Французский жим с гантелью / блоком из-за головы",
+        "default_rest_sec": 75,
+        "notes": "Суперсет 2. RIR 1 (10–12 повт). Растяжка длинной головки трицепса",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "🔄 День 4 — Full Body + 🔥 HIIT Финишер #2",
+    "notes": "Цель: Поддерживающий стимул для ног, закрепление объёма верха. Время: ~55 мин + 10 мин финишер (EMOM 10 мин / Сани + Канаты / No-Equipment).",
+    "exercises": [
+      {
+        "name": "Фронтальный присед / Гакк / Жим ногами",
+        "default_rest_sec": 120,
+        "notes": "RIR 2 (8–10 повт). Чистая работа квадрицепса",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Жим в тренажере сидя (Chest Press)",
+        "default_rest_sec": 90,
+        "notes": "RIR 1 (8–12 повт). Безопасная работа без стабилизаторов",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Подтягивания нейтральным хватом / Верхний блок",
+        "default_rest_sec": 90,
+        "notes": "RIR 1 (8–12 повт). Фокус на широчайшие",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Ягодичный мост со штангой / тренажер",
+        "default_rest_sec": 90,
+        "notes": "RIR 1 (8–12 повт). Пиковое сокращение вверху 1–2 сек",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 10
+          }
+        ]
+      },
+      {
+        "name": "Тяга горизонтального блока одной рукой",
+        "default_rest_sec": 75,
+        "notes": "RIR 1 (10–12 повт). Глубокая амплитуда широчайшей",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          }
+        ]
+      },
+      {
+        "name": "Разведения в стороны на блоке / гантели",
+        "default_rest_sec": 45,
+        "notes": "Суперсет. RIR 0–1 (15–20 повт). Пампинг дельт",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 15
+          }
+        ]
+      },
+      {
+        "name": "Сгибания на бицепс молотковым хватом",
+        "default_rest_sec": 50,
+        "notes": "Суперсет. RIR 1 (10–12 повт). Брахиалис и предплечья",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          }
+        ]
+      },
+      {
+        "name": "Разгибания на трицепс с канатной рукоятью",
+        "default_rest_sec": 60,
+        "notes": "Суперсет. RIR 0–1 (10–15 повт). Финальный памп рук",
+        "sets": [
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          },
+          {
+            "type": "normal",
+            "target_weight": 0,
+            "target_reps": 12
+          }
         ]
       }
     ]

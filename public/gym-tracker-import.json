@@ -1,0 +1,1589 @@
+{
+  "app": "GymTrackerPWA",
+  "version": 1,
+  "exported_at": 1790588452347,
+  "data": {
+    "workouts": [
+      {
+        "id": "ec7175d0-4888-4d5b-b71f-9890f8ecfc8c",
+        "title": "💥 День 1 — Верх A (Силовой уклон)",
+        "notes": "Цель: Максимальное механическое напряжение, сила и база. Время: ~65 мин. Ноги свежие к завтра.",
+        "created_at": 1790588452347,
+        "updated_at": 1790588452347,
+        "exercises": [
+          {
+            "id": "597777cf-7a19-49bf-9e44-21af0c3b14ff",
+            "name": "Жим штанги лёжа",
+            "order_index": 0,
+            "default_rest_sec": 180,
+            "notes": "RIR 2 (5–8 повт). Лопатки сведены, стабильный упор ногами",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "b0b8b18a-b6ab-4389-8e2f-2f219ed9a3ba",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "3544914c-f3a6-486d-83b3-69882b2f7c57",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "520c89e5-1448-4276-bd8d-0b62162d8d86",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "2d4b4680-6aae-4aad-b787-c40ede688a8a",
+            "name": "Подтягивания с весом / без",
+            "order_index": 1,
+            "default_rest_sec": 150,
+            "notes": "RIR 1–2 (6–8 повт). Полная амплитуда с паузой внизу",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "747d6c75-bf9b-4431-80d6-e903efd904ce",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "127b1738-83d4-4ec1-9c25-f96947491b59",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "20f90d4a-fec9-4ba9-954c-71d2abbfe45e",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "51250ae7-de68-4513-83e6-b6d85ea7ddba",
+            "name": "Жим гантелей на наклонной скамье (30°)",
+            "order_index": 2,
+            "default_rest_sec": 120,
+            "notes": "RIR 1–2 (8–10 повт). Акцент на верхний пучок грудных",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "977dfc5d-cf1a-4e4c-b831-1ef657048686",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "f8798f20-96e9-450d-86ad-b5cfc6994653",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "2ab9c8dc-1d87-49d0-a333-23f0130571c1",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "8caba351-91c8-4d8f-8253-fc0f4b9b10de",
+            "name": "Тяга гантели/штанги с опорой грудью",
+            "order_index": 3,
+            "default_rest_sec": 120,
+            "notes": "RIR 1–2 (8–10 повт). Исключает нагрузку на поясницу",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "37e89987-d359-449f-9060-2d9bee901a41",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "45d4a3a1-23b4-4222-9c32-354a8c793a82",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "e7ee6dd8-2c36-4203-bd86-d2971e555dfe",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "ab395d09-e2e6-4b56-9952-1964cb40dad2",
+            "name": "Разведения гантелей в стороны",
+            "order_index": 4,
+            "default_rest_sec": 60,
+            "notes": "Суперсет 1. RIR 1–0 (12–15 повт). Плавно, без рывков корпусом",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "d05acd5f-d9ae-4278-bd80-2818c0e0db26",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "685ff1ae-2e01-44e5-910b-66d3d27b20db",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "bcd35048-bdeb-4fef-9095-610e19948d30",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "50e2d5c4-2338-4e68-b9b6-48e155f1cbfb",
+            "name": "Сгибание рук с гантелями стоя (бицепс)",
+            "order_index": 5,
+            "default_rest_sec": 75,
+            "notes": "Суперсет 1. RIR 1 (8–12 повт). Супинация кисти в верхней точке",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "19d4a48e-1186-42a8-9b45-73bd6104fbd3",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "163cb884-479d-4f45-aa62-e72e5ec904fd",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "602e9667-89c8-4097-b1bc-a81d477bee18",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "dcdd0447-b2e7-4000-9859-2c6f04a26a0c",
+            "name": "Разведения на заднюю дельту (наклон/блок)",
+            "order_index": 6,
+            "default_rest_sec": 60,
+            "notes": "Суперсет 2. RIR 1–0 (12–15 повт). Движение строго через локти",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "b71faa85-671b-4a83-a5eb-ee9d8df54782",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "d4db5759-e790-4f48-bcd2-d44dc17529d9",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "30a59f80-84ae-4c57-8e46-290f2a047cf3",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "a25ce2d8-5585-49cf-9b05-1b8f520c2c06",
+            "name": "Разгибание рук на блоке (трицепс)",
+            "order_index": 7,
+            "default_rest_sec": 75,
+            "notes": "Суперсет 2. RIR 1–0 (10–12 повт). Локти прижаты к корпусу",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "3b62698c-f6e0-4909-91be-546ea76e7844",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "da977266-7964-418d-a3cf-f4acabe7d222",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "5bb6a83b-21f3-444a-a93f-60b466f983aa",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "a16f7510-de55-4af7-833b-85fa5727a75c",
+        "title": "🦵 День 2 — Ноги (Оптимизированный порядок + Заминка)",
+        "notes": "Цель: Квадрицепсы, бицепсы бедра, ягодицы с защитой поясницы. Время: ~60 мин + 8–10 мин заминка на велотренажере (Zone 1–2, пульс 100–120 уд/мин).",
+        "created_at": 1790588452347,
+        "updated_at": 1790588452347,
+        "exercises": [
+          {
+            "id": "6e274f02-d8a8-4f8e-9cfd-4612c81f3bf7",
+            "name": "Присед со штангой на спине",
+            "order_index": 0,
+            "default_rest_sec": 180,
+            "notes": "RIR 2 (5–8 повт). Контролируемый спуск, без отбива",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "ac9326fd-0958-4f55-b8d4-8a6731d8c3d9",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "cda45d81-12d6-496f-98d0-5e94f23eb058",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "0f461bfa-c176-4621-a052-f22ed6e94333",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "23e652bc-6ed9-47d4-991e-7aede4f86aa9",
+                "set_number": 4,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 8,
+                "actual_reps": 8,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "97000ba3-ca16-4293-acd4-e4c395eb6e60",
+            "name": "Сгибание ног в тренажёре лёжа/сидя",
+            "order_index": 1,
+            "default_rest_sec": 90,
+            "notes": "RIR 1 (10–12 повт). Разгрузка спины, памп задней поверхности",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "59950537-450d-4dc3-8dea-892ced4ef3fe",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "1260170e-f44e-4755-9709-c340e6a169f1",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "b2578f14-7c73-45bd-bb53-a38649162f2b",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "d01a066a-6335-46a5-838a-a012700d634f",
+            "name": "Румынская тяга с гантелями / штангой",
+            "order_index": 2,
+            "default_rest_sec": 150,
+            "notes": "RIR 1–2 (8–10 повт). Отвод таза назад, нейтральная спина",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "bd08301a-f2e8-4acb-86eb-136216ee3b62",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "fbfda6c8-9715-494a-bf43-9e7544f5bf67",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "b3231439-b960-4725-b40d-376dafdd1a14",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "8c58b146-53b7-42af-8788-b6048d102034",
+            "name": "Болгарский сплит-присед",
+            "order_index": 3,
+            "default_rest_sec": 90,
+            "notes": "RIR 1 (8–12 повт на ногу). Можно держаться за стойку для баланса",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "eadb8c55-cd02-4e34-982f-0ef3ee8ecb40",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "7f8208c0-56a9-4132-854c-659e8757b2cf",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "768e773d-945f-4f1f-b734-a53e218cc182",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "608cf8c1-af5b-4154-803b-27130c80bc4f",
+            "name": "Разгибание ног в тренажёре",
+            "order_index": 4,
+            "default_rest_sec": 75,
+            "notes": "RIR 0–1 (12–15 повт). Пауза 1 сек в верхней точке",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "693827a4-b76f-40a7-b969-91b03bfd62a6",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "5d402991-d360-4a22-949b-5ddbdf32f2a5",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "3a497fb2-daa8-4614-9b41-1c336352f71d",
+            "name": "Подъём на носки стоя (икры)",
+            "order_index": 5,
+            "default_rest_sec": 45,
+            "notes": "Суперсет. RIR 0–1 (10–15 повт). 2 сек пауза в растяжке внизу",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "5e30c80f-6335-4129-b724-813c5a07b0fc",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "45c5629c-9747-492a-b6ce-87723dfc0b49",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "3d0dae46-5ec6-48fb-a2ca-118068222df4",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "a1ab7af7-52a3-46e9-8387-55efa1d118f0",
+                "set_number": 4,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "fe719c5d-2137-4fa2-9460-e4bb6323e6d7",
+            "name": "Пресс (скручивания на блоке или подъем ног)",
+            "order_index": 6,
+            "default_rest_sec": 60,
+            "notes": "Суперсет. RIR 1 (10–15 повт). Подконтрольное сокращение",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "39f18452-7264-460c-ae0a-59de49278b1c",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "879102a0-37de-460e-833b-b08f2d2625e0",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "96103090-4e85-4b1e-bc2c-6105a2069ab1",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1963b0a5-1e22-478a-9bc6-4babe7f04c0d",
+        "title": "⚡ День 3 — Верх B + 🔥 HIIT Финишер #1",
+        "notes": "Цель: Изоляция, метаболический стресс, проработка в удлинённых позициях. Время: ~60 мин + 8 мин финишер (AirBike 15/45 или Табата Concept2).",
+        "created_at": 1790588452347,
+        "updated_at": 1790588452347,
+        "exercises": [
+          {
+            "id": "6fef3916-9fe3-43e5-babc-88733fa8dfec",
+            "name": "Жим гантелей на горизонтальной скамье",
+            "order_index": 0,
+            "default_rest_sec": 120,
+            "notes": "RIR 1–2 (8–12 повт). Глубокое растяжение грудных внизу",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "c5feaae3-3ef4-43b8-84fb-7ecdb7e0cb2e",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "d18adb3d-806e-4f04-a862-1e56d430ca52",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "fa7b50e1-be1c-4313-ac5b-a9d8da517ff6",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "5b0530e6-658e-4035-bc49-9bb8a3531644",
+            "name": "Тяга верхнего блока к груди",
+            "order_index": 1,
+            "default_rest_sec": 120,
+            "notes": "RIR 1 (8–12 повт). Средний/нейтральный хват",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "5fc7f165-335a-46d6-94c5-4e93e1387b88",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "b85826ff-d79b-460c-938f-307e9f71e687",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "3bd68688-940e-41c2-8e44-be55635d6b84",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "44100f1a-42c0-4d87-91da-208679387c8b",
+            "name": "Жим гантелей сидя / Жим в хаммере",
+            "order_index": 2,
+            "default_rest_sec": 120,
+            "notes": "RIR 1–2 (8–12 повт). Наклон спинки 75–80° для здоровья плеч",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "7cd02c9c-d5ee-4685-ba12-0e1431fde86a",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "230e6329-17f2-4e30-9101-03c2a4516593",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "3dfe6192-539a-4efb-9947-cce469d5b55a",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "bcb16ff4-9191-41d6-8b00-957be592edc0",
+            "name": "Горизонтальная тяга блока к поясу",
+            "order_index": 3,
+            "default_rest_sec": 90,
+            "notes": "RIR 1 (8–12 повт). Сведение лопаток с фиксацией на 1 сек",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "4a1f4dae-922a-46df-b13c-6b4f505fe445",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "ba4be114-06e5-4e99-831d-e67328d4b85a",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "377a90b6-5b1a-4622-8f75-8b10e5f97068",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "55737207-efb6-43e0-87e7-b7a66b8afb86",
+            "name": "Разведения в стороны (гантели или кроссовер)",
+            "order_index": 4,
+            "default_rest_sec": 60,
+            "notes": "Суперсет 1. RIR 0–1 (12–20 повт). Акцент на среднюю дельту",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "da3510ae-a278-4005-8968-5b5af527596f",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "2c751328-92be-45c0-a84f-3097422d7dd6",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "0532fdf8-5b0e-4b5c-bd7a-0c13676e921a",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "464987c2-0a8e-4ed9-b325-7f29c39beb90",
+                "set_number": 4,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "508a734f-9f72-46ca-813d-4745a7c94b87",
+            "name": "Сгибание рук на наклонной скамье (бицепс)",
+            "order_index": 5,
+            "default_rest_sec": 75,
+            "notes": "Суперсет 1. RIR 1 (10–12 повт). Мощная растяжка длинной головки",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "9d682f1b-1400-4553-a0c4-782bc7fa03ae",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "1a9280a0-67ea-4549-b2a2-3f96282cdf08",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "def25710-575a-4252-948e-3ccd9e0e7019",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "ef76131f-ba3f-4746-be32-3a8bcfe92835",
+            "name": "Обратная бабочка (Rear Pec-Deck)",
+            "order_index": 6,
+            "default_rest_sec": 60,
+            "notes": "Суперсет 2. RIR 0–1 (12–20 повт). Задняя дельта",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "aba846ea-0b81-4bea-ad36-0e9e45f5edbc",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "4f56e8d4-3e90-4ce0-964a-bf28ec34e92a",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "11c5ba2e-8991-42a6-b94b-6f246c768ed3",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "29eb41a2-1a1b-47c5-bee0-2a9777aec0e2",
+            "name": "Французский жим с гантелью / блоком из-за головы",
+            "order_index": 7,
+            "default_rest_sec": 75,
+            "notes": "Суперсет 2. RIR 1 (10–12 повт). Растяжка длинной головки трицепса",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "e6d7ae7c-8eb1-4580-ab02-c3e9bdc945e3",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "12ea25fa-c4c1-477e-9cab-abe616325b14",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "4f3040dc-35d8-49c4-b25c-622779eba45b",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "d7b739a4-418e-4e0d-94af-ddfef4a751f8",
+        "title": "🔄 День 4 — Full Body + 🔥 HIIT Финишер #2",
+        "notes": "Цель: Поддерживающий стимул для ног, закрепление объёма верха. Время: ~55 мин + 10 мин финишер (EMOM 10 мин / Сани + Канаты / No-Equipment).",
+        "created_at": 1790588452347,
+        "updated_at": 1790588452347,
+        "exercises": [
+          {
+            "id": "812cf7a3-feaf-4173-afe2-91cb8752f539",
+            "name": "Фронтальный присед / Гакк / Жим ногами",
+            "order_index": 0,
+            "default_rest_sec": 120,
+            "notes": "RIR 2 (8–10 повт). Чистая работа квадрицепса",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "b939406c-b695-4dee-9d7c-814149d4f593",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "52f02973-566b-4be8-970c-673d5fcbe2bd",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "6563627a-0580-4663-b009-9e911c889048",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "7c970c48-c503-4975-b0c8-c0116ecd13f4",
+            "name": "Жим в тренажере сидя (Chest Press)",
+            "order_index": 1,
+            "default_rest_sec": 90,
+            "notes": "RIR 1 (8–12 повт). Безопасная работа без стабилизаторов",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "076cc6cd-b67c-41d6-95b5-f3f032ad3973",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "473eadb9-80da-4978-b024-6a93f437f2ec",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "0bcf988b-e5fb-456b-9c34-b89663f706b2",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "75ea86ba-0918-46c1-99c7-d7b9179cb4f3",
+            "name": "Подтягивания нейтральным хватом / Верхний блок",
+            "order_index": 2,
+            "default_rest_sec": 90,
+            "notes": "RIR 1 (8–12 повт). Фокус на широчайшие",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "46fe5736-1c01-4874-893c-894f80fe3bd1",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "ed181810-dbdf-4502-b2c7-7a5dc4443c7d",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "bd419434-347a-40d5-8776-c8f73f593063",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "36b4b725-d6d9-49dd-8afa-9597c467105e",
+            "name": "Ягодичный мост со штангой / тренажер",
+            "order_index": 3,
+            "default_rest_sec": 90,
+            "notes": "RIR 1 (8–12 повт). Пиковое сокращение вверху 1–2 сек",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "7a04d1b0-5401-4c02-b37a-f28a8193dac8",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "c9961ec5-6d79-4439-84b5-7a08da21d23a",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "5e125cb0-f8bc-4902-8652-dc7a060c3a01",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 10,
+                "actual_reps": 10,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "22b3bd11-c479-41db-8525-e5771c31b314",
+            "name": "Тяга горизонтального блока одной рукой",
+            "order_index": 4,
+            "default_rest_sec": 75,
+            "notes": "RIR 1 (10–12 повт). Глубокая амплитуда широчайшей",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "b82c2e0c-04fd-4e04-ae92-f274b8457f38",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "d58e5ac6-c32b-42a0-903c-e9642fa14080",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "ee9bd6bb-7342-4fbf-b2b6-b65a1948be18",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "c76e8451-3e0f-4917-81b3-5c355dfd291f",
+            "name": "Разведения в стороны на блоке / гантели",
+            "order_index": 5,
+            "default_rest_sec": 45,
+            "notes": "Суперсет. RIR 0–1 (15–20 повт). Пампинг дельт",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "a86e9794-26df-4697-8cf9-b7528abd1756",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "4a8102bf-6fa5-476a-bb1d-f45c390f9d85",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "b2d53b66-3781-4091-aa60-4f1c1d7956df",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 15,
+                "actual_reps": 15,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "18644c8a-8c95-4c94-84a1-f0810b608011",
+            "name": "Сгибания на бицепс молотковым хватом",
+            "order_index": 6,
+            "default_rest_sec": 50,
+            "notes": "Суперсет. RIR 1 (10–12 повт). Брахиалис и предплечья",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "a41cc8d9-2e84-4493-bf1a-c3919b77cdd0",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "d55f1b79-c618-40a8-a18f-651f895f409e",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "1c7ea91c-204b-4867-b427-e6d6283a42e2",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          },
+          {
+            "id": "2e57e910-2d3f-45e6-ae37-40983e200195",
+            "name": "Разгибания на трицепс с канатной рукоятью",
+            "order_index": 7,
+            "default_rest_sec": 60,
+            "notes": "Суперсет. RIR 0–1 (10–15 повт). Финальный памп рук",
+            "previous_performance": null,
+            "sets": [
+              {
+                "id": "e97c4d49-db4f-40f2-b12d-6d72c56c0b19",
+                "set_number": 1,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "140f5c93-17e7-44e7-a40a-26b4934400f4",
+                "set_number": 2,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              },
+              {
+                "id": "1cc93167-06ee-4ef1-93c4-cbdbf7b7d832",
+                "set_number": 3,
+                "type": "normal",
+                "target_weight": 0,
+                "actual_weight": 0,
+                "target_reps": 12,
+                "actual_reps": 12,
+                "is_completed": false,
+                "custom_rest_sec": null
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "user_custom_exercises": [
+      {
+        "id": "c03fa828-6fc5-4cbb-82a9-a235d82bdd02",
+        "name": "Жим штанги лёжа",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 180
+      },
+      {
+        "id": "588934f3-5bc7-4ccc-8b8c-f5d8423501b6",
+        "name": "Подтягивания с весом / без",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 150
+      },
+      {
+        "id": "1cb78a79-89bd-41ee-87b5-af7d89642a1d",
+        "name": "Жим гантелей на наклонной скамье (30°)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 120
+      },
+      {
+        "id": "f8137265-3c24-493f-b808-d30d95e2fa70",
+        "name": "Тяга гантели/штанги с опорой грудью",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 120
+      },
+      {
+        "id": "b8d847cf-833b-40c3-949a-44a286196bb2",
+        "name": "Разведения гантелей в стороны",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 60
+      },
+      {
+        "id": "581be336-adfc-4ea0-b490-bb318ca91eec",
+        "name": "Сгибание рук с гантелями стоя (бицепс)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 75
+      },
+      {
+        "id": "a0784e92-7d18-40f7-a138-281ec103f3df",
+        "name": "Разведения на заднюю дельту (наклон/блок)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 60
+      },
+      {
+        "id": "8c2876f9-753d-4438-8e6c-9551b5ae87a2",
+        "name": "Разгибание рук на блоке (трицепс)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 75
+      },
+      {
+        "id": "6bca41f5-7b66-4121-b799-400a382851d6",
+        "name": "Присед со штангой на спине",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 180
+      },
+      {
+        "id": "be70cfff-2868-44b6-b50e-f6bee5e964bb",
+        "name": "Сгибание ног в тренажёре лёжа/сидя",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 90
+      },
+      {
+        "id": "1d1286c3-58ad-45cb-8078-91136358a292",
+        "name": "Румынская тяга с гантелями / штангой",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 150
+      },
+      {
+        "id": "152ce721-d98a-4595-b238-e9a2058aacb5",
+        "name": "Болгарский сплит-присед",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 90
+      },
+      {
+        "id": "b5f18971-ab5b-4682-9c31-6bf83eaac1f0",
+        "name": "Разгибание ног в тренажёре",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 75
+      },
+      {
+        "id": "69580d6b-a7dc-4918-ac1e-ae0c99d791b3",
+        "name": "Подъём на носки стоя (икры)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 45
+      },
+      {
+        "id": "0af53a58-d22d-4ede-9ab1-9dc2db4b9559",
+        "name": "Пресс (скручивания на блоке или подъем ног)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 60
+      },
+      {
+        "id": "df87074c-6a49-4d1f-9953-57613f136b0f",
+        "name": "Жим гантелей на горизонтальной скамье",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 120
+      },
+      {
+        "id": "98c67200-6af4-4905-ab6f-7ca5bdb8eeca",
+        "name": "Тяга верхнего блока к груди",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 120
+      },
+      {
+        "id": "805f7e26-7246-4b1b-b312-df792e3da7b6",
+        "name": "Жим гантелей сидя / Жим в хаммере",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 120
+      },
+      {
+        "id": "74c629e9-2720-45d3-a5f7-c03c597e0da9",
+        "name": "Горизонтальная тяга блока к поясу",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 90
+      },
+      {
+        "id": "0e4bbdb5-77bd-4499-bbce-51fb9621688f",
+        "name": "Разведения в стороны (гантели или кроссовер)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 60
+      },
+      {
+        "id": "ff3abc72-5d32-406f-a099-a31d73fef66b",
+        "name": "Сгибание рук на наклонной скамье (бицепс)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 75
+      },
+      {
+        "id": "fee443d1-43e0-4901-8ef3-b4d9f98fd669",
+        "name": "Обратная бабочка (Rear Pec-Deck)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 60
+      },
+      {
+        "id": "7966223e-6281-4d81-80b1-87543d46048f",
+        "name": "Французский жим с гантелью / блоком из-за головы",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 75
+      },
+      {
+        "id": "afed7cfd-f02e-4487-8f52-5f3e5df9f4e7",
+        "name": "Фронтальный присед / Гакк / Жим ногами",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 120
+      },
+      {
+        "id": "3108a72f-6945-4aee-97f6-236df2c33995",
+        "name": "Жим в тренажере сидя (Chest Press)",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 90
+      },
+      {
+        "id": "f0351dea-a7b1-4ba7-9606-0dfca029e910",
+        "name": "Подтягивания нейтральным хватом / Верхний блок",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 90
+      },
+      {
+        "id": "831ab502-8840-405c-a8a8-4ae15f15c052",
+        "name": "Ягодичный мост со штангой / тренажер",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 90
+      },
+      {
+        "id": "82ecd580-d90d-4eb0-87a4-22504c1f14a6",
+        "name": "Тяга горизонтального блока одной рукой",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 75
+      },
+      {
+        "id": "2edcc7d8-0a89-4eac-b3a5-82bfcd754483",
+        "name": "Разведения в стороны на блоке / гантели",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 45
+      },
+      {
+        "id": "9abccdc0-1fbf-43cb-99b1-129bb1c4f89c",
+        "name": "Сгибания на бицепс молотковым хватом",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 50
+      },
+      {
+        "id": "8fe8d70c-3551-4897-9be5-287555ff4078",
+        "name": "Разгибания на трицепс с канатной рукоятью",
+        "last_used_at": 1790588452347,
+        "default_rest_sec": 60
+      }
+    ],
+    "workout_history": []
+  }
+}
