@@ -14,6 +14,7 @@ import {
   saveWorkoutHistory,
   recordCustomExercise,
   getLastPerformanceForExercise,
+  searchCustomExercises,
 } from '../db/index.ts';
 import { unlockAudioContext } from '../services/sound.ts';
 import { triggerTimerDoneFeedback } from '../services/feedback.ts';
@@ -31,6 +32,7 @@ export class WorkoutSessionView {
   private timerInterval: number | null = null;
   private undoTimer: number | null = null;
   private lastCompletedSetRef: { exIndex: number; setIndex: number } | null = null;
+  private savedNavScrollLeft = 0;
 
   constructor(container: HTMLElement, options: { onFinish: () => void }) {
     this.container = container;
@@ -193,6 +195,11 @@ export class WorkoutSessionView {
   }
 
   public render(): void {
+    const existingNavTabs = this.container.querySelector('.exercise-nav-tabs');
+    if (existingNavTabs) {
+      this.savedNavScrollLeft = existingNavTabs.scrollLeft;
+    }
+
     this.container.innerHTML = '';
 
     const root = document.createElement('div');
@@ -262,13 +269,20 @@ export class WorkoutSessionView {
     navTabs.className = 'exercise-nav-tabs';
     this.session.exercises.forEach((ex, idx) => {
       const allDone = ex.sets.length > 0 && ex.sets.every((s) => s.is_completed);
+      const isActive = idx === this.session.active_exercise_index;
       const chip = document.createElement('button');
       chip.type = 'button';
-      chip.className = `exercise-tab-chip ${idx === this.session.active_exercise_index ? 'active' : ''} ${
-        allDone ? 'completed' : ''
-      }`;
-      chip.innerHTML = `${allDone ? '✓ ' : ''}${idx + 1}. ${escapeHtml(ex.name || 'Exercise')}`;
+      chip.className = `exercise-tab-chip ${isActive ? 'active' : ''} ${allDone ? 'completed' : ''}`;
+      chip.innerHTML = `
+        ${isActive ? '<span class="chip-active-dot"></span>' : ''}
+        ${allDone ? '<span class="chip-check-icon">✓</span>' : ''}
+        <span>${idx + 1}. ${escapeHtml(ex.name || 'Exercise')}</span>
+      `;
       chip.addEventListener('click', () => {
+        if (this.session.active_exercise_index === idx) {
+          chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          return;
+        }
         this.session.active_exercise_index = idx;
         // Select first incomplete set in this exercise
         const firstIncomplete = ex.sets.findIndex((s) => !s.is_completed);
@@ -278,6 +292,15 @@ export class WorkoutSessionView {
       });
       navTabs.appendChild(chip);
     });
+
+    navTabs.addEventListener(
+      'scroll',
+      () => {
+        this.savedNavScrollLeft = navTabs.scrollLeft;
+      },
+      { passive: true }
+    );
+
     root.appendChild(navTabs);
 
     // 4. Focus Exercise Card
@@ -292,6 +315,23 @@ export class WorkoutSessionView {
     root.appendChild(bottomBar);
 
     this.container.appendChild(root);
+
+    // Restore scroll position immediately so there is no visual jump to start
+    if (this.savedNavScrollLeft > 0) {
+      navTabs.scrollLeft = this.savedNavScrollLeft;
+    }
+
+    // Smoothly center the active exercise chip into view
+    requestAnimationFrame(() => {
+      const activeChip = navTabs.children[this.session.active_exercise_index] as HTMLElement | undefined;
+      if (activeChip) {
+        activeChip.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest',
+        });
+      }
+    });
 
     // Initial render of rest timer widget if active
     this.renderRestTimerWidget();
@@ -361,24 +401,102 @@ export class WorkoutSessionView {
 
   private createExerciseCard(exercise: Exercise): HTMLElement {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'card session-exercise-card';
     card.style.marginBottom = '20px';
 
     // Header
     const header = document.createElement('div');
-    header.style.display = 'flex';
-    header.style.justifyContent = 'space-between';
-    header.style.alignItems = 'flex-start';
-    header.style.marginBottom = '12px';
+    header.className = 'session-exercise-header';
 
-    header.innerHTML = `
-      <div>
-        <div style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase;">
-          EXERCISE ${this.session.active_exercise_index + 1} OF ${this.session.exercises.length}
-        </div>
-        <h2 style="margin-top: 2px;">${escapeHtml(exercise.name || 'Exercise')}</h2>
-      </div>
+    const infoBox = document.createElement('div');
+    infoBox.className = 'session-exercise-header-info';
+
+    const stepLabel = document.createElement('div');
+    stepLabel.className = 'session-exercise-step-label';
+    stepLabel.textContent = `EXERCISE ${this.session.active_exercise_index + 1} OF ${this.session.exercises.length}`;
+    infoBox.appendChild(stepLabel);
+
+    // Title View Row (Normal Mode)
+    const titleRow = document.createElement('div');
+    titleRow.className = 'session-exercise-title-row';
+
+    const titleH2 = document.createElement('h2');
+    titleH2.className = 'session-exercise-title';
+    titleH2.textContent = exercise.name || 'Exercise';
+    titleH2.title = 'Click to rename exercise';
+
+    const renameBtn = document.createElement('button');
+    renameBtn.type = 'button';
+    renameBtn.className = 'session-rename-trigger-btn';
+    renameBtn.title = 'Rename exercise';
+    renameBtn.setAttribute('aria-label', 'Rename exercise');
+    renameBtn.innerHTML = `
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
     `;
+
+    titleRow.appendChild(titleH2);
+    titleRow.appendChild(renameBtn);
+    infoBox.appendChild(titleRow);
+
+    // Rename Form Box (Edit Mode)
+    const renameBox = document.createElement('div');
+    renameBox.className = 'session-rename-box';
+    renameBox.style.display = 'none';
+
+    const renameForm = document.createElement('form');
+    renameForm.className = 'session-rename-input-row';
+
+    const nameWrapper = document.createElement('div');
+    nameWrapper.className = 'exercise-name-wrapper session-rename-input-wrapper';
+
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'exercise-name-input session-rename-input';
+    nameInput.value = exercise.name || '';
+    nameInput.placeholder = 'Exercise name...';
+    nameInput.autocomplete = 'off';
+    nameInput.spellcheck = false;
+
+    const dropdown = document.createElement('div');
+    dropdown.className = 'autocomplete-dropdown';
+    dropdown.style.display = 'none';
+
+    nameWrapper.appendChild(nameInput);
+    nameWrapper.appendChild(dropdown);
+    renameForm.appendChild(nameWrapper);
+
+    const actionsBox = document.createElement('div');
+    actionsBox.className = 'session-rename-actions';
+
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'submit';
+    saveBtn.className = 'btn-primary session-rename-action-btn';
+    saveBtn.title = 'Save';
+    saveBtn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    `;
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.className = 'btn-secondary session-rename-action-btn';
+    cancelBtn.title = 'Cancel';
+    cancelBtn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    `;
+
+    actionsBox.appendChild(saveBtn);
+    actionsBox.appendChild(cancelBtn);
+    renameForm.appendChild(actionsBox);
+    renameBox.appendChild(renameForm);
+    infoBox.appendChild(renameBox);
 
     // Dropdown / quick menu for dynamic edits (on the fly)
     const addSetQuick = document.createElement('button');
@@ -387,9 +505,114 @@ export class WorkoutSessionView {
     addSetQuick.style.minHeight = '36px';
     addSetQuick.innerHTML = `+ Set`;
     addSetQuick.addEventListener('click', () => this.addSetToCurrentExercise());
-    header.appendChild(addSetQuick);
 
+    header.appendChild(infoBox);
+    header.appendChild(addSetQuick);
     card.appendChild(header);
+
+    // Autocomplete & Rename logic
+    const showSuggestions = async (query: string) => {
+      const results = await searchCustomExercises(query);
+      if (results.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+      }
+      dropdown.innerHTML = '';
+      results.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'autocomplete-item';
+        row.innerHTML = `
+          <span>${escapeHtml(item.name)}</span>
+          <span class="rest-hint">rest ${item.default_rest_sec}s</span>
+        `;
+        row.addEventListener('mousedown', async (e) => {
+          e.preventDefault();
+          dropdown.style.display = 'none';
+          await applyNewExerciseName(item.name, item.default_rest_sec);
+        });
+        dropdown.appendChild(row);
+      });
+      dropdown.style.display = 'block';
+    };
+
+    const enterEditMode = () => {
+      titleRow.style.display = 'none';
+      renameBox.style.display = 'flex';
+      addSetQuick.style.display = 'none';
+      nameInput.value = exercise.name || '';
+      nameInput.focus();
+      nameInput.select();
+      showSuggestions(nameInput.value);
+    };
+
+    const exitEditMode = () => {
+      dropdown.style.display = 'none';
+      renameBox.style.display = 'none';
+      titleRow.style.display = 'flex';
+      addSetQuick.style.display = '';
+    };
+
+    titleH2.addEventListener('click', enterEditMode);
+    renameBtn.addEventListener('click', enterEditMode);
+    cancelBtn.addEventListener('click', exitEditMode);
+
+    nameInput.addEventListener('input', () => {
+      showSuggestions(nameInput.value);
+    });
+
+    nameInput.addEventListener('focus', () => {
+      showSuggestions(nameInput.value);
+    });
+
+    nameInput.addEventListener('blur', () => {
+      setTimeout(() => {
+        dropdown.style.display = 'none';
+      }, 200);
+    });
+
+    nameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        exitEditMode();
+      }
+    });
+
+    const applyNewExerciseName = async (newName: string, newDefaultRestSec?: number) => {
+      const trimmed = newName.trim();
+      if (!trimmed) {
+        showToast('Exercise name cannot be empty', 'error');
+        return;
+      }
+
+      if (trimmed === exercise.name) {
+        exitEditMode();
+        return;
+      }
+
+      exercise.name = trimmed;
+      if (newDefaultRestSec) {
+        exercise.default_rest_sec = newDefaultRestSec;
+      }
+
+      // Update ghost data for the newly chosen exercise name
+      exercise.previous_performance = await getLastPerformanceForExercise(trimmed);
+
+      // Record to custom exercises for future quick autocomplete
+      await recordCustomExercise(trimmed, exercise.default_rest_sec);
+
+      // Save the active session
+      await saveActiveSession(this.session);
+
+      showToast(`Exercise renamed to "${trimmed}"`, 'success');
+
+      // Re-render to refresh card, ghost performance hint, and navigation chips
+      this.render();
+    };
+
+    renameForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await applyNewExerciseName(nameInput.value);
+    });
 
     // Previous performance hint (Ghost Data)
     if (exercise.previous_performance) {
@@ -618,19 +841,66 @@ export class WorkoutSessionView {
     rMain.appendChild(rInput);
     rMain.appendChild(rPlus);
 
+    // Quick steppers for reps
+    const rQuick = document.createElement('div');
+    rQuick.className = 'stepper-quick-row';
+
+    const rQM1 = document.createElement('button');
+    rQM1.type = 'button';
+    rQM1.className = 'stepper-quick-btn';
+    rQM1.textContent = '-1';
+    rQM1.addEventListener('click', (e) => {
+      e.stopPropagation();
+      set.actual_reps = Math.max(1, (set.actual_reps || set.target_reps) - 1);
+      rInput.value = `${set.actual_reps}`;
+      saveActiveSession(this.session);
+    });
+
+    const rQP1 = document.createElement('button');
+    rQP1.type = 'button';
+    rQP1.className = 'stepper-quick-btn';
+    rQP1.textContent = '+1';
+    rQP1.addEventListener('click', (e) => {
+      e.stopPropagation();
+      set.actual_reps = (set.actual_reps || set.target_reps) + 1;
+      rInput.value = `${set.actual_reps}`;
+      saveActiveSession(this.session);
+    });
+
+    const rQP2 = document.createElement('button');
+    rQP2.type = 'button';
+    rQP2.className = 'stepper-quick-btn';
+    rQP2.textContent = '+2';
+    rQP2.addEventListener('click', (e) => {
+      e.stopPropagation();
+      set.actual_reps = (set.actual_reps || set.target_reps) + 2;
+      rInput.value = `${set.actual_reps}`;
+      saveActiveSession(this.session);
+    });
+
+    rQuick.appendChild(rQM1);
+    rQuick.appendChild(rQP1);
+    rQuick.appendChild(rQP2);
+
     const rLabel = document.createElement('div');
     rLabel.className = 'stepper-label';
     rLabel.textContent = 'reps';
 
     repsBox.appendChild(rMain);
+    repsBox.appendChild(rQuick);
     repsBox.appendChild(rLabel);
     row.appendChild(repsBox);
 
     // 5. Delete set button (if more than 1 set)
     const delBtn = document.createElement('button');
     delBtn.type = 'button';
-    delBtn.className = 'btn-icon-danger';
-    delBtn.innerHTML = '✕';
+    delBtn.className = 'btn-icon-danger session-set-del-btn';
+    delBtn.innerHTML = `
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    `;
     delBtn.title = 'Delete set';
     delBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -998,8 +1268,12 @@ export class WorkoutSessionView {
       const template = await getWorkoutById(this.session.workout_id);
       if (template) {
         for (const sessionEx of this.session.exercises) {
-          const tmplEx = template.exercises.find((e) => e.name.toLowerCase() === sessionEx.name.toLowerCase());
+          const tmplEx =
+            template.exercises.find((e) => e.id === sessionEx.id) ||
+            template.exercises.find((e) => e.name.toLowerCase() === sessionEx.name.toLowerCase());
           if (tmplEx) {
+            tmplEx.name = sessionEx.name;
+            if (sessionEx.default_rest_sec) tmplEx.default_rest_sec = sessionEx.default_rest_sec;
             sessionEx.sets.forEach((sSet, sIdx) => {
               if (tmplEx.sets[sIdx]) {
                 if (sSet.actual_weight) tmplEx.sets[sIdx].target_weight = sSet.actual_weight;

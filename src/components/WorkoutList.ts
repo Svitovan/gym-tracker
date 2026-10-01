@@ -88,7 +88,7 @@ export class WorkoutListView {
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M12 5v14M5 12h14" stroke-linecap="round"/>
       </svg>
-      <span>+ New Workout</span>
+      <span>New Workout</span>
     `;
     newBtn.addEventListener('click', () => this.onCreateWorkout());
     this.container.appendChild(newBtn);
@@ -136,12 +136,11 @@ export class WorkoutListView {
         <div class="workout-card-title">${escapeHtml(workout.title || 'Untitled Workout')}</div>
         <span style="font-size: 0.75rem; color: var(--text-muted);">${updatedDate}</span>
       </div>
-      ${
-        workout.notes
-          ? `<p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">${escapeHtml(
-              workout.notes
-            )}</p>`
-          : ''
+      ${workout.notes
+        ? `<p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">${escapeHtml(
+          workout.notes
+        )}</p>`
+        : ''
       }
       <div class="workout-card-meta">
         <span>

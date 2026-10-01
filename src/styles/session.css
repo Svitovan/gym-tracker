@@ -166,9 +166,12 @@
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 4px 6px 10px 6px;
   margin-bottom: 14px;
   scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-padding: 0 24px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .exercise-nav-tabs::-webkit-scrollbar {
@@ -177,6 +180,9 @@
 
 .exercise-tab-chip {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 14px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -184,18 +190,215 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+  white-space: nowrap;
 }
 
-.exercise-tab-chip.active {
-  background: var(--bg-surface-elevated);
-  border-color: var(--accent-cyan);
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(14, 165, 233, 0.2);
+.exercise-tab-chip:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+  color: var(--text-primary);
+  background: var(--bg-surface-hover);
 }
 
 .exercise-tab-chip.completed {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+/* Active State: Vibrant neon glow & high contrast */
+.exercise-tab-chip.active {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.28) 0%, rgba(56, 189, 248, 0.16) 100%);
+  border: 1.5px solid var(--accent-cyan);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Active + Completed: Distinct combined state */
+.exercise-tab-chip.active.completed {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(14, 165, 233, 0.25) 100%);
+  border: 1.5px solid var(--accent-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.35);
+}
+
+/* Active indicator dot inside chip */
+.exercise-tab-chip .chip-active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  display: inline-block;
+  animation: pulseChipDot 1.5s infinite;
+}
+
+.exercise-tab-chip.completed .chip-check-icon {
+  color: #34d399;
+  font-weight: 700;
+}
+
+@keyframes pulseChipDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ==================== ACTIVE SESSION EXERCISE HEADER & RENAME ==================== */
+
+.session-exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.session-exercise-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.session-exercise-step-label {
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.session-exercise-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.session-exercise-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  word-break: break-word;
+}
+
+.session-exercise-title:hover {
+  color: var(--accent-cyan);
+}
+
+.session-rename-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.session-rename-trigger-btn:hover {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: scale(1.05);
+}
+
+.session-rename-trigger-btn:active {
+  transform: scale(0.95);
+}
+
+/* Rename Inline Box */
+.session-rename-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  animation: sessionRenameFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes sessionRenameFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.session-rename-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.session-rename-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.session-rename-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-elevated);
+  border: 1.5px solid var(--accent-cyan);
+  color: var(--text-primary);
+  outline: none;
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.25);
+  transition: all var(--transition-fast);
+}
+
+.session-rename-input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.35);
+}
+
+.session-rename-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.session-rename-action-btn {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  padding: 0;
+  cursor: pointer;
+}
+
+.session-rename-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.session-rename-action-btn:active {
+  transform: translateY(1px);
 }
 
 /* Exercise Notes in Active Session */
@@ -233,21 +436,31 @@
 
 .session-set-row {
   display: grid;
-  grid-template-columns: 26px 34px minmax(0, 1fr) minmax(0, 1fr) 28px;
-  align-items: center;
-  gap: 4px;
+  grid-template-columns: 26px 34px minmax(0, 1fr) minmax(0, 1fr) 22px;
+  align-items: start;
+  gap: 6px;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 8px 4px;
+  padding: 8px 8px;
   transition: all var(--transition-fast);
   cursor: pointer;
   box-sizing: border-box;
-  overflow: hidden;
+}
+
+.session-set-row .session-set-check {
+  margin-top: 4px;
+}
+
+.session-set-row .set-type-badge {
+  margin-top: 2px;
 }
 
 .session-set-row .stepper-box {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .session-set-row .stepper-main {
@@ -269,11 +482,92 @@
   padding: 0;
 }
 
+.session-set-row .stepper-quick-row {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.session-set-row .stepper-quick-btn {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 2px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.session-set-row .stepper-quick-btn:hover {
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(14, 165, 233, 0.35);
+  color: var(--accent-cyan);
+}
+
+.session-set-row .stepper-quick-btn:active {
+  background: var(--accent-cyan);
+  color: #ffffff;
+}
+
+.session-set-row .stepper-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1;
+  padding-top: 1px;
+}
+
+/* Red Delete Set Button in Session Set Row */
+.session-set-row .session-set-del-btn,
+.session-set-row .btn-icon-danger {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  border-radius: var(--radius-sm);
+  padding: 0;
+  margin: 0;
+  margin-top: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  align-self: start;
+  color: var(--accent-danger-text, var(--accent-danger));
+  background: var(--accent-danger-bg);
+  border: 1px solid var(--accent-danger-border);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.session-set-row .session-set-del-btn:hover,
+.session-set-row .btn-icon-danger:hover {
+  background: var(--accent-danger);
+  border-color: var(--accent-danger-hover);
+  color: #ffffff;
+}
+
+.session-set-row .session-set-del-btn:active,
+.session-set-row .btn-icon-danger:active {
+  transform: scale(0.95);
+}
+
 .session-set-row.active {
   background: var(--bg-surface-elevated);
   border: 2px solid var(--accent-cyan);
   box-shadow: 0 0 16px rgba(14, 165, 233, 0.2);
-  transform: scale(1.01);
 }
 
 .session-set-row.completed {

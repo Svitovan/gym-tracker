@@ -618,11 +618,53 @@ export class WorkoutEditorView {
     repsMain.appendChild(repsInput);
     repsMain.appendChild(repsPlus);
 
+    // Quick steppers for reps: -1, +1, +2
+    const repsQuick = document.createElement('div');
+    repsQuick.className = 'stepper-quick-row';
+
+    const rqMinus1 = document.createElement('button');
+    rqMinus1.type = 'button';
+    rqMinus1.className = 'stepper-quick-btn';
+    rqMinus1.textContent = '-1';
+    rqMinus1.addEventListener('click', () => {
+      set.target_reps = Math.max(1, set.target_reps - 1);
+      set.actual_reps = set.target_reps;
+      repsInput.value = `${set.target_reps}`;
+      this.triggerAutoSave();
+    });
+
+    const rqPlus1 = document.createElement('button');
+    rqPlus1.type = 'button';
+    rqPlus1.className = 'stepper-quick-btn';
+    rqPlus1.textContent = '+1';
+    rqPlus1.addEventListener('click', () => {
+      set.target_reps = set.target_reps + 1;
+      set.actual_reps = set.target_reps;
+      repsInput.value = `${set.target_reps}`;
+      this.triggerAutoSave();
+    });
+
+    const rqPlus2 = document.createElement('button');
+    rqPlus2.type = 'button';
+    rqPlus2.className = 'stepper-quick-btn';
+    rqPlus2.textContent = '+2';
+    rqPlus2.addEventListener('click', () => {
+      set.target_reps = set.target_reps + 2;
+      set.actual_reps = set.target_reps;
+      repsInput.value = `${set.target_reps}`;
+      this.triggerAutoSave();
+    });
+
+    repsQuick.appendChild(rqMinus1);
+    repsQuick.appendChild(rqPlus1);
+    repsQuick.appendChild(rqPlus2);
+
     const repsLabel = document.createElement('div');
     repsLabel.className = 'stepper-label';
     repsLabel.textContent = 'reps';
 
     repsBox.appendChild(repsMain);
+    repsBox.appendChild(repsQuick);
     repsBox.appendChild(repsLabel);
     row.appendChild(repsBox);
 
@@ -634,7 +676,7 @@ export class WorkoutEditorView {
     deleteSetBtn.type = 'button';
     deleteSetBtn.className = 'btn-icon-danger';
     deleteSetBtn.innerHTML = `
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <line x1="18" y1="6" x2="6" y2="18"/>
         <line x1="6" y1="6" x2="18" y2="18"/>
       </svg>

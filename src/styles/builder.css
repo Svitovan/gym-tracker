@@ -265,16 +265,15 @@
 
 .set-row {
   display: grid;
-  grid-template-columns: 22px 34px minmax(0, 1fr) minmax(0, 1fr) 28px;
-  align-items: center;
-  gap: 4px;
+  grid-template-columns: 22px 34px minmax(0, 1fr) minmax(0, 1fr) 22px;
+  align-items: start;
+  gap: 6px;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 8px 4px;
+  padding: 8px 8px;
   transition: border-color var(--transition-fast);
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .set-row:hover {
@@ -287,6 +286,10 @@
   font-weight: 700;
   color: var(--text-secondary);
   text-align: center;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Set Type Badge */
@@ -302,6 +305,7 @@
   border: 1px solid transparent;
   user-select: none;
   padding: 0;
+  margin-top: 2px;
 }
 
 .set-type-badge.type-normal {
@@ -413,26 +417,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 34px;
 }
 
 .set-actions .btn-icon-danger {
-  width: 26px;
-  height: 26px;
-  min-width: 26px;
-  min-height: 26px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
   border-radius: var(--radius-sm);
   color: var(--accent-danger-text, var(--accent-danger));
   background: var(--accent-danger-bg);
   border: 1px solid var(--accent-danger-border);
   padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.set-actions .btn-icon-danger:hover {
+  background: var(--accent-danger);
+  border-color: var(--accent-danger-hover);
+  color: #ffffff;
 }
 
 .set-actions .btn-icon-danger:active {
   background: var(--accent-danger);
   color: #ffffff;
+  transform: scale(0.95);
 }
 
 /* Add / Duplicate Set Actions */
