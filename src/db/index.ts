@@ -275,6 +275,14 @@ export const OBSOLETE_DEFAULT_WORKOUT_TITLES = [
   'day 1 (chest / triceps)',
   'day 2 (back / biceps)',
   'day 3 (legs / shoulders)',
+  '💥 день 1 — верх a (силовой уклон)',
+  '🦵 день 2 — ноги (оптимизированный порядок + заминка)',
+  '⚡ день 3 — верх b + 🔥 hiit финишер #1',
+  '🔄 день 4 — full body + 🔥 hiit финишер #2',
+  '💥 день 1 — верх a (акцент на силу)',
+  '🦵 день 2 — ноги (акцент на силу)',
+  '⚡ день 3 — верх b (акцент на мышцы)',
+  '🔄 день 4 — full body (второй стимул для ног)',
 ];
 
 export async function removeObsoleteDefaultWorkouts(): Promise<number> {

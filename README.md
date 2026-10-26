@@ -32,8 +32,12 @@ A sleek, offline-first Progressive Web App (PWA) designed for frictionless stren
 - Build custom routines with custom exercises, default rest periods, and exercise-specific notes (e.g., grip type, bench angle, machine pin position).
 - Reorder exercises easily with `▲ / ▼` buttons.
 - Exercise search & autocomplete that remembers your frequently used movements.
-- **Preloaded Workouts** (`src/data/default_workouts.json`):
-  1. **Day 3 — Upper Body B + 🔥 HIIT Finisher #1**
+- **Preloaded Workouts** (`src/data/default_workouts.json` / `gym-tracker-import-4days.json`):
+  1. **💥 Day 1 — Upper A (Strength Focus)** (7 exercises, 16 sets)
+  2. **🦵 Day 2 — Legs (Strength Focus)** (6 exercises, 15 sets)
+  3. **⚡ Day 3 — Upper B (Hypertrophy Focus)** (7 exercises, 16 sets)
+  4. **🔄 Day 4 — Full Body (Second Leg Stimulus)** (6 exercises, 14 sets)
+  - Total Weekly Volume: **61 working sets per week**, optimized for 60-minute sessions alongside running and yoga.
 
 ### 📊 History & Analytics
 - Overview cards: **Total Volume (kg / tonnes)**, **Total Workouts Completed**, and **Average Duration**.
