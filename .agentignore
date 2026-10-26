@@ -1,0 +1,84 @@
+# ==============================================================================
+# .agentignore - AI Agent Ignore Rules
+# ==============================================================================
+# Specifies files and directories that AI coding assistants (Antigravity, Cursor,
+# Copilot, Claude Code, Aider, etc.) should ignore when searching, indexing,
+# and assembling code context.
+# ==============================================================================
+
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/
+.cache/
+
+# Package Lockfiles (prevent wasting context tokens on massive JSON/YAML trees)
+# Consult package.json for dependency declarations and version ranges
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build & Bundler Artifacts
+dist/
+build/
+out/
+.parcel-cache/
+.vite/
+*.tsbuildinfo
+
+# Version Control Internals
+.git/
+.svn/
+.hg/
+
+# Environment & Sensitive Credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+secrets/
+credentials.json
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Logs & Diagnostics
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+vite.log
+
+# Test & Coverage Outputs
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# Agent Scratchpads, Transcripts & Local Caches
+.gemini/
+.antigravity/
+.agent-scratch/
+brain/
+scratch/
+
+# Large Data Dumps & Archives (keep src/data/default_workouts.json accessible)
+gym-tracker-import-4days.json
+*.sqlite
+*.sqlite3
+*.dump
+*.tar.gz
+*.zip
