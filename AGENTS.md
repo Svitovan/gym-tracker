@@ -1,20 +1,36 @@
-# Gym Tracker PWA - Agent Guidelines (`AGENTS.md`)
+# Gym Tracker PWA - Agent Guidelines
 
-This repository is an offline-first, mobile-first Progressive Web App (PWA) designed for strength training tracking in the gym.
+This repository is a mobile-first strength-training tracker. Offline operation
+and reliable local persistence are requirements; verify them rather than assuming
+they are guaranteed by a successful build.
 
-Detailed, modular rule documents are maintained in [`.agents/rules/`](.agents/rules/):
-- **Core Principles**: [`.agents/rules/00-overview.md`](.agents/rules/00-overview.md) (100% offline-first, zero cloud dependencies, zero data loss, lean stack).
-- **Architecture**: [`.agents/rules/01-architecture.md`](.agents/rules/01-architecture.md) (Vanilla TypeScript, Vite 6, IndexedDB via `idb`, CSS tokens).
-- **Code Style**: [`.agents/rules/02-code-style.md`](.agents/rules/02-code-style.md) (Strict TypeScript, class-based DOM views, CSS variables from `variables.css`).
-- **Mobile & Touch UX**: [`.agents/rules/03-mobile-touch-ux.md`](.agents/rules/03-mobile-touch-ux.md) (>=48px touch targets, steppers instead of keyboard typing, vibration/audio cues).
-- **Data & Storage**: [`.agents/rules/04-storage-data.md`](.agents/rules/04-storage-data.md) (IndexedDB schema, crash recovery, JSON backup/restore).
-- **Quality Assurance**: [`.agents/rules/05-testing-quality.md`](.agents/rules/05-testing-quality.md) (Verification commands, regression prevention).
+## Reading rules
 
-## Quick Agent Rules Summary
+Read [core principles](.agents/rules/00-overview.md) and
+[verification](.agents/rules/05-testing-quality.md) for every change. Use the
+[task-to-rule map](.agents/rules/README.md) to read additional rules before editing
+the corresponding area. Do not assume a tool automatically loads them.
 
-1. **Stack**: Vanilla TypeScript + Vite + IndexedDB (`idb`). Do not install React, Vue, Tailwind, or external UI component libraries.
-2. **Offline First**: Never introduce external CDNs, remote analytics, or cloud APIs. The app must run 100% locally.
-3. **Gym Ergonomics**: All interactive touch targets must be >= 48px. Prefer steppers (`-5`, `-2.5`, `+1`, `+2.5`, `+5 kg`) over virtual keyboard inputs.
-4. **Styles**: Always use CSS custom properties from `src/styles/variables.css` (`var(--bg-surface)`, `var(--accent-primary)`, etc.).
-5. **Session Safety**: The active workout session must be continually saved to IndexedDB (`active_session` store) so no user data is lost on reload or crash.
-6. **Verification**: Always verify changes by running `npm run build`.
+| Rules | Scope |
+| --- | --- |
+| [00 - Overview](.agents/rules/00-overview.md) | Scope, offline requirements, data safety |
+| [01 - Architecture](.agents/rules/01-architecture.md) | Stack, source map, view lifecycle |
+| [02 - Code style](.agents/rules/02-code-style.md) | TypeScript, DOM safety, CSS tokens |
+| [03 - Mobile UX](.agents/rules/03-mobile-touch-ux.md) | Touch targets, accessibility, feedback |
+| [04 - Storage](.agents/rules/04-storage-data.md) | IndexedDB, recovery, migrations, backup |
+| [05 - Verification](.agents/rules/05-testing-quality.md) | Build and checks appropriate to the change |
+| [06 - PWA](.agents/rules/06-pwa-offline.md) | Service worker, assets, updates, hosting |
+| [07 - Templates and exports](.agents/rules/07-templates-exports.md) | Generator, shipped JSON, Markdown |
+
+## Quick rules
+
+1. Use Vanilla TypeScript, Vite, native CSS, and IndexedDB through `idb`.
+   Do not add UI frameworks or libraries without an explicit user request.
+2. Do not introduce external CDNs, fonts, analytics, or cloud API dependencies.
+3. Use touch targets of at least 48 x 48 CSS px and prefer steppers for workout
+   weights and reps. Keep text entry available for names and notes.
+4. Reuse tokens from `src/styles/variables.css`.
+5. Persist active-session changes. Handle failed writes and preserve recovery
+   data until completion has been durably saved.
+6. Do not change training plans, template IDs, or user data as incidental cleanup.
+7. Always run `npm run build` after changes and report the checks actually performed.

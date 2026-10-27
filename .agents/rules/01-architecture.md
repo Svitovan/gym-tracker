@@ -1,47 +1,39 @@
-# 01 - Architecture & Technology Stack
+# 01 - Architecture
 
-## 1. Directory Structure
+## Stack and source map
 
-```text
-gym-tracker/
-├── public/                 # Static assets, PWA manifest, service worker (sw.js), icons
-├── docs/                   # Product requirements, workout program templates, plans
-├── scripts/                # Node/utility automation scripts (e.g. template generation)
-├── src/
-│   ├── components/         # View classes and UI components (DOM-based)
-│   ├── data/               # Default preloaded workout programs (JSON)
-│   ├── db/                 # IndexedDB schema, connection pool, and repository methods
-│   ├── services/           # Browser API services (Web Audio, WakeLock, Backup, Feedback)
-│   ├── styles/             # Modular CSS stylesheets (variables.css, main.css, view-specific)
-│   ├── types/              # TypeScript interfaces, domain types, and discriminated unions
-│   ├── utils/              # Pure utility functions (UUID generator, math, formatting)
-│   └── main.ts             # Application bootstrapper, App router, and SW registration
-├── index.html              # Single Page Application HTML entrypoint
-├── netlify.toml            # Deployment & caching headers configuration
-├── tsconfig.json           # Strict TypeScript configuration
-└── vite.config.ts          # Vite build configuration (port 3000, host: true)
-```
+The current package uses Vite 6, TypeScript 5 in strict mode, and `idb` 8.
+Inspect `package.json`, `package-lock.json`, and `tsconfig.json` for dependency
+or build changes; do not duplicate exact resolved versions here.
 
-## 2. Technology Stack & Role
+| Path | Responsibility |
+| --- | --- |
+| `src/main.ts` | Bootstrap, navigation, service-worker registration |
+| `src/components/` | DOM view classes, header, settings modal, toasts |
+| `src/types/workout.ts` | Workouts, exercises, sets, active session, history |
+| `src/db/index.ts` | IndexedDB schema, CRUD, seed and template synchronization |
+| `src/services/backup.ts` | JSON backup/import and storage diagnostics |
+| `src/services/markdownExport.ts` | Template/history Markdown and sharing |
+| `src/services/sound.ts`, `src/services/feedback.ts`, `src/services/wakeLock.ts` | Optional device APIs |
+| `src/styles/` | Tokens in `variables.css`, global and view-specific styles |
+| `src/utils/uuid.ts` | UUID support |
+| `src/data/default_workouts.json` | Templates bundled with the app |
+| `public/` | Worker, manifest, icon, downloadable import JSON |
+| `scripts/generate_import_json.cjs` | Generator with embedded workout definitions |
+| `docs/` | Requirements and proposals; verify implementation status |
+| `netlify.toml` | Build, SPA fallback, cache headers |
 
-| Technology | Purpose | Key Details |
-| :--- | :--- | :--- |
-| **Vite 6** | Bundler & Dev Server | Fast HMR, ESM build, root-relative asset resolution |
-| **TypeScript 5.x** | Language & Safety | Strict mode enabled, `target: ES2022`, module: `ESNext` |
-| **IndexedDB (`idb`)** | Persistence Layer | Lightweight promise wrapper over browser IndexedDB |
-| **Vanilla DOM & CSS** | View Layer | Class-based views with explicit lifecycle, CSS Custom Properties |
-| **Service Worker (`sw.js`)** | PWA Caching | Offline cache-first strategy for app shell and assets |
-| **Native Web APIs** | Device Integration | Web Audio API (sound), Vibration API, Screen Wake Lock API |
+## Views and lifecycle
 
-## 3. Application Lifecycle & Routing (`src/main.ts`)
-
-- **View Routing**: Managed by the `App` class using the `AppView` discriminated union:
-  ```ts
-  type AppView =
-    | { type: 'LIST' }
-    | { type: 'HISTORY' }
-    | { type: 'EDITOR'; workoutId: string }
-    | { type: 'SESSION'; workoutId?: string };
-  ```
-- **Active Session Resume**: On boot, `App.init()` checks `getActiveSession()`. If an in-progress workout exists, it automatically navigates to `{ type: 'SESSION' }`.
-- **View Lifecycle**: Views instantiate with a `container: HTMLElement` and options/callbacks. If a view attaches intervals or global listeners (like `WorkoutSessionView`), ensure a cleanup method (`destroy()`) is implemented and called on navigation.
+- `App.navigate()` switches `LIST`, `HISTORY`, `EDITOR`, and `SESSION` views.
+  Keep this routing model unless the task requires changing it.
+- `App.init()` initializes storage and templates, then checks `getActiveSession()`
+  to resume an existing session.
+- Lists/history use `render()`, the editor uses `init()`, and the session uses
+  `start(workoutId?)`. Inspect actual signatures before calling them.
+- `WorkoutSessionView.dispose()` releases session resources; navigation calls it
+  when leaving a session. Preserve this integration.
+- Clean up owned timers and global listeners when views are replaced. Prevent
+  asynchronous work from updating a disposed view.
+- Keep class-based views and functional helpers where they already exist.
+  Do not rename lifecycle methods or add a base class merely for uniformity.

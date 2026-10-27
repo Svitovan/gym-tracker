@@ -1,70 +1,62 @@
-# 04 - Storage & Data Persistence (IndexedDB)
+# 04 - Storage, recovery, and JSON backup
 
-## 1. Database Architecture (`src/db/index.ts`)
+## Current contract
 
-The database is built on **IndexedDB** using the `idb` library.
-- **Database Name**: `gym_tracker_db`
-- **Current Version**: `1`
+Inspect `src/db/index.ts` and `src/types/workout.ts` before storage changes.
+The database is currently `gym_tracker_db`, version 1, using `idb`.
+All stores use an `id` key path:
 
-### Object Stores & Indexes
+| Store | Indexes / key details |
+| --- | --- |
+| `workouts` | `by-updated` on `updated_at` |
+| `active_session` | Single record with `id: 'active'` |
+| `user_custom_exercises` | `by-name`, `by-last-used` |
+| `workout_history` | `by-workout-id`, `by-started` |
 
-```ts
-interface GymTrackerDB extends DBSchema {
-  workouts: {
-    key: string;
-    value: Workout;
-    indexes: { 'by-updated': number };
-  };
-  active_session: {
-    key: string;               // Static key: 'active'
-    value: ActiveSession;
-  };
-  user_custom_exercises: {
-    key: string;
-    value: UserCustomExercise;
-    indexes: {
-      'by-name': string;
-      'by-last-used': number;
-    };
-  };
-  workout_history: {
-    key: string;
-    value: WorkoutHistory;
-    indexes: {
-      'by-workout-id': string;
-      'by-started': number;
-    };
-  };
-}
+Read previous performance with `getLastPerformanceForExercise(name)`.
+Keep history snapshots independent from later template edits.
+
+JSON backup version 1 in `src/services/backup.ts` has this shape:
+
+```text
+{ app: 'GymTrackerPWA', version: 1, exported_at: number,
+  data: { workouts: Workout[], user_custom_exercises: UserCustomExercise[],
+          workout_history: WorkoutHistory[] } }
 ```
 
-## 2. Schema Evolution & Migration Rules
+`active_session` is excluded from export/import. This backup does not recover an
+active session. Raw template arrays are a different format and are not currently
+accepted by the backup importer.
 
-1. **Version Bumping**: When adding a new object store or modifying indexes, increment `DB_VERSION` in `src/db/index.ts`.
-2. **Safe Upgrade Blocks**:
-   ```ts
-   upgrade(db, oldVersion, newVersion, transaction) {
-     if (oldVersion < 1) {
-       // Initial schema
-     }
-     if (oldVersion < 2) {
-       // Step-by-step non-destructive migrations
-     }
-   }
-   ```
-3. **Never Clear Stores During Upgrades**: Never use `db.deleteObjectStore()` in production migrations unless explicitly converting data into a new format within the same transaction.
+## Required behavior for changes
 
-## 3. Active Session Recovery Contract
+- Persist every active-session mutation: weights, reps, completion, notes,
+  exercise/set edits, active position, and timers. Prevent stale writes from
+  overwriting newer state during rapid interactions.
+- Handle failed writes visibly without discarding the in-memory workout or its
+  last saved recovery record. Report save success only after writes commit.
+- Save history before clearing the active session. For completion changes, make
+  related history/template/session writes atomic where needed so failure or retry
+  cannot lose a session or create duplicate history.
+- Clearing a session on discard requires the existing deliberate user action.
+- Bump `DB_VERSION` for store/index changes. Implement incremental, non-destructive
+  upgrades from supported older versions; preserve IDs and history. Delete stores
+  only when converting their data within the same upgrade transaction.
+- For import changes, validate the full payload before writing: app/version,
+  nested records, IDs, set types, finite numbers, and allowed ranges. Commit
+  related stores in one transaction and report success after `tx.done`.
+- Preserve valid backup compatibility and define merge/conflict behavior.
+  Do not silently turn merging into replacement or reset unrelated data.
+- Handle quota, transaction, and database-open errors. Persistent-storage
+  permission does not guarantee browser data can never be removed.
+- Do not introduce deletion or overwriting of user routines based only on titles.
+  Review seeding and template synchronization with rule 07.
 
-- **Frequent Synchronization**: Any mutation to the active workout session (set completion, weight/rep adjustment, note edit, rest timer update) must immediately persist to `active_session` store using `saveActiveSession(session)`.
-- **Completion & Discard Cleanup**: When a workout is finished (`finishSession()`) or discarded, `clearActiveSession()` must be called to ensure subsequent app boots return to the main workout list.
-- **Ghost Data (Previous Performance)**: When loading exercises for a workout or session, enrich them with `getPreviousPerformance(exerciseName)` from `workout_history` so users can see previous weights and reps.
+## Known limitations, not guarantees
 
-## 4. Export & Import Integrity
-
-- **JSON Format**: Data exports produce a structured JSON object containing:
-  - App metadata and timestamp
-  - `workouts` array
-  - `history` array
-  - `custom_exercises` array
-- **Import Validation**: When importing (`src/services/backup.ts`), strictly validate JSON schema structure before writing to IndexedDB to avoid corrupting user databases.
+- The current importer checks only part of the payload and uses separate
+  transactions per store. Full validation and atomic import remain requirements.
+- Completion currently updates templates, writes history, and clears the session
+  through separate operations. Many session saves are not awaited by callers.
+- Current obsolete-template cleanup identifies routines by title. Do not expand
+  that behavior; address its data-safety risks in a scoped task.

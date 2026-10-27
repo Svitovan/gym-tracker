@@ -1,63 +1,35 @@
-# 02 - Code Style & TypeScript Conventions
+# 02 - Code style and DOM safety
 
-## 1. TypeScript Standards
+## TypeScript
 
-- **Strict Typing**:
-  - `noImplicitAny` is enforced by `tsconfig.json`. Never use `any`. Use `unknown` with type narrowing if the type is indeterminate.
-  - Define interfaces in `src/types/` (e.g. `workout.ts`). Keep domain types centralized.
-  - Return types and parameter types must be explicitly annotated for all public and exported functions/methods.
-- **Null Safety**:
-  - Be explicit with `null` vs `undefined`.
-  - Use optional chaining (`?.`) and nullish coalescing (`??`) instead of loose boolean truthiness checks (`||`) when checking numbers or booleans (e.g., `value ?? 0` to preserve `0`).
+- Preserve strict mode and unused-code checks in `tsconfig.json`.
+- Do not introduce `any`, `@ts-ignore`, or unchecked casts for untrusted data.
+  Narrow `unknown` with runtime checks, especially at JSON import boundaries.
+- Keep shared domain types in `src/types/workout.ts` and implementation-only
+  types near their consumers. Annotate public/exported function boundaries.
+- Preserve valid zero values: use `??` instead of `||` where zero is meaningful.
+  Validate finite numbers and domain ranges at input boundaries.
+- Fix existing type escapes in the touched area when practical; avoid unrelated
+  repository-wide refactors.
 
-## 2. Component Design & DOM Manipulation
+## DOM and lifecycle
 
-- **Class-Based Views**:
-  - Views follow the pattern:
-    ```ts
-    export class ExampleView {
-      private container: HTMLElement;
-      private options: ExampleOptions;
+- Prefer `textContent`, `createElement()`, and DOM properties for user-supplied
+  titles, exercise names, notes, and imported strings.
+- With `innerHTML`, escape dynamic text and quoted attribute values for their
+  insertion context. HTML escaping does not validate URLs, CSS, or scripts;
+  do not interpolate untrusted data into those contexts.
+- Reuse an appropriate existing escaping helper in the touched area. Avoid
+  introducing abstractions solely to rewrite unrelated components.
+- Follow the view's existing lifecycle. Release owned intervals, timeouts,
+  global listeners, and object URLs when no longer needed.
 
-      constructor(container: HTMLElement, options: ExampleOptions) {
-        this.container = container;
-        this.options = options;
-      }
+## CSS
 
-      public async render(): Promise<void> {
-        this.container.innerHTML = '';
-        // Build DOM structure
-      }
-
-      public destroy(): void {
-        // Clear intervals, timeouts, and global window/document listeners
-      }
-    }
-    ```
-- **XSS & HTML Escaping**:
-  - When injecting dynamic user strings (workout titles, exercise names, notes) into `.innerHTML`, always sanitize using an `escapeHtml()` helper:
-    ```ts
-    function escapeHtml(str: string): string {
-      return str.replace(/[&<>'"]/g, (tag) => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;',
-      }[tag] || tag));
-    }
-    ```
-  - Prefer `document.createElement()` and `element.textContent` for element construction where feasible.
-
-## 3. Styling & CSS Conventions
-
-- **CSS Custom Properties**:
-  - All color tokens, border radiuses, font stacks, and touch metrics are declared in `src/styles/variables.css`.
-  - Never introduce hardcoded hex colors or arbitrary px dimensions when an equivalent design token exists:
-    - Backgrounds: `var(--bg-app)`, `var(--bg-surface)`, `var(--bg-surface-elevated)`, `var(--bg-surface-card)`
-    - Borders: `var(--border-subtle)`, `var(--border-card)`, `var(--border-focus)`
-    - Accents: `var(--accent-primary)`, `var(--accent-cyan)`, `var(--accent-warmup)`, `var(--accent-dropset)`, `var(--accent-failure)`
-    - Touch metrics: `var(--touch-target-min)` (48px), `var(--btn-primary-h)` (56px)
-- **Modular Stylesheets**:
-  - Keep view-specific CSS separated into `src/styles/{view}.css` (`main.css`, `builder.css`, `session.css`, `history.css`).
-  - Do not use inline styles for complex layouts; use CSS classes.
+- Reuse `src/styles/variables.css` for colors, fonts, radii, shadows, touch sizes,
+  and transitions. Add a token when a reusable design value is missing.
+- Keep layout in CSS classes and view-specific stylesheets rather than growing
+  inline templates. Runtime-calculated values may use DOM style properties.
+- Inspect existing tokens, including `--bg-surface`, `--accent-primary`,
+  `--touch-target-min`, and `--btn-primary-h`, before use.
+- Do not add remote font imports. Preserve local/system fallbacks.

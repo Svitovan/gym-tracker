@@ -1,22 +1,30 @@
-# Project Agent Rules Directory (`.agents/rules/`)
+# Project agent rules
 
-This directory contains modular guidelines and constraints loaded by AI coding assistants (such as Google Antigravity, Cursor, Claude Code, and Copilot).
+These documents are referenced by root `AGENTS.md`. Read relevant files explicitly;
+automatic loading and `.agentignore` support depend on the tool. Numbered names
+organize documents; they do not guarantee load order.
 
-## Structure & Purpose
+## Task-to-rule map
 
-| File | Scope | Summary |
-| :--- | :--- | :--- |
-| **`00-overview.md`** | Core Mission | Non-negotiables: 100% offline-first, gym ergonomics, zero framework creep, zero data loss. |
-| **`01-architecture.md`** | Architecture | Directory layout, Vite + TypeScript + IndexedDB stack, routing & lifecycle. |
-| **`02-code-style.md`** | Code Conventions | TypeScript strict mode, class-based component pattern, XSS escaping, CSS variables. |
-| **`03-mobile-touch-ux.md`** | Mobile UX | 48px touch targets, steppers instead of keyboard inputs, audio & haptic feedback. |
-| **`04-storage-data.md`** | Persistence | IndexedDB schema (`GymTrackerDB`), migrations, active session recovery, backup JSON. |
-| **`05-testing-quality.md`** | QA & Verification | Verification commands (`npm run build`, `tsc --noEmit`), pre-commit checklist, edge cases. |
+Always read `00-overview.md` and `05-testing-quality.md`. Add the files below for
+the affected area; a task can require more than one row.
 
-## How to Add or Modify Rules
+| Task | Additional rules |
+| --- | --- |
+| Navigation, lifecycle, architecture, dependencies | `01-architecture.md`, `02-code-style.md` |
+| DOM, TypeScript, styles | `02-code-style.md` |
+| Mobile controls, accessibility, feedback, device APIs | `01-architecture.md`, `02-code-style.md`, `03-mobile-touch-ux.md` |
+| Session, timers, completion | `01-architecture.md`, `02-code-style.md`, `03-mobile-touch-ux.md`, `04-storage-data.md` |
+| IndexedDB, migration, JSON backup/import | `02-code-style.md`, `04-storage-data.md` |
+| Worker, manifest, assets, hosting, offline updates | `01-architecture.md`, `06-pwa-offline.md` |
+| Default workouts, generator, JSON examples, Markdown | `02-code-style.md`, `04-storage-data.md`, `07-templates-exports.md` |
 
-1. **Keep Rules Actionable**: Write direct instructions, code patterns, and concrete constraints. Avoid generic prose.
-2. **Respect Context Budget**:
-   - Each rule file should remain concise (well below the 24 KB / 24,000 bytes Antigravity per-file limit).
-   - Rules are loaded automatically by Antigravity and merged into the active rule set.
-3. **Numbering Convention**: Use 2-digit prefixes (`00-`, `01-`, etc.) to control file ordering and logical reading flow.
+## Maintaining rules
+
+- Keep instructions concise, actionable, and specific to this checkout.
+- Reference source definitions rather than copying large interfaces or code.
+- Separate current behavior, desired invariants, and known limitations.
+- Update rules with relevant behavior changes; recheck names and paths.
+- Avoid duplicate requirements, tool-specific limits, and loading promises.
+- `.agentignore` reduces context for supporting tools. It does not replace
+  `.gitignore`, access permissions, or handling of personal data.
