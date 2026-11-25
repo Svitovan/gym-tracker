@@ -287,8 +287,20 @@ export class WorkoutSessionView {
         // Select first incomplete set in this exercise
         const firstIncomplete = ex.sets.findIndex((s) => !s.is_completed);
         this.session.active_set_index = firstIncomplete !== -1 ? firstIncomplete : 0;
-        saveActiveSession(this.session);
-        this.render();
+        void saveActiveSession(this.session).catch(() => {
+          showToast('Could not save the active exercise. Please try again.', 'error');
+        });
+
+        navTabs.querySelector('.exercise-tab-chip.active')?.classList.remove('active');
+        navTabs.querySelector('.chip-active-dot')?.remove();
+        chip.classList.add('active');
+        const activeDot = document.createElement('span');
+        activeDot.className = 'chip-active-dot';
+        chip.prepend(activeDot);
+
+        root.querySelector('.session-exercise-card')?.replaceWith(this.createExerciseCard(ex));
+        root.querySelector('.session-bottom-bar')?.replaceWith(this.createBottomActionBar());
+        chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       });
       navTabs.appendChild(chip);
     });
@@ -302,6 +314,8 @@ export class WorkoutSessionView {
     );
 
     root.appendChild(navTabs);
+
+    root.appendChild(this.createAddExerciseControl());
 
     // 4. Focus Exercise Card
     const currentEx = this.session.exercises[this.session.active_exercise_index] || this.session.exercises[0];
@@ -335,6 +349,146 @@ export class WorkoutSessionView {
 
     // Initial render of rest timer widget if active
     this.renderRestTimerWidget();
+  }
+
+  private createAddExerciseControl(): HTMLElement {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'session-add-exercise';
+
+    const openButton = document.createElement('button');
+    openButton.type = 'button';
+    openButton.className = 'btn-secondary session-add-exercise-open';
+    openButton.textContent = '+ Add exercise';
+    wrapper.appendChild(openButton);
+
+    const form = document.createElement('form');
+    form.className = 'session-add-exercise-form';
+    form.hidden = true;
+
+    const label = document.createElement('label');
+    label.htmlFor = 'session-new-exercise-name';
+    label.textContent = 'Exercise name';
+    const input = document.createElement('input');
+    input.id = 'session-new-exercise-name';
+    input.className = 'exercise-name-input';
+    input.type = 'text';
+    input.placeholder = 'Search or enter a name';
+    input.autocomplete = 'off';
+    input.required = true;
+
+    const suggestions = document.createElement('div');
+    suggestions.className = 'session-add-exercise-suggestions';
+    suggestions.setAttribute('aria-label', 'Suggested exercises');
+
+    const actions = document.createElement('div');
+    actions.className = 'session-add-exercise-actions';
+    const addButton = document.createElement('button');
+    addButton.type = 'submit';
+    addButton.className = 'btn-cyan';
+    addButton.textContent = 'Add exercise';
+    const cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.className = 'btn-secondary';
+    cancelButton.textContent = 'Cancel';
+    actions.append(addButton, cancelButton);
+    form.append(label, input, suggestions, actions);
+    wrapper.appendChild(form);
+
+    let selectedRest = 90;
+    let searchVersion = 0;
+    const updateSuggestions = async (): Promise<void> => {
+      const version = ++searchVersion;
+      try {
+        const results = await searchCustomExercises(input.value);
+        if (version !== searchVersion || !form.isConnected || form.hidden) return;
+        suggestions.replaceChildren();
+        for (const result of results) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'session-add-exercise-suggestion';
+          button.textContent = result.name;
+          button.addEventListener('click', () => {
+            input.value = result.name;
+            selectedRest = result.default_rest_sec;
+            searchVersion++;
+            suggestions.replaceChildren();
+            input.focus();
+          });
+          suggestions.appendChild(button);
+        }
+      } catch {
+        if (version === searchVersion && form.isConnected) {
+          showToast('Could not load exercise suggestions.', 'error');
+        }
+      }
+    };
+
+    openButton.addEventListener('click', () => {
+      openButton.hidden = true;
+      form.hidden = false;
+      input.focus();
+      void updateSuggestions();
+    });
+    cancelButton.addEventListener('click', () => {
+      searchVersion++;
+      form.hidden = true;
+      openButton.hidden = false;
+      openButton.focus();
+    });
+    input.addEventListener('input', () => {
+      selectedRest = 90;
+      void updateSuggestions();
+    });
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const name = input.value.trim();
+      if (!name) {
+        input.focus();
+        return;
+      }
+      addButton.disabled = true;
+      cancelButton.disabled = true;
+      input.disabled = true;
+
+      let previousPerformance: Exercise['previous_performance'] = null;
+      try {
+        previousPerformance = await getLastPerformanceForExercise(name);
+      } catch {
+        showToast('Could not load previous performance.', 'error');
+      }
+      if (!form.isConnected) return;
+
+      const exercise: Exercise = {
+        id: generateUUID(),
+        name,
+        order_index: this.session.exercises.length,
+        default_rest_sec: selectedRest,
+        notes: '',
+        previous_performance: previousPerformance,
+        sets: [{
+          id: generateUUID(), set_number: 1, type: 'normal',
+          target_weight: 0, actual_weight: 0, target_reps: 10, actual_reps: 10,
+          is_completed: false, custom_rest_sec: null,
+        }],
+      };
+      this.session.exercises.push(exercise);
+      this.session.active_exercise_index = this.session.exercises.length - 1;
+      this.session.active_set_index = 0;
+      this.render();
+      try {
+        await saveActiveSession(this.session);
+      } catch {
+        showToast('Could not save the exercise. Your workout is still open; try another change to save it.', 'error');
+        return;
+      }
+      try {
+        await recordCustomExercise(name, selectedRest);
+      } catch {
+        showToast('Exercise saved, but could not update suggestions.', 'error');
+      }
+    });
+
+    return wrapper;
   }
 
   private renderRestTimerWidget(): void {

@@ -162,6 +162,71 @@
 
 /* ==================== EXERCISE NAVIGATION TABS ==================== */
 
+.session-add-exercise {
+  margin-bottom: 14px;
+}
+
+.session-add-exercise [hidden] {
+  display: none;
+}
+
+.session-add-exercise-open {
+  width: 100%;
+}
+
+.session-add-exercise-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.session-add-exercise-form label {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.session-add-exercise-form input {
+  min-height: var(--touch-target-min);
+}
+
+.session-add-exercise-suggestions {
+  display: flex;
+  flex-direction: column;
+  max-height: 192px;
+  overflow-y: auto;
+}
+
+.session-add-exercise-suggestion {
+  min-height: var(--touch-target-min);
+  justify-content: flex-start;
+  padding: 8px 12px;
+  text-align: left;
+  color: var(--text-primary);
+  background: var(--bg-surface-elevated);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-wrap: anywhere;
+}
+
+.session-add-exercise-suggestion:focus-visible,
+.session-add-exercise-suggestion:hover {
+  outline: 2px solid var(--border-focus);
+  outline-offset: -2px;
+}
+
+.session-add-exercise-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.session-add-exercise-actions button {
+  flex: 1 1 140px;
+}
+
 .exercise-nav-tabs {
   display: flex;
   gap: 8px;
