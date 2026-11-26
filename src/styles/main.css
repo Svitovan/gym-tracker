@@ -365,3 +365,49 @@ button:active {
     transform: translateY(0);
   }
 }
+
+
+/* ==================== NOTIFICATION SETTINGS ==================== */
+
+.notification-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.notification-settings h3 {
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+}
+
+.notification-settings button {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  justify-content: flex-start;
+  padding: 0 14px;
+}
+
+.notification-settings button[aria-pressed="true"] {
+  border-color: var(--accent-primary);
+}
+
+.notification-settings button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.notification-settings button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.notification-settings p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.notification-settings .notification-hint {
+  color: var(--text-muted);
+}

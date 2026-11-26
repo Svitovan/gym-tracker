@@ -18,6 +18,7 @@ import {
 } from '../db/index.ts';
 import { unlockAudioContext } from '../services/sound.ts';
 import { triggerTimerDoneFeedback } from '../services/feedback.ts';
+import { showRestFinishedNotification } from '../services/notifications.ts';
 import { requestWakeLock, releaseWakeLock } from '../services/wakeLock.ts';
 import { generateUUID } from '../utils/uuid.ts';
 import { showToast } from './Toast.ts';
@@ -115,7 +116,17 @@ export class WorkoutSessionView {
     this.render();
   }
 
+  private readonly handleTimerVisibility = (): void => {
+    if (document.visibilityState === 'visible') this.updateRestTimerTick();
+  };
+
+  private readonly handleTimerPageShow = (): void => {
+    this.updateRestTimerTick();
+  };
+
   private startTimers(): void {
+    document.addEventListener('visibilitychange', this.handleTimerVisibility);
+    window.addEventListener('pageshow', this.handleTimerPageShow);
     // 1. Elapsed workout timer
     this.elapsedInterval = window.setInterval(() => {
       const elapsedEl = document.getElementById('session-elapsed-display');
@@ -153,8 +164,15 @@ export class WorkoutSessionView {
 
     // Timer Finished!
     if (remainingMs <= 0) {
+      const deadline = this.session.timer.end_timestamp;
+      // Mark stopped synchronously before any feedback or async work.
       this.session.timer.is_running = false;
-      saveActiveSession(this.session);
+      void saveActiveSession(this.session).catch((err) => {
+        console.error('[Timer] Could not save completed timer:', err);
+        showToast('Could not save timer state. Workout recovery may be outdated.', 'error');
+      });
+
+      void showRestFinishedNotification(this.session.started_at, deadline);
 
       // Trigger multi-sensory notification
       triggerTimerDoneFeedback();
@@ -1464,6 +1482,8 @@ export class WorkoutSessionView {
   }
 
   public dispose(): void {
+    document.removeEventListener('visibilitychange', this.handleTimerVisibility);
+    window.removeEventListener('pageshow', this.handleTimerPageShow);
     if (this.elapsedInterval) {
       window.clearInterval(this.elapsedInterval);
       this.elapsedInterval = null;

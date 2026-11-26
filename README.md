@@ -22,6 +22,7 @@ A sleek, offline-first Progressive Web App (PWA) designed for frictionless stren
   - Auto-triggers upon completing a set.
   - Quick-adjust buttons (`-15s`, `+30s`, `Next Set ➔`, `Skip ✕`).
   - Multi-sensory completion alert using the **Web Audio API** (synthesized dual-tone chime) and **Vibration API**.
+- **Optional system notifications:** enable Rest Timer Notifications in Settings and grant browser permission. The existing Service Worker displays a local notification when the rest timer expires, including on Android's lock screen when permitted by system settings. No server or internet connection is required once the PWA is installed and cached. If Android suspends the page, delivery may be delayed until the app resumes; this is not a native scheduled alarm. Use the test notification in Settings to verify permissions.
 - **Screen Wake Lock API**: Keeps your phone screen awake during workouts so you never have to unlock it between sets.
 - **Crash & Reload Resilience**: Active session state is continuously saved in IndexedDB. If your browser closes or page refreshes, your workout resumes seamlessly.
 - **Undo Protection**: 5-second snackbar notification allows undoing accidental set completions.

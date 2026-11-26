@@ -5,6 +5,13 @@ import {
 } from '../services/backup.ts';
 import { resetToDefaultWorkouts } from '../db/index.ts';
 import { showToast } from './Toast.ts';
+import {
+  areRestNotificationsEnabled,
+  getNotificationPermission,
+  requestNotificationPermission,
+  setRestNotificationsEnabled,
+  showTestNotification,
+} from '../services/notifications.ts';
 
 // Global deferred prompt for PWA installation
 let deferredInstallPrompt: any = null;
@@ -41,6 +48,20 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
           </svg>
         </button>
       </div>
+
+      <!-- Rest timer system notifications -->
+      <section class="notification-settings" aria-labelledby="notification-settings-heading">
+        <h3 id="notification-settings-heading">Rest Timer Notifications</h3>
+        <button class="btn-secondary" type="button" id="btn-rest-notifications" aria-pressed="false">
+          Rest notifications: Off
+        </button>
+        <button class="btn-secondary" type="button" id="btn-test-notification">
+          Send test notification
+        </button>
+        <p id="notification-status" role="status" aria-live="polite"></p>
+        <p class="notification-hint">Allow notifications in your browser and Android lock screen settings.
+          Alerts may be delayed until you reopen the app if Android suspends the web page.</p>
+      </section>
 
       <!-- 1. Backup & Restore Section -->
       <div style="margin-bottom: 20px;">
@@ -137,6 +158,65 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
   const close = () => overlay.remove();
   overlay.querySelector('#btn-close-settings')?.addEventListener('click', close);
   overlay.querySelector('#btn-settings-done')?.addEventListener('click', close);
+
+  const toggle = overlay.querySelector<HTMLButtonElement>('#btn-rest-notifications')!;
+  const test = overlay.querySelector<HTMLButtonElement>('#btn-test-notification')!;
+  const status = overlay.querySelector<HTMLElement>('#notification-status')!;
+  let notificationBusy = false;
+
+  const updateNotificationControls = (message?: string) => {
+    const permission = getNotificationPermission();
+    const enabled = areRestNotificationsEnabled();
+    toggle.setAttribute('aria-pressed', String(enabled));
+    toggle.textContent = `Rest notifications: ${enabled ? 'On' : 'Off'}`;
+    toggle.disabled = notificationBusy || (!enabled && (permission === 'unsupported' || permission === 'denied'));
+    test.disabled = notificationBusy || permission !== 'granted';
+
+    status.textContent = message ?? (
+      permission === 'unsupported' ? 'System notifications are unavailable in this browser or context.' :
+      permission === 'denied' ? 'Notifications blocked. Allow them in your browser/site settings and reopen Settings.' :
+      permission === 'default' ? 'Permission not granted. Turn on notifications to request access.' :
+      enabled ? 'Permission granted. Rest notifications enabled.' : 'Permission granted. Rest notifications disabled.'
+    );
+  };
+
+  toggle.addEventListener('click', async () => {
+    notificationBusy = true;
+    updateNotificationControls();
+    let message: string | undefined;
+    try {
+      if (areRestNotificationsEnabled()) {
+        setRestNotificationsEnabled(false);
+      } else {
+        const permission = await requestNotificationPermission();
+        if (permission === 'granted') setRestNotificationsEnabled(true);
+      }
+    } catch (err) {
+      console.warn('[Notifications] Unable to change preference:', err);
+      message = 'Could not change notification settings. Check browser permissions and storage.';
+    } finally {
+      notificationBusy = false;
+      updateNotificationControls(message);
+    }
+  });
+
+  test.addEventListener('click', async () => {
+    notificationBusy = true;
+    updateNotificationControls();
+    let message: string;
+    try {
+      await showTestNotification();
+      message = 'Test notification submitted. Check the Android notification shade and lock screen.';
+    } catch (err) {
+      console.warn('[Notifications] Test failed:', err);
+      message = err instanceof Error ? err.message : 'Could not show a test notification.';
+    } finally {
+      notificationBusy = false;
+      updateNotificationControls(message);
+    }
+  });
+
+  updateNotificationControls();
 
   // Export JSON
   overlay.querySelector('#btn-export-json')?.addEventListener('click', async () => {

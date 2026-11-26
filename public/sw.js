@@ -83,3 +83,23 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+// A notification tap returns the user to the existing workout if possible.
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil((async () => {
+    const scope = self.registration.scope;
+    const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const client of windows) {
+      if (client.url.startsWith(scope)) {
+        try {
+          await client.focus();
+          return;
+        } catch (err) {
+          console.warn('[ServiceWorker] Could not focus workout:', err);
+        }
+      }
+    }
+    await self.clients.openWindow(scope);
+  })());
+});

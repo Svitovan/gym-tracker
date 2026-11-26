@@ -52,7 +52,7 @@ class App {
 
   private registerServiceWorker(): void {
     if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && window.isSecureContext) {
-      window.addEventListener('load', () => {
+      const register = () => {
         navigator.serviceWorker
           .register('/sw.js')
           .then((reg) => {
@@ -73,7 +73,11 @@ class App {
           .catch((err) => {
             console.warn('[ServiceWorker] Registration failed:', err);
           });
-      });
+      };
+
+      // DB initialization may finish after the load event has already fired.
+      if (document.readyState === 'complete') register();
+      else window.addEventListener('load', register, { once: true });
 
       let refreshing = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
