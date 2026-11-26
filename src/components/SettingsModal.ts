@@ -203,7 +203,7 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
   test.addEventListener('click', async () => {
     notificationBusy = true;
     updateNotificationControls();
-    let message: string;
+    let message: string | undefined;
     try {
       await showTestNotification();
       message = 'Test notification submitted. Check the Android notification shade and lock screen.';
