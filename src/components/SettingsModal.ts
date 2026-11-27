@@ -25,23 +25,22 @@ export function registerInstallPromptListener(): void {
 }
 
 export async function openSettingsModal(onDataUpdated?: () => void): Promise<void> {
-  const existing = document.getElementById('settings-modal-overlay');
-  if (existing) existing.remove();
-
+  const previousFocus = document.activeElement;
   const diagnostics = await getStorageDiagnostics();
+  if (document.getElementById('settings-modal-overlay')) return;
 
   const overlay = document.createElement('div');
   overlay.id = 'settings-modal-overlay';
-  overlay.className = 'modal-overlay';
+  overlay.className = 'modal-overlay settings-modal-overlay';
 
   overlay.innerHTML = `
-    <div class="modal-dialog" style="max-width: 480px;">
+    <div class="modal-dialog settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h2 style="font-size: 1.35rem; display: flex; align-items: center; gap: 8px;">
+        <h2 id="settings-modal-title" style="font-size: 1.35rem; display: flex; align-items: center; gap: 8px;">
           <span>⚙</span>
           <span>Settings & Data</span>
         </h2>
-        <button class="btn-icon-danger" id="btn-close-settings" title="Close" aria-label="Close" style="width: 32px; height: 32px;">
+        <button class="btn-icon-danger settings-modal-close" id="btn-close-settings" title="Close" aria-label="Close">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <line x1="18" y1="6" x2="6" y2="18"/>
             <line x1="6" y1="6" x2="18" y2="18"/>
@@ -154,10 +153,23 @@ export async function openSettingsModal(onDataUpdated?: () => void): Promise<voi
 
   document.body.appendChild(overlay);
 
-  // Close handlers
-  const close = () => overlay.remove();
-  overlay.querySelector('#btn-close-settings')?.addEventListener('click', close);
+  const app = document.getElementById('app');
+  const wasInert = app?.inert ?? false;
+  if (app) app.inert = true;
+
+  const close = () => {
+    if (!overlay.isConnected) return;
+    overlay.remove();
+    if (app) app.inert = wasInert;
+    if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
+  };
+  const closeButton = overlay.querySelector<HTMLButtonElement>('#btn-close-settings');
+  closeButton?.addEventListener('click', close);
   overlay.querySelector('#btn-settings-done')?.addEventListener('click', close);
+  overlay.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') close();
+  });
+  closeButton?.focus({ preventScroll: true });
 
   const toggle = overlay.querySelector<HTMLButtonElement>('#btn-rest-notifications')!;
   const test = overlay.querySelector<HTMLButtonElement>('#btn-test-notification')!;

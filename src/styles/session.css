@@ -836,6 +836,38 @@
   box-shadow: var(--shadow-md);
 }
 
+.settings-modal-overlay {
+  padding:
+    calc(16px + env(safe-area-inset-top, 0px))
+    calc(16px + env(safe-area-inset-right, 0px))
+    calc(16px + env(safe-area-inset-bottom, 0px))
+    calc(16px + env(safe-area-inset-left, 0px));
+}
+
+.settings-modal {
+  min-width: 0;
+  max-width: 480px;
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.settings-modal-close {
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+}
+
+.settings-modal button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .settings-modal {
+    padding: 16px;
+  }
+}
+
 @keyframes modalFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
